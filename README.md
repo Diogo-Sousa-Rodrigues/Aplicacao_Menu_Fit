@@ -21,15 +21,12 @@ In today's fast-paced world, many individuals struggle with creating a meal plan
 - Individual users
 - Nutritionists
 - Fitness companies
-- Marketing or sales teams
-- 
+- Health and Fitness enthusiasts
 
 ###### Users
-- Young adults
-- Everyday User
-- Users with food restrictions
-- Nutritionists
-- Health and Fitness enthusiasts
+- Default user
+- User with a profile
+- 
 
 
 #### Vision & Scope of the Solution
