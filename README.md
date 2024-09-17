@@ -7,9 +7,13 @@
 - Tiago Filipe da Cunha Fernandes - 2022156526 - a2022156526@isec.pt
 - Juliano Mak Babaroca - 2022119541 - a2022119541@isec.pt
 - Bárbara Sousa Trindade - 2022144651 - a2022144651@isec.pt 
-- 
+- Júlio Pacheco - 2017018694 - a21270050@isec.pt
 
-## Add your files
+## Vision and Scope
+
+# Problem Statement
+
+
 
 - [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
 - [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
