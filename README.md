@@ -12,9 +12,9 @@
 
 ## Vision and Scope
 
-### Problem Statement
+##### Problem Statement
 
-#### Project Background
+###### Project Background
 People usually struggle with
 
 - [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
