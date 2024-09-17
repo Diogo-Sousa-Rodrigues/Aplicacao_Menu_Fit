@@ -43,7 +43,7 @@ To empower individuals to take control of their nutrition and wellness by provid
 - Set restrictions for the meal plan (food restrictions, cost restrictions, meal complexity, calorie goals, dietary objective)
 - Set favourite meals or ingredients to be considered in the generation on the meal plan
 - Get information on how to prepare the meals
-- Reminders: Notifications for meal prep times or ingredients.
+- Notifications for meal prep times or ingredients.
 
 ###### Features that will not be developed
 - Connection to shopping app.
