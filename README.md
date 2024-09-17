@@ -22,6 +22,7 @@ In today's fast-paced world, many individuals struggle with creating a meal plan
 - Nutritionists
 - Fitness companies
 - Marketing or sales teams
+- 
 
 ###### Users
 - Young adults
@@ -34,5 +35,6 @@ In today's fast-paced world, many individuals struggle with creating a meal plan
 ###### Vision statement
 This project aims to provide a practical and straightforward solution by generating customized meal plans tailored to individual goals, dietary preferences, and budget, offering users a simple and effective way to manage their nutrition.
 
+#### Vision & Scope of the Solution
 
-<!--asdasdad-->
+###### Vision statement
