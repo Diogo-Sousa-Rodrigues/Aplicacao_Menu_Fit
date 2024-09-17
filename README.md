@@ -12,7 +12,7 @@
 
 ## Vision and Scope
 
-##### Problem Statement
+#### Problem Statement
 
 ###### Project Background
 In today's fast-paced world, many individuals struggle with creating a meal plan due to time constraints and a lack of knowledge. This can lead to poor dietary choices, which may not align with their personal health goals, dietary restrictions, or financial limitations.
@@ -33,3 +33,6 @@ In today's fast-paced world, many individuals struggle with creating a meal plan
 ##### Vision & Scope of the Solution
 ###### Vision statement
 This project aims to provide a practical and straightforward solution by generating customized meal plans tailored to individual goals, dietary preferences, and budget, offering users a simple and effective way to manage their nutrition.
+
+
+<!--asdasdad-->
