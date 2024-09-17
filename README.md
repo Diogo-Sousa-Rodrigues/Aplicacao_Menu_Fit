@@ -31,7 +31,7 @@ In today's fast-paced world, many individuals struggle with creating a meal plan
 - Nutritionists
 - Health and Fitness enthusiasts
 
-##### Vision & Scope of the Solution
+#### Vision & Scope of the Solution
 ###### Vision statement
 This project aims to provide a practical and straightforward solution by generating customized meal plans tailored to individual goals, dietary preferences, and budget, offering users a simple and effective way to manage their nutrition.
 
@@ -39,3 +39,12 @@ This project aims to provide a practical and straightforward solution by generat
 #### Vision & Scope of the Solution
 
 ###### Vision statement
+To empower individuals to take control of their nutrition and wellness by providing a simple, personalized, and time-saving meal planning experience. Whether striving for a healthier lifestyle, managing dietary restrictions, or maintaining a balanced routine, our app adapts to unique needs and schedules, making healthy eating accessible, enjoyable, and effortless for everyone.
+
+###### List of features
+- Generate a full week meal plan based on user input
+- Create and Configure a user profile
+- Set restrictions for the meal plan (food restrictions, cost restrictions, meal complexity, calorie goals, dietary objective)
+- Set favourite meals or ingredients to be considered in the generation on the meal plan
+- Get information on how to prepare the meals
+- Reminders: Notifications for meal prep times or ingredients.
