@@ -5,6 +5,9 @@
 ## Team
 
 - Tiago Filipe da Cunha Fernandes - 2022156526 - a2022156526@isec.pt
+- Juliano Mak Babaroca - 2022119541 - a2022119541@isec.pt
+- Bárbara Sousa Trindade - 2022144651 - a2022144651@isec.pt 
+- 
 
 ## Add your files
 
