@@ -55,7 +55,7 @@ Users will seek health and nutritional advice before committing to the meal plan
 
 #### Mockups
 #### User Storie 1
-![User Storie 1](imagens/dietaryrestrictions1.PNG)
+![User Storie 1](imagens/dietaryrestrictions1.png)
 
 
 #### User Stories
