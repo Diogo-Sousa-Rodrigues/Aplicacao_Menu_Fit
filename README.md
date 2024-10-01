@@ -54,7 +54,7 @@ https://cdn.discordapp.com/attachments/1282999451824422953/1288097141591642131/i
 
 #### Mockups
 #### User Storie 1
-![User Storie 1](imagenss/dietaryrestrictions1.PNG)
+![User Storie 1](imagens/dietaryrestrictions1.PNG)
 
 
 #### User Stories
