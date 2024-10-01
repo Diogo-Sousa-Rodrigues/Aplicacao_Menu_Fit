@@ -53,6 +53,17 @@ Users will seek health and nutritional advice before committing to the meal plan
 https://cdn.discordapp.com/attachments/1282999451824422953/1288097141591642131/image.png?ex=66fc8332&is=66fb31b2&hm=50db7aa65ee137421d86bccc14a39c5af407a90daf5680ec33d725b9219ef8c6&
 
 #### Mockups
+#### User Storie 1
+![User Storie 1](imagenss/dietaryrestrictions1.png)
+
+
+#### User Stories
+- User Storie 1
+I expect the meal prep applications to take into account my health and dietary restrictions
+- User Storie 2
+- User Storie 3
+- User Storie 4
+- User Storie 5
 
 
 ## Definition of Done
