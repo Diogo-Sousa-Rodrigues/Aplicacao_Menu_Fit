@@ -50,7 +50,7 @@ Users will seek health and nutritional advice before committing to the meal plan
 
 ## Requirements
 #### Use Case Diagram
-![Use case diagram](imagens/Use_Case_Diagram.png)
+![Use case diagram](imagens/User_Case_Diagram.png)
 
 
 #### Mockups
