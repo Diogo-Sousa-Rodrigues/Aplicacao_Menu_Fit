@@ -37,7 +37,7 @@ To empower individuals to take control of their nutrition and wellness by provid
 - Generate a full week meal plan based on user input
 - Create and Configure a user profile
 - Set restrictions for the meal plan (food restrictions, cost restrictions, meal complexity, calorie goals, dietary objective)
-- Set favourite meals or ingredients to be considered in the generation on the meal plan
+- Set favourite meals to be considered in the generation on the meal plan
 - Get information on how to prepare the meals
 - Notifications for meal prep times or ingredients.
 
@@ -60,8 +60,9 @@ Users will seek health and nutritional advice before committing to the meal plan
 
 #### User Stories
 - User Storie 1
-I expect the meal prep applications to take into account my health and dietary restrictions
+- I expect the meal prep application to take into account my health and dietary restrictions
 - User Storie 2
+- I want to be able to quickly review and edit my goals and informations
 - User Storie 3
 - User Storie 4
 - User Storie 5
