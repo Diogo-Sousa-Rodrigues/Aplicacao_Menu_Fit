@@ -50,7 +50,8 @@ Users will seek health and nutritional advice before committing to the meal plan
 
 ## Requirements
 #### Use Case Diagram
-https://cdn.discordapp.com/attachments/1282999451824422953/1288097141591642131/image.png?ex=66fc8332&is=66fb31b2&hm=50db7aa65ee137421d86bccc14a39c5af407a90daf5680ec33d725b9219ef8c6&
+![Use case diagram](imagens/diagramacasosdeuso.png)
+
 
 #### Mockups
 #### User Storie 1
