@@ -59,13 +59,17 @@ Users will seek health and nutritional advice before committing to the meal plan
 
 
 #### User Stories
-- User Storie 1
+- User Story 1
 - I expect the meal prep application to take into account my health and dietary restrictions
-- User Storie 2
+- User Story 2
 - I want to be able to quickly review and edit my goals and informations
-- User Storie 3
-- User Storie 4
-- User Storie 5
+- User Story 3
+- User Story 4
+- User Story 5
+- User Story 6
+- User Story 7
+- User Story 8
+- I expect the meal prep app to let me save my favorite meals and to delete the ones i dont like
 
 
 ## Definition of Done
