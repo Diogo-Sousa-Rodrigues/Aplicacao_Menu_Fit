@@ -192,12 +192,18 @@ Milestone tracking for goals is visually appealing, easy to understand, and prov
 
 ***
 
+## Increments
+
 ### Sprint 1
 ##### Sprint Plan
 
 - Goal: <!-- Create the base architecture of the app and basic interface. -->
-  - 
-  - 
+  - Register
+  - Login
+  - Meal plan form
+  - Reminders
+  - Generate weekly meal plan
+  - Daily Goals
 
 - Dates: from 15/Oct to 29/Oct, 2 weeks
 
