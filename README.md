@@ -177,11 +177,16 @@ Milestone tracking for goals is visually appealing, easy to understand, and prov
 
 ### Release 1
 
-- Goal:
-    -
-    -
-    -
-- Dates: 11/Nov
+- Goal: MVP - We define our MVP as an app that will offer this possibilities and functionalities to the user:
+  - Create Profile
+  - Generate weekly meal plan
+  - Manage weekly meal plan
+  - View recipes
+  - Get reminders
+  - Favorite/Delete meals
+  - Daily Goal Tracker
+
+- Dates: 12/Nov
 - Team capacity: 4 * 4 * 5 = 80 hours
 - Release: V1.0
 
