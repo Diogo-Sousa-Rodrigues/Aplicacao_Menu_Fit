@@ -69,14 +69,14 @@ Users will seek health and nutritional advice before committing to the meal plan
 #### User Story 4
 ![User Story 4](imagens/timeandbudget.png)
 
+#### User Story 5
+![User Story 5](imagens/mealplanreview.png)
+
 #### User Story 7
 ![User Story 7](imagens/weeklyplan.png)
 
 #### User Story 6, 9
 ![User Story 6](imagens/mainmenu.png)
-
-#### User Story 5
-![User Story 5](imagens/mealplanreview.png)
 
 #### User Story 8
 ![User Story 8](imagens/recipe.png)
