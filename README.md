@@ -111,7 +111,7 @@ Users will seek health and nutritional advice before committing to the meal plan
 ## Architecture and Design
 
 #### Domain Model
-<!--![Domain Model](imagens/xxxx.png)-->
+![Domain Model](imagens/modelodominio.png)
 
 ***
 
