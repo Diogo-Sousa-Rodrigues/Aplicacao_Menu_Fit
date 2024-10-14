@@ -103,3 +103,125 @@ Users will seek health and nutritional advice before committing to the meal plan
 - Acceptance tests passed
 - Accepted by the client
 - Code merged to main
+
+***
+
+## Architecture and Design
+
+#### Domain Model
+<!--![Domain Model](imagens/xxxx.png)-->
+
+***
+
+## Risk Plan
+
+##### Threshhold of Success
+<!---
+The project fails if:
+ Essential features such as habit tracking, visual progress insights, task and habit management, reminders, and goal setting are incomplete or not functioning as intended.
+Users find it difficult to navigate the app or encounter usability issues, leading to dissatisfaction and disengagement.
+Reminders are unreliable, causing users to miss their tasks and habits frequently.
+Milestone tracking for goals is confusing or not visually represented clearly, leading to user frustration.
+
+- The "must" user stories are not developed
+- The app is not in a working condition upon release.
+The team is not satisfied with the app and their work on the project, based on a questionare at the last meeting before final release. -->
+
+The project is successful if:
+<!--- By the final release date, all essential features, namely habit tracking, task and habit management and reminders, are fully implemented and pass acceptance tests without critical defects.
+Users find the app intuitive, user-friendly, and engaging, leading to positive feedback and a high level of satisfaction.
+Reminders are delivered accurately and on time, ensuring users can effectively manage their tasks and habits.
+Milestone tracking for goals is visually appealing, easy to understand, and provides users with a sense of achievement and progress. -->
+
+- All "must" user stories are developed and tasks assigned to them finished.
+- All group members contibuted to the project equally (rounded up to the nearest hour).
+- The team is satisfied with the app and their work on the project, based on a questionare at the last meeting before final release.
+<!-- - The interface of the app it appealing to most group members and clients. -->
+
+
+##### Risk List
+<!-- - RSK1 - PxI: 4x5=20; Inaccurate Time and Effort Estimations
+  - Risk: The team lacks experience in estimating the time and effort required for tasks, leading to underestimations or        overestimations, resulting in unforeseen project delays.
+  - Impact: 5
+  - Likelihood: 4 -->
+
+##### Mitigation Actions (threats>=20)
+
+***
+
+## Pre-Game
+### Sprint 0 Plan
+
+- Goal: description
+- Dates: from 1/Oct to 15/Oct, 2 weeks
+- Sprint 0 Backlog:
+  - Task1 – Write Team
+  - Task2 – Write V&S
+  - Task3 – Write Requirements
+  - Task4 – Write DoD
+  - Task5 – Write Architecture&Design
+  - Task6 – Write Risk Plan
+  - Task7 – Write Pre-Gane
+  - Task8 – Write Release Plan
+  - Task9 – Write Product Increments
+  - Task10 – Create Product Board
+  - Task11 – Create Sprint 0 Board
+  - Task12 – Write US in PB, estimate (SML), prioritize (MoSCoW), sort
+  - Task13 – Create repository with “GPS Git” Workflow
+  
+***
+
+## Release Plan
+
+### Release 1
+
+- Goal:
+    -
+    -
+    -
+- Dates: 11/Nov
+- Team capacity: 4 * 4 * 5 = 80 hours
+- Release: V1.0
+
+***
+
+### Sprint 1
+##### Sprint Plan
+
+- Goal: <!-- Create the base architecture of the app and basic interface. -->
+  - 
+  - 
+
+- Dates: from 15/Oct to 29/Nov, 2 weeks
+
+- Roles:
+  - Product Owner: Júlio Pacheco
+  - Scrum Master: Juliano Babaroca
+
+- To do:
+  - US1: As a user, I want to be able to see which tasks I need to complete or the ones I already completed. (alterar, apenas exemplo)
+
+  - US2: 
+
+  - US3: 
+  
+  - US4: 
+  
+  - US5: 
+  
+  - US6: 
+  
+  - US7: 
+  
+  - US8:
+  
+  - US9: 
+  
+  - US10:  
+
+  
+- Story Points: (alterar)2S+2M
+
+- Analysis: short analysis of the planning meeting
+
+##### Sprint Review
