@@ -191,7 +191,7 @@ Milestone tracking for goals is visually appealing, easy to understand, and prov
   - 
   - 
 
-- Dates: from 15/Oct to 29/Nov, 2 weeks
+- Dates: from 15/Oct to 29/Oct, 2 weeks
 
 - Roles:
   - Product Owner: Júlio Pacheco
