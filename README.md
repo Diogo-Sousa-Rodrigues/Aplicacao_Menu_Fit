@@ -64,14 +64,16 @@ Users will seek health and nutritional advice before committing to the meal plan
 
 
 #### User Stories
-- User Story 1 (#1)
-- User Story 2
-- User Story 3
-- User Story 4
-- User Story 5
-- User Story 6
-- User Story 7
-- User Story 8
+- User Story 1 (#13)
+- User Story 2 (#12)
+- User Story 3 (#15)
+- User Story 4 (#14)
+- User Story 5 (#22)
+- User Story 6 (#45)
+- User Story 7 (#19)
+- User Story 8 (#18)
+- User Story 9 (#17)
+- User Story 10 (#44)
 
 
 ## Definition of Done
