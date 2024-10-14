@@ -24,7 +24,6 @@ In today's fast-paced world, many individuals struggle with creating a meal plan
 - Health and Fitness enthusiasts
 
 ###### Users
-- Default user
 - User with a profile
 
 ***
