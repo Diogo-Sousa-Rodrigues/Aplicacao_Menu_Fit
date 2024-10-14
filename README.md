@@ -69,20 +69,20 @@ Users will seek health and nutritional advice before committing to the meal plan
 #### User Story 4
 ![User Story 4](imagens/timeandbudget.png)
 
-#### User Story 5, 8
-![User Story 5](imagens/weeklyplan.png)
+#### User Story 7
+![User Story 7](imagens/weeklyplan.png)
 
-#### User Story 5, 7, 10
-![User Story 5](imagens/mainmenu.png)
+#### User Story 6, 9
+![User Story 6](imagens/mainmenu.png)
 
-#### User Story 6
-![User Story 6](imagens/mealplanreview.png)
+#### User Story 5
+![User Story 5](imagens/mealplanreview.png)
 
-#### User Story 9
-![User Story 9](imagens/recipe.png)
+#### User Story 8
+![User Story 8](imagens/recipe.png)
 
-#### User Story 11
-![User Story 11](imagens/recipeslist.png)
+#### User Story 10
+![User Story 10](imagens/recipeslist.png)
 
 
 #### User Stories
@@ -90,13 +90,12 @@ Users will seek health and nutritional advice before committing to the meal plan
 - User Story 2 (#12)
 - User Story 3 (#15)
 - User Story 4 (#14)
-- User Story 5 (#22)
-- User Story 6 (#45)
-- User Story 7 (#19)
-- User Story 8 (#18)
-- User Story 9 (#17)
-- User Story 10 (#44)
-- User Story 11 (#21)
+- User Story 5 (#45)
+- User Story 6 (#19)
+- User Story 7 (#18)
+- User Story 8 (#17)
+- User Story 9 (#44)
+- User Story 10 (#21)
 
 
 ## Definition of Done
