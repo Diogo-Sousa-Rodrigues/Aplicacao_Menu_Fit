@@ -81,8 +81,8 @@ Users will seek health and nutritional advice before committing to the meal plan
 #### User Story 9
 ![User Story 9](imagens/recipe.png)
 
-#### User Story 10
-![User Story 10](imagens/recipeslist.png)
+#### User Story 11
+![User Story 11](imagens/recipeslist.png)
 
 
 #### User Stories
@@ -96,6 +96,7 @@ Users will seek health and nutritional advice before committing to the meal plan
 - User Story 8 (#18)
 - User Story 9 (#17)
 - User Story 10 (#44)
+- User Story 11 (#21)
 
 
 ## Definition of Done
