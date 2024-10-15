@@ -241,10 +241,12 @@ Milestone tracking for goals is visually appealing, easy to understand, and prov
   
   - US6: As a user, I want to keep track of my daily goals, so that I can stay on top of my progress and ensure I meet my nutritional objectives consistently.
     - Task1: Calorie Counter
+    - Task2: UI
   
   - US9: As a user, I want the app to tell me if there is anything I need to do ahead of time in a meal so that I can prepare for it.
     - Task1: Reminder Data
     - Task2: UI
+    - Task3: Manage Reminder
   
 - Story Points: 5S+1M+1S(incomplete)
 
