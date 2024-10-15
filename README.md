@@ -208,8 +208,8 @@ Milestone tracking for goals is visually appealing, easy to understand, and prov
 - Dates: from 15/Oct to 29/Oct, 2 weeks
 
 - Roles:
-  - Product Owner: Júlio Pacheco
-  - Scrum Master: Juliano Babaroca
+  - Product Owner: Diogo Rodrigues
+  - Scrum Master: Tiago Fernandes
 
 - To do:
   - US1: As a user, I want to be able to register my basic information on the app, so that I will be able to login next time and it will save my information.
