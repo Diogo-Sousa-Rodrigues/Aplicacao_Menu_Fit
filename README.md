@@ -148,7 +148,33 @@ Milestone tracking for goals is visually appealing, easy to understand, and prov
   - Impact: 5
   - Likelihood: 4 -->
 
+- RSK1 -  PxI: 2x3 = 6; Misalignment on MVP Definition
+  - Risk: Confusion over the core features to be delivered, resulting in work overload or lack of focus.
+  - Probability: 2
+  - Impact: 3
+
+- RSK2 -  PxI: 4x3 = 12; Team Collaboration Issues
+  - Risk: Difficulty in coordinating the team, resulting in inefficiency or uneven contributions.
+  - Probability: 4
+  - Impact: 3
+
+
+- RSK3 -  PxI: 3x5 = 15; Task Overload or Lack of Team Capacity
+  - Risk: The team may not complete the planned work within the allocated capacity.
+  - Probability: 3
+  - Impact: 5
+
+
+- RSK4 - PxI: 4x5 = 20; Lack of team AI knowledge
+  - Risk: The team may not know how to properly work with AI, which the project is very dependent on, leading to not being able to complete the tasks.
+  - Probability: 4
+  - Impact: 5
+
+
+
 ##### Mitigation Actions (threats>=20)
+Mitigation actions:
+- RSK4 - MS; Allocate time in tasks for the learning of AI. 
 
 ***
 
