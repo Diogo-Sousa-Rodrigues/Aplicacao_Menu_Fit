@@ -1,13 +1,17 @@
+import javafx.application.Application;
+import UI.MainJFX;
 import model.users.BasicUser;
 import model.users.Gender;
 import model.users.User;
 import persistence.EphemeralStore;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
+
         EphemeralStore store = EphemeralStore.getInstance();
 
         String email = "mail@mail.com";
@@ -26,5 +30,7 @@ public class Main {
         Optional<User> putResult = store.putUser(newUser, password);
 
         assert putResult.isEmpty();
+
+        Application.launch(MainJFX.class,args);
     }
 }

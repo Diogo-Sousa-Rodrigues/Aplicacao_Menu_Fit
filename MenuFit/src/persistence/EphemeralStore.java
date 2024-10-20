@@ -14,6 +14,10 @@ public class EphemeralStore {
         return instance;
     }
 
+    public Map<String, User> getUsers() {
+        return this.users;
+    }
+
     public Optional<User> getUser(String email, String password) {
         if (this.credentials.containsKey(email)) {
             String key = this.credentials.get(email);
@@ -26,6 +30,20 @@ public class EphemeralStore {
         }
 
         return Optional.empty();
+    }
+
+    public boolean verifyLogin(String email, String password) {
+        if (this.credentials.containsKey(email)) {
+            String key = this.credentials.get(email);
+
+            if (key.equals(password)) {
+                if (users.containsKey(email)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public Optional<User> putUser(User user, String password) {
