@@ -10,6 +10,7 @@ import persistence.EphemeralStore;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 
 
 public class LogInController {
@@ -48,9 +49,17 @@ public class LogInController {
         String password = getPassword();
 
         EphemeralStore store = EphemeralStore.getInstance();
-        boolean credentialsVerification = store.verifyLogin(email, password);
 
-        if(!credentialsVerification){
+        Optional<User> getResult= store.getUser(email, password);
+
+        // if (#.isPresent()), podemos obter a instância com #.get()
+        // Exemplo:
+        //
+        // if (getResult.isPresent()) {
+        //      User user = getResult.get();
+        // }
+
+        if(getResult.isEmpty()){
             invalidLogin.setVisible(true);
         }else{
             sceneSwitcher.switchScene("../fxml/MainMenu.fxml", event);
