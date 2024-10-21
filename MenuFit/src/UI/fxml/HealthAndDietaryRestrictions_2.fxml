@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Controllers.HealthAndDietaryRestrictions_2Controller">
+   <children>
+      <Label layoutX="248.0" layoutY="98.0" text="Health and Dietary Considerations">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <ImageView fx:id="logo" fitHeight="48.0" fitWidth="53.0" layoutX="44.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../../gpsUIv2/src/Resources/logo.png" />
+         </image></ImageView>
+      <Label layoutX="97.0" layoutY="46.0" text="MenuFit">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Button fx:id="goBack" layoutX="80.0" layoutY="520.0" mnemonicParsing="false" onAction="#previousHandler" text="&lt; Go Back" />
+      <Button fx:id="next" layoutX="642.0" layoutY="519.0" mnemonicParsing="false" onAction="#finishHandler" prefHeight="26.0" prefWidth="73.0" text="Next &gt;" />
+      <Label layoutX="136.0" layoutY="161.0" text="Do you have any allergies or intolerances?">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="allergiesOrIntolerancesTextField" alignment="TOP_LEFT" layoutX="184.0" layoutY="211.0" prefHeight="49.0" prefWidth="175.0" />
+      <Label layoutX="136.0" layoutY="178.0" text="(e.g. lactose, gluten, nuts)">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <Label layoutX="136.0" layoutY="300.0" text="Do you have any chronic health conditions?">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="chronicHealthTextField" alignment="TOP_LEFT" layoutX="184.0" layoutY="350.0" prefHeight="49.0" prefWidth="175.0" />
+      <Label layoutX="136.0" layoutY="317.0" text="(e.g. diabetes, hypertension, high cholesterol)">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <Label layoutX="456.0" layoutY="163.0" text="Are you following any specific diet for medical reasons?">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="medicalReasonsTextField" alignment="TOP_LEFT" layoutX="504.0" layoutY="213.0" prefHeight="49.0" prefWidth="175.0" />
+      <Label layoutX="456.0" layoutY="180.0" text="(e.g. low-sodium, low-carb, diabetic-friendly)">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <Label layoutX="456.0" layoutY="302.0" text="Do you have any gastrointestinal issues?">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="gastrointestinalIssuesTextField" alignment="TOP_LEFT" layoutX="504.0" layoutY="352.0" prefHeight="49.0" prefWidth="175.0" />
+      <Label layoutX="456.0" layoutY="319.0" text="(e.g. IBS, Crohn's disease, acid reflu)">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <RadioButton fx:id="allergiesOrIntolerancesNoRadioButton" layoutX="136.0" layoutY="211.0" mnemonicParsing="false" text="No">
+         <toggleGroup>
+            <ToggleGroup fx:id="A" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="allergiesOrIntolerancesYesRadioButton" layoutX="136.0" layoutY="241.0" mnemonicParsing="false" text="Yes" toggleGroup="$A" />
+      <RadioButton fx:id="medicalNoRadioButton" layoutX="454.0" layoutY="212.0" mnemonicParsing="false" text="No">
+         <toggleGroup>
+            <ToggleGroup fx:id="B" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="medicalYesRadioButton" layoutX="454.0" layoutY="242.0" mnemonicParsing="false" text="Yes" toggleGroup="$B" />
+      <RadioButton fx:id="chronicHealthNoRadioButton" layoutX="134.0" layoutY="351.0" mnemonicParsing="false" text="No">
+         <toggleGroup>
+            <ToggleGroup fx:id="C" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="chronicHealthYesRadioButton" layoutX="134.0" layoutY="381.0" mnemonicParsing="false" text="Yes" toggleGroup="$C" />
+      <RadioButton fx:id="gastrointestinalIssuesNoRadioButton" layoutX="454.0" layoutY="351.0" mnemonicParsing="false" text="No">
+         <toggleGroup>
+            <ToggleGroup fx:id="D" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="gastrointestinalIssuesYesRadioButton" layoutX="454.0" layoutY="381.0" mnemonicParsing="false" text="Yes" toggleGroup="$D" />
+   </children>
+</AnchorPane>
