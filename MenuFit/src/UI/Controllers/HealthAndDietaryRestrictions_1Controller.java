@@ -63,7 +63,6 @@ public class HealthAndDietaryRestrictions_1Controller {
 
         levelOfFitnessComboBox.getItems().addAll("Beginner", "Intermediate", "Advanced");
 
-
         desiredWeightYesRadioButton.setOnAction(e -> {
             toggleDesiredWeightTextField();
             validateForm();
@@ -112,8 +111,8 @@ public class HealthAndDietaryRestrictions_1Controller {
     }
 
     @FXML
-    public void previousHandler() {
-        System.out.println("Going back to the previous screen.");
+    public void previousHandler(ActionEvent event) {
+        sceneSwitcher.switchScene("../fxml/MainMenu.fxml", event);
     }
 
     public HealthAndDietaryRestrictions_1Controller(){
@@ -193,6 +192,7 @@ public class HealthAndDietaryRestrictions_1Controller {
     private void toggleDailyCalorieCountTextField() {
         if (dailyCalorieYesCountRadioButton.isSelected()) {
             dailyCalorieCountTextField.setDisable(false);
+        } else {
             dailyCalorieCountTextField.setDisable(true);
             dailyCalorieCountTextField.clear();
         }
