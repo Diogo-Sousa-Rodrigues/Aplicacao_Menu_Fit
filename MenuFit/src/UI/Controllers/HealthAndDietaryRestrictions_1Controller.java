@@ -5,7 +5,8 @@ import model.HealthData;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Stage;
+import model.users.User;
+import persistence.LoggedInUserStore;
 
 public class HealthAndDietaryRestrictions_1Controller {
 
@@ -155,6 +156,10 @@ public class HealthAndDietaryRestrictions_1Controller {
                 desiredWeight,
                 dailyCalorieCount
         );
+
+        LoggedInUserStore userStore = LoggedInUserStore.getInstance();
+        User currentUser = userStore.getCurrentUser();
+        currentUser.setHealthData(healthData);
 
         System.out.println("Health Data collected: " + healthData);
 

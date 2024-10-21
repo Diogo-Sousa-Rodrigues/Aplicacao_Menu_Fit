@@ -1,5 +1,7 @@
 package model.users;
 
+import model.HealthData;
+
 import java.util.Date;
 
 public interface User {
@@ -88,4 +90,18 @@ public interface User {
      * @param gender The User's new gender.
      */
     void setGender(Gender gender);
+
+    /**
+     * Sets the User's health data
+     *
+     * @param healthData The User's new health data
+     */
+    void setHealthData(HealthData healthData);
+
+    /**
+     * Gets the User's health data
+     *
+     * @return The User's health data as a HealthData
+     */
+    HealthData getHealthData();
 }

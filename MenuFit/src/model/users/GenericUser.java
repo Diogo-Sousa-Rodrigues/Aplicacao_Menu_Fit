@@ -1,5 +1,7 @@
 package model.users;
 
+import model.HealthData;
+
 import java.util.Date;
 
 public abstract class GenericUser implements User {
@@ -73,9 +75,17 @@ public abstract class GenericUser implements User {
         this.gender = gender;
     }
 
+    @Override
+    public HealthData getHealthData() { return healthData; }
+
+    @Override
+    public void setHealthData(HealthData healthData) {this.healthData = healthData;}
+
     private String firstName, lastName, email;
 
     private Date birthdate;
 
     private Gender gender;
+
+    private HealthData healthData;
 }

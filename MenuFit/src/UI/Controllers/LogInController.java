@@ -7,9 +7,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.users.User;
 import persistence.EphemeralStore;
+import persistence.LoggedInUserStore;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.Optional;
 
 
@@ -62,6 +62,8 @@ public class LogInController {
         if(getResult.isEmpty()){
             invalidLogin.setVisible(true);
         }else{
+            LoggedInUserStore userStore = LoggedInUserStore.getInstance();
+            userStore.setCurrentUser(getResult.get());
             sceneSwitcher.switchScene("../fxml/MainMenu.fxml", event);
         }
     }
