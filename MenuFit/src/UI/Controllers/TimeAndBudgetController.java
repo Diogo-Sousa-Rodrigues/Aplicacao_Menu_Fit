@@ -48,7 +48,7 @@ public class TimeAndBudgetController implements Initializable {
 
     @FXML
     void previousHandler(ActionEvent event) throws IOException {
-        //sceneSwitcher.switchScene("../fxml/xxxxxxxxx.fxml", event);
+        sceneSwitcher.switchScene("../fxml/HealthAndDietaryRestrictions_3.fxml", event);
     }
     @FXML
     void finishHandler(ActionEvent event) throws IOException{

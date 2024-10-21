@@ -2,6 +2,9 @@ package UI.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -9,6 +12,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class HealthAndDietaryRestrictions_3Controller {
 
@@ -113,8 +119,7 @@ public class HealthAndDietaryRestrictions_3Controller {
     }
 
     @FXML
-    public void finishHandler() {
-
+    public void finishHandler(ActionEvent event) {
         if (vitaminOrMineralYesRadioButton.isSelected()) {
             String deficiencies = vitaminOrMineralTextField.getText().trim();
             if (deficiencies.isEmpty()) {
@@ -147,6 +152,15 @@ public class HealthAndDietaryRestrictions_3Controller {
         }
 
         System.out.println("Proceeding to the next step...");
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../fxml/TimeAndBudget.fxml"));
+            Stage stage = (Stage) next.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "An error occurred while trying to load the next scene.");
+        }
     }
 
     @FXML
