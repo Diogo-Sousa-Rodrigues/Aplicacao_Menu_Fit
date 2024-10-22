@@ -1,5 +1,3 @@
-import javafx.application.Application;
-import UI.MainJFX;
 import model.users.BasicUser;
 import model.users.Gender;
 import model.users.User;
@@ -11,6 +9,9 @@ import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
+        // This file is not the entry point of the project.
+        // Used to showcase model functionality and quick testing (no ui)
+        // The entry point should be MainJFX.java .
 
         EphemeralStore store = EphemeralStore.getInstance();
 
@@ -30,7 +31,5 @@ public class Main {
         Optional<User> putResult = store.putUser(newUser, password);
 
         assert putResult.isEmpty();
-
-        Application.launch(MainJFX.class,args);
     }
 }
