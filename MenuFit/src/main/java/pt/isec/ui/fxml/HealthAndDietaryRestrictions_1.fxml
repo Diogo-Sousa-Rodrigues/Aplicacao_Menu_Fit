@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.image.Image?>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Controllers.HealthAndDietaryRestrictions_1Controller">
+   <children>
+      <Label layoutX="294.0" layoutY="98.0" text="Introduce your health data">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <ImageView fx:id="logo" fitHeight="48.0" fitWidth="53.0" layoutX="44.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/logo.png" />
+         </image></ImageView>
+      <Label layoutX="97.0" layoutY="46.0" text="MenuFit">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Button fx:id="goBack" layoutX="80.0" layoutY="520.0" mnemonicParsing="false" onAction="#previousHandler" text="&lt; Go Back" />
+      <Button fx:id="next" layoutX="642.0" layoutY="519.0" mnemonicParsing="false" onAction="#finishHandler" prefHeight="26.0" prefWidth="73.0" text="Next &gt;" />
+      <TextField fx:id="weightTextField" alignment="TOP_LEFT" layoutX="97.0" layoutY="150.0" prefHeight="26.0" prefWidth="212.0" promptText="Weight:" />
+      <TextField fx:id="heightTextField" alignment="TOP_LEFT" layoutX="97.0" layoutY="190.0" prefHeight="26.0" prefWidth="212.0" promptText="Height:" />
+      <TextField fx:id="objectiveTextField" alignment="TOP_LEFT" layoutX="97.0" layoutY="230.0" prefHeight="159.0" prefWidth="212.0" promptText="Objective:" />
+      <ComboBox fx:id="levelOfFitnessComboBox" layoutX="366.0" layoutY="151.0" prefHeight="25.0" prefWidth="280.0" promptText="Level of Fitness" />
+      <Label layoutX="366.0" layoutY="230.0" text="Do you have a desired weight?" />
+      <TextField fx:id="desiredWeightTextField" layoutX="414.0" layoutY="262.0" prefHeight="25.0" prefWidth="25.0" />
+      <Label fx:id="BMI" alignment="TOP_LEFT" layoutX="514.0" layoutY="260.0" prefHeight="38.0" prefWidth="220.0" text="According to your BMI healthy range, your weight should be between X and Y" wrapText="true" />
+      <Label layoutX="366.0" layoutY="326.0" text="Do you have a daily calorie count?" />
+      <TextField fx:id="dailyCalorieCountTextField" layoutX="414.0" layoutY="358.0" prefHeight="25.0" prefWidth="25.0" />
+      <RadioButton fx:id="desiredWeightNoRadioButton" layoutX="365.0" layoutY="254.0" mnemonicParsing="false" text="No">
+         <toggleGroup>
+            <ToggleGroup fx:id="A" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="desiredWeightYesRadioButton" layoutX="365.0" layoutY="284.0" mnemonicParsing="false" text="Yes" toggleGroup="$A" />
+      <RadioButton fx:id="dailyCalorieNoCountRadioButton" layoutX="364.0" layoutY="349.0" mnemonicParsing="false" text="No">
+         <toggleGroup>
+            <ToggleGroup fx:id="C" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="dailyCalorieYesCountRadioButton" layoutX="364.0" layoutY="379.0" mnemonicParsing="false" text="Yes" toggleGroup="$C" />
+      <RadioButton fx:id="kgRadioButton" layoutX="457.0" layoutY="254.0" mnemonicParsing="false" text="kg">
+         <toggleGroup>
+            <ToggleGroup fx:id="B" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="lbsRadioButton" layoutX="457.0" layoutY="284.0" mnemonicParsing="false" text="lbs" toggleGroup="$B" />
+   </children>
+</AnchorPane>
