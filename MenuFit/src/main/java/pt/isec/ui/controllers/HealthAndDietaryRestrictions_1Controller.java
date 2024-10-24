@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import pt.isec.model.HealthData;
+import pt.isec.model.users.HealthData;
 import pt.isec.model.users.User;
 import pt.isec.persistence.LoggedInUserStore;
 
