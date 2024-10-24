@@ -11,10 +11,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainMenuController {
-
+    SceneSwitcher sceneSwitcher;
+    public MainMenuController(){
+        this.sceneSwitcher = new SceneSwitcher();
+    }
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        try {
+        /*try {
 
             Parent healthAndDietaryPage = FXMLLoader.load(getClass().getResource("/UI/fxml/HealthAndDietaryRestrictions_1.fxml"));
             Scene healthAndDietaryScene = new Scene(healthAndDietaryPage);
@@ -27,7 +30,8 @@ public class MainMenuController {
             appStage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_1.fxml", event);
     }
 
 

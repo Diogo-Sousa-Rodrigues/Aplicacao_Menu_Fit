@@ -150,7 +150,7 @@ public class HealthAndDietaryRestrictions_3Controller {
         System.out.println("Proceeding to the next step...");
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("../fxml/TimeAndBudget.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../../../../../resources/fxml/TimeAndBudget.fxml"));
             Stage stage = (Stage) next.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {
@@ -161,7 +161,7 @@ public class HealthAndDietaryRestrictions_3Controller {
 
     @FXML
     public void previousHandler(ActionEvent event) {
-        sceneSwitcher.switchScene("../fxml/HealthAndDietaryRestrictions_2.fxml", event);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event);
     }
 
     private void showAlert(String title, String message) {

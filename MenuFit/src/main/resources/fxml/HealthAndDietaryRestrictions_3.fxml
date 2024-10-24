@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Controllers.HealthAndDietaryRestrictions_3Controller">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.HealthAndDietaryRestrictions_3Controller">
    <children>
       <Label layoutX="248.0" layoutY="98.0" text="Health and Dietary Considerations">
          <font>
@@ -18,7 +18,7 @@
          </font></Label>
       <ImageView fx:id="logo" fitHeight="48.0" fitWidth="53.0" layoutX="44.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Resources/logo.png" />
+            <Image url="@../images/logo.png" />
          </image></ImageView>
       <Label layoutX="97.0" layoutY="46.0" text="MenuFit">
          <font>

@@ -17,7 +17,7 @@ public class SceneSwitcher {
     // Método para mudar de cena
     public void switchScene(String fxmlFile, ActionEvent event) {
         try {
-            root = FXMLLoader.load(getClass().getResource(fxmlFile));
+            root = FXMLLoader.load(getClass().getClassLoader().getResource(fxmlFile));
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

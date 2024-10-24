@@ -151,13 +151,13 @@ public class HealthAndDietaryRestrictions_2Controller {
         }
 
         System.out.println("Proceeding to the next step...");
-        sceneSwitcher.switchScene("../fxml/HealthAndDietaryRestrictions_3.fxml", event);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_3.fxml", event);
     }
 
     @FXML
     public void previousHandler(ActionEvent event) {
         System.out.println("Going back to the previous step...");
-        sceneSwitcher.switchScene("../fxml/HealthAndDietaryRestrictions_1.fxml", event);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_1.fxml", event);
     }
 
     private void showAlert(String title, String message) {

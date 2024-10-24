@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import pt.isec.model.users.User;
 import pt.isec.persistence.EphemeralStore;
+import pt.isec.persistence.LoggedInUserStore;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -58,19 +59,19 @@ public class LogInController {
         // if (getResult.isPresent()) {
         //      User user = getResult.get();
         // }
-
+        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event); //TEMPORARY FOR TESTING
         if(getResult.isEmpty()){
             invalidLogin.setVisible(true);
         }else{
             LoggedInUserStore userStore = LoggedInUserStore.getInstance();
             userStore.setCurrentUser(getResult.get());
-            sceneSwitcher.switchScene("../fxml/MainMenu.fxml", event);
+            sceneSwitcher.switchScene("fxml/MainMenu.fxml", event);
         }
     }
 
     @FXML
     void registerNowHandler(ActionEvent event) throws IOException {
-        sceneSwitcher.switchScene("../fxml/Register.fxml", event);
+        sceneSwitcher.switchScene("fxml/Register.fxml", event);
     }
 
     @FXML

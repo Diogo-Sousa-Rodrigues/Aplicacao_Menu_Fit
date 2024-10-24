@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RegisterController {
+    SceneSwitcher sceneSwitcher;
 
     @FXML
     private TextField firstNameField;
@@ -32,6 +33,9 @@ public class RegisterController {
     @FXML
     private ComboBox genderComboBox;
 
+    public RegisterController(){
+        this.sceneSwitcher = new SceneSwitcher();
+    }
     @FXML
     private void handleRegister(ActionEvent event) {
         String firstName = firstNameField.getText();
@@ -62,9 +66,7 @@ public class RegisterController {
         store.putUser(newUser, password);
 
         showAlert("Registration Successful", "User Registered Successfully!");
-
-        SceneSwitcher sceneSwitcher = new SceneSwitcher();
-        sceneSwitcher.switchScene("/UI/fxml/LogIn.fxml", event);
+        sceneSwitcher.switchScene("fxml/LogIn.fxml", event);
     }
 
     @FXML
@@ -78,8 +80,7 @@ public class RegisterController {
         genderComboBox.setValue(null);
 
         // Switch back to login scene if desired
-        SceneSwitcher sceneSwitcher = new SceneSwitcher();
-        sceneSwitcher.switchScene("/UI/fxml/LogIn.fxml", event);
+        sceneSwitcher.switchScene("fxml/LogIn.fxml", event);
     }
 
     private void showAlert(String title, String message) {

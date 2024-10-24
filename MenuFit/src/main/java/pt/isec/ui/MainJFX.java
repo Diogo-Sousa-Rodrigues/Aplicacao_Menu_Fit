@@ -13,10 +13,10 @@ public class MainJFX  extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("fxml/LogIn.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/LogIn.fxml"));
             Scene scene = new Scene(root);
             stage.setTitle("MenuFit");
-            Image icon = new Image("Resources/logo.png");
+            Image icon = new Image("images/logo.png");
             stage.getIcons().add(icon);
             stage.setScene(scene);
             stage.show();

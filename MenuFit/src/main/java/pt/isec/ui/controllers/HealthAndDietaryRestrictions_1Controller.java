@@ -113,7 +113,7 @@ public class HealthAndDietaryRestrictions_1Controller {
 
     @FXML
     public void previousHandler(ActionEvent event) {
-        sceneSwitcher.switchScene("../fxml/MainMenu.fxml", event);
+        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event);
     }
 
     public HealthAndDietaryRestrictions_1Controller(){
@@ -163,7 +163,7 @@ public class HealthAndDietaryRestrictions_1Controller {
 
         System.out.println("Health Data collected: " + healthData);
 
-        sceneSwitcher.switchScene("../fxml/HealthAndDietaryRestrictions_2.fxml", event);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event);
     }
 
     private void showAlert(String title, String message) {
