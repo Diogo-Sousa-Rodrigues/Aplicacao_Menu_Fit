@@ -8,9 +8,12 @@ import pt.isec.model.users.HealthData;
 import pt.isec.model.users.User;
 
 public class HealthAndDietaryRestrictions_1Controller {
-    public HealthAndDietaryRestrictions_1Controller(User user){
+    /*public HealthAndDietaryRestrictions_1Controller(User user){
         this.user = user;
         this.sceneSwitcher = new SceneSwitcher();
+    }*/
+    public HealthAndDietaryRestrictions_1Controller(){
+        sceneSwitcher = new SceneSwitcher();
     }
 
     @FXML
@@ -55,7 +58,7 @@ public class HealthAndDietaryRestrictions_1Controller {
                 dailyCalorieCount
         );
 
-        this.user.setHealthData(healthData);
+        //this.user.setHealthData(healthData);
 
         System.out.println("Health Data collected: " + healthData);
 
@@ -155,7 +158,7 @@ public class HealthAndDietaryRestrictions_1Controller {
         }
     }
 
-    private final User user;
+    //private final User user;
 
     private final SceneSwitcher sceneSwitcher;
 

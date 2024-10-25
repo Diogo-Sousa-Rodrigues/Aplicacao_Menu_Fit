@@ -149,14 +149,15 @@ public class HealthAndDietaryRestrictions_3Controller {
 
         System.out.println("Proceeding to the next step...");
 
-        try {
+        /*try {
             Parent root = FXMLLoader.load(getClass().getResource("../../../../../resources/fxml/TimeAndBudget.fxml"));
             Stage stage = (Stage) next.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Error", "An error occurred while trying to load the next scene.");
-        }
+        }*/
+        sceneSwitcher.switchScene("fxml/TimeAndBudget.fxml", event);
     }
 
     @FXML

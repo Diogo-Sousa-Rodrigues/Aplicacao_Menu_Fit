@@ -56,6 +56,6 @@ public class TimeAndBudgetController implements Initializable {
             budget = null;
         }
         //TODO guardar os dados
-        //sceneSwitcher.switchScene("../fxml/xxxxxxxxx.fxml", event);
+        sceneSwitcher.switchScene("fxml/MealPlanReview.fxml", event);
     }
 }

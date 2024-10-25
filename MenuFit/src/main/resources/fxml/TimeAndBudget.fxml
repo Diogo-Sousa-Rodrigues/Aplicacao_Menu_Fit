@@ -45,8 +45,8 @@
       <Slider fx:id="budgetSlider" layoutX="444.0" layoutY="344.0" majorTickUnit="49.0" min="1.0" minorTickCount="1" prefHeight="14.0" prefWidth="300.0" showTickLabels="true" value="10.0" />
       <Label layoutX="354.0" layoutY="357.0" text="+" />
       <Label layoutX="746.0" layoutY="357.0" text="+" />
-      <Button fx:id="previous" onAction="#previousHandler" layoutX="80.0" layoutY="520.0" mnemonicParsing="false" text="&lt; Previous" />
-      <Button fx:id="finish" onAction="#finishHandler" layoutX="642.0" layoutY="519.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" text="Finish" />
+      <Button fx:id="previous" layoutX="80.0" layoutY="520.0" mnemonicParsing="false" onAction="#previousHandler" text="&lt; Previous" />
+      <Button fx:id="finish" layoutX="636.0" layoutY="519.0" mnemonicParsing="false" onAction="#finishHandler" prefHeight="26.0" prefWidth="80.0" text="See Preview" />
       <Label fx:id="timeLabel" layoutX="169.0" layoutY="389.0" text="10" />
       <Label fx:id="budgetLabel" layoutX="565.0" layoutY="389.0" text="5" />
    </children>
