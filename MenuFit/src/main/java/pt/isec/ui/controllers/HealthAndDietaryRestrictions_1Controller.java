@@ -6,58 +6,74 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import pt.isec.model.users.HealthData;
 import pt.isec.model.users.User;
-import pt.isec.persistence.LoggedInUserStore;
 
 public class HealthAndDietaryRestrictions_1Controller {
-
-    private SceneSwitcher sceneSwitcher;
-
-    @FXML
-    private Button goBack;
-    @FXML
-    private Button next;
+    public HealthAndDietaryRestrictions_1Controller(User user){
+        this.user = user;
+        this.sceneSwitcher = new SceneSwitcher();
+    }
 
     @FXML
-    private TextField weightTextField;
+    public void previousHandler(ActionEvent event) {
+        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event);
+    }
 
     @FXML
-    private TextField heightTextField;
+    public void finishHandler(ActionEvent event) {
+        String weight = weightTextField.getText();
+        String height = heightTextField.getText();
+        String objective = objectiveTextField.getText();
+        String levelOfFitness = levelOfFitnessComboBox.getValue();
+        String desiredWeight = desiredWeightYesRadioButton.isSelected() ? desiredWeightTextField.getText() : "None";
+        String dailyCalorieCount = dailyCalorieYesCountRadioButton.isSelected() ? dailyCalorieCountTextField.getText() : "None";
 
-    @FXML
-    private TextField objectiveTextField;
+        if (weight.isEmpty() || height.isEmpty() || objective.isEmpty() || levelOfFitness == null ||
+                (!desiredWeightYesRadioButton.isSelected() && !desiredWeightNoRadioButton.isSelected()) ||
+                (!dailyCalorieYesCountRadioButton.isSelected() && !dailyCalorieNoCountRadioButton.isSelected()) ||
+                (!kgRadioButton.isSelected() && !lbsRadioButton.isSelected())) {
 
-    @FXML
-    private ComboBox<String> levelOfFitnessComboBox;
+            showAlert("Attention", "Please fill in all required fields and make selections for the radio buttons.");
+            return;
+        }
 
-    @FXML
-    private TextField desiredWeightTextField;
+        if (desiredWeightYesRadioButton.isSelected() && desiredWeightTextField.getText().isEmpty()) {
+            showAlert("Attention", "Please specify your desired weight.");
+            return;
+        }
 
-    @FXML
-    private TextField dailyCalorieCountTextField;
+        if (dailyCalorieYesCountRadioButton.isSelected() && dailyCalorieCountTextField.getText().isEmpty()) {
+            showAlert("Attention", "Please specify your daily calorie count.");
+            return;
+        }
 
-    @FXML
-    private RadioButton desiredWeightYesRadioButton;
+        HealthData healthData = new HealthData(
+                weight,
+                height,
+                objective,
+                levelOfFitness,
+                desiredWeight,
+                dailyCalorieCount
+        );
 
-    @FXML
-    private RadioButton desiredWeightNoRadioButton;
+        this.user.setHealthData(healthData);
 
-    @FXML
-    private RadioButton dailyCalorieYesCountRadioButton;
+        System.out.println("Health Data collected: " + healthData);
 
-    @FXML
-    private RadioButton dailyCalorieNoCountRadioButton;
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event);
+    }
 
-    @FXML
-    private RadioButton kgRadioButton;
+    public void calculateBMI() {
+        try {
+            double weight = Double.parseDouble(weightTextField.getText());
+            double height = Double.parseDouble(heightTextField.getText()) / 100;
 
-    @FXML
-    private RadioButton lbsRadioButton;
+            double bmi = weight / (height * height);
 
-    @FXML
-    private Label BMI;
-
-    @FXML
-    private ToggleGroup weightUnitToggleGroup;
+            BMI.setText(String.format("Your BMI is %.2f", bmi));
+        } catch (NumberFormatException e) {
+            BMI.setText("Invalid weight or height.");
+        }
+    }
 
     @FXML
     private void initialize() {
@@ -111,60 +127,6 @@ public class HealthAndDietaryRestrictions_1Controller {
                 && desiredWeightSelected && dailyCalorieSelected && weightUnitSelected));
     }
 
-    @FXML
-    public void previousHandler(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event);
-    }
-
-    public HealthAndDietaryRestrictions_1Controller(){
-        this.sceneSwitcher = new SceneSwitcher();
-    }
-
-    @FXML
-    public void finishHandler(ActionEvent event) {
-        String weight = weightTextField.getText();
-        String height = heightTextField.getText();
-        String objective = objectiveTextField.getText();
-        String levelOfFitness = levelOfFitnessComboBox.getValue();
-        String desiredWeight = desiredWeightYesRadioButton.isSelected() ? desiredWeightTextField.getText() : "None";
-        String dailyCalorieCount = dailyCalorieYesCountRadioButton.isSelected() ? dailyCalorieCountTextField.getText() : "None";
-
-        if (weight.isEmpty() || height.isEmpty() || objective.isEmpty() || levelOfFitness == null ||
-                (!desiredWeightYesRadioButton.isSelected() && !desiredWeightNoRadioButton.isSelected()) ||
-                (!dailyCalorieYesCountRadioButton.isSelected() && !dailyCalorieNoCountRadioButton.isSelected()) ||
-                (!kgRadioButton.isSelected() && !lbsRadioButton.isSelected())) {
-
-            showAlert("Attention", "Please fill in all required fields and make selections for the radio buttons.");
-            return;
-        }
-
-        if (desiredWeightYesRadioButton.isSelected() && desiredWeightTextField.getText().isEmpty()) {
-            showAlert("Attention", "Please specify your desired weight.");
-            return;
-        }
-
-        if (dailyCalorieYesCountRadioButton.isSelected() && dailyCalorieCountTextField.getText().isEmpty()) {
-            showAlert("Attention", "Please specify your daily calorie count.");
-            return;
-        }
-
-        HealthData healthData = new HealthData(
-                weight,
-                height,
-                objective,
-                levelOfFitness,
-                desiredWeight,
-                dailyCalorieCount
-        );
-
-        LoggedInUserStore userStore = LoggedInUserStore.getInstance();
-        User currentUser = userStore.getCurrentUser();
-        currentUser.setHealthData(healthData);
-
-        System.out.println("Health Data collected: " + healthData);
-
-        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event);
-    }
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(AlertType.WARNING);
@@ -174,16 +136,6 @@ public class HealthAndDietaryRestrictions_1Controller {
         alert.showAndWait();
     }
 
-    public void calculateBMI() {
-        try {
-            double weight = Double.parseDouble(weightTextField.getText());
-            double height = Double.parseDouble(heightTextField.getText()) / 100;
-            double bmi = weight / (height * height);
-            BMI.setText(String.format("Your BMI is %.2f", bmi));
-        } catch (NumberFormatException e) {
-            BMI.setText("Invalid weight or height.");
-        }
-    }
 
     private void toggleDesiredWeightTextField() {
         if (desiredWeightYesRadioButton.isSelected()) {
@@ -202,4 +154,29 @@ public class HealthAndDietaryRestrictions_1Controller {
             dailyCalorieCountTextField.clear();
         }
     }
+
+    private final User user;
+
+    private final SceneSwitcher sceneSwitcher;
+
+    @FXML
+    private Button goBack, next;
+
+    @FXML
+    private TextField weightTextField, heightTextField, objectiveTextField,
+            desiredWeightTextField, dailyCalorieCountTextField;
+
+    @FXML
+    private RadioButton desiredWeightYesRadioButton, desiredWeightNoRadioButton,
+            dailyCalorieYesCountRadioButton, dailyCalorieNoCountRadioButton,
+            kgRadioButton, lbsRadioButton;
+
+    @FXML
+    private Label BMI;
+
+    @FXML
+    private ToggleGroup weightUnitToggleGroup;
+
+    @FXML
+    private ComboBox<String> levelOfFitnessComboBox;
 }
