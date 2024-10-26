@@ -56,7 +56,7 @@ public class LogInController {
         if(getResult.isEmpty()){
             invalidLogin.setVisible(true);
         }else{
-            sceneSwitcher.switchScene("fxml/MainMenu.fxml", event);
+            sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, getResult.get());
         }
     }
 

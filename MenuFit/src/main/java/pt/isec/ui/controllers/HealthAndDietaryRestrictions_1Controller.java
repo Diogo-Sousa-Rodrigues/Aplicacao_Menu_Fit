@@ -6,19 +6,18 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import pt.isec.model.users.HealthData;
 import pt.isec.model.users.User;
+import pt.isec.model.users.UserInitializable;
 
-public class HealthAndDietaryRestrictions_1Controller {
-    /*public HealthAndDietaryRestrictions_1Controller(User user){
-        this.user = user;
-        this.sceneSwitcher = new SceneSwitcher();
-    }*/
+public class HealthAndDietaryRestrictions_1Controller implements UserInitializable {
+
+    private User user;
     public HealthAndDietaryRestrictions_1Controller(){
         sceneSwitcher = new SceneSwitcher();
     }
 
     @FXML
     public void previousHandler(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event);
+        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user);
     }
 
     @FXML
@@ -158,8 +157,6 @@ public class HealthAndDietaryRestrictions_1Controller {
         }
     }
 
-    //private final User user;
-
     private final SceneSwitcher sceneSwitcher;
 
     @FXML
@@ -182,4 +179,9 @@ public class HealthAndDietaryRestrictions_1Controller {
 
     @FXML
     private ComboBox<String> levelOfFitnessComboBox;
+
+    @Override
+    public void initializeUser(User user) {
+        this.user = user;
+    }
 }

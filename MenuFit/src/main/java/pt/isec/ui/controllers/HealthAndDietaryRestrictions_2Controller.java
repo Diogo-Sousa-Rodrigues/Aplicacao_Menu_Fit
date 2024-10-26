@@ -5,10 +5,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import pt.isec.model.users.User;
+import pt.isec.model.users.UserInitializable;
 
-public class HealthAndDietaryRestrictions_2Controller {
+public class HealthAndDietaryRestrictions_2Controller implements UserInitializable {
 
     private SceneSwitcher sceneSwitcher;
+    private User user;
 
     @FXML
     private RadioButton allergiesOrIntolerancesYesRadioButton;
@@ -151,13 +154,13 @@ public class HealthAndDietaryRestrictions_2Controller {
         }
 
         System.out.println("Proceeding to the next step...");
-        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_3.fxml", event);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_3.fxml", event, user);
     }
 
     @FXML
     public void previousHandler(ActionEvent event) {
         System.out.println("Going back to the previous step...");
-        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_1.fxml", event);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_1.fxml", event, user);
     }
 
     private void showAlert(String title, String message) {
@@ -216,5 +219,10 @@ public class HealthAndDietaryRestrictions_2Controller {
         boolean gastrointestinalIssuesFilled = !gastrointestinalIssuesYesRadioButton.isSelected() || !gastrointestinalIssuesTextField.getText().trim().isEmpty();
 
         next.setDisable(!(allergiesSelected && chronicHealthSelected && medicalSelected && gastrointestinalIssuesSelected && allergiesFilled && chronicHealthFilled && medicalFilled && gastrointestinalIssuesFilled));
+    }
+
+    @Override
+    public void initializeUser(User user) {
+        this.user = user;
     }
 }

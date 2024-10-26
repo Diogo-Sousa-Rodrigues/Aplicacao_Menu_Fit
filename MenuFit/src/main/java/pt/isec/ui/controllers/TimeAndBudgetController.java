@@ -6,12 +6,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import pt.isec.model.users.User;
+import pt.isec.model.users.UserInitializable;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TimeAndBudgetController implements Initializable {
+public class TimeAndBudgetController implements Initializable, UserInitializable {
+    private User user;
     SceneSwitcher sceneSwitcher;
     Integer budget, time;
     @FXML
@@ -56,6 +59,11 @@ public class TimeAndBudgetController implements Initializable {
             budget = null;
         }
         //TODO guardar os dados
-        sceneSwitcher.switchScene("fxml/MealPlanReview.fxml", event);
+        sceneSwitcher.switchScene("fxml/MealPlanReview.fxml", event, user);
+    }
+
+    @Override
+    public void initializeUser(User user) {
+        this.user = user;
     }
 }

@@ -55,5 +55,6 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="lbsRadioButton" layoutX="457.0" layoutY="284.0" mnemonicParsing="false" text="lbs" toggleGroup="$B" />
+
    </children>
 </AnchorPane>

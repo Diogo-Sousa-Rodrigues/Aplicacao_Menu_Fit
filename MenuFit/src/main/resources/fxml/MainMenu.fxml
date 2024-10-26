@@ -60,6 +60,7 @@
                 <Font size="14.0" />
             </font>
         </Label>
+        <Label fx:id="recipeCaloriesLabel" layoutX="14.0" layoutY="58.0" text="-Calories" />
         <Label fx:id="recipeTimeLabel" layoutX="14.0" layoutY="75.0" text="-time" />
         <ImageView fx:id="recipeImage" fitHeight="71.0" fitWidth="82.0" layoutX="138.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/logo.png" />
@@ -70,9 +71,9 @@
     <Pane layoutX="330.0" layoutY="365.0" prefHeight="116.0" prefWidth="234.0" style="-fx-border-color: grey; -fx-border-width: 2;">
         <children>
             <CheckBox fx:id="mealCheckBox" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#mealPreviewChangeHandler" />
-            <Label fx:id="recipeCaloriesLabel" layoutX="46.0" layoutY="14.0" prefHeight="17.0" prefWidth="73.0" text="Example 1" />
+            <Label fx:id="reminder1" layoutX="46.0" layoutY="14.0" prefHeight="17.0" prefWidth="73.0" text="Example 1" />
             <CheckBox fx:id="mealCheckBox1" layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#mealPreviewChangeHandler" />
-            <Label fx:id="recipeCaloriesLabel1" layoutX="46.0" layoutY="41.0" prefHeight="17.0" prefWidth="73.0" text="Example 2" />
+            <Label fx:id="reminder2" layoutX="46.0" layoutY="41.0" prefHeight="17.0" prefWidth="73.0" text="Example 2" />
         </children>
     </Pane>
     <Label layoutX="330.0" layoutY="329.0" text="Reminders">
@@ -113,11 +114,21 @@
             <Font size="18.0" />
          </font></Label>
 
-        <Button layoutX="149.0" layoutY="313.0" mnemonicParsing="false"  prefHeight="35.0" prefWidth="37.0" text="+" />
+        <Button layoutX="149.0" layoutY="313.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="37.0" text="+" />
     </Pane>
      <Label layoutX="600.0" layoutY="107.0" text="Daily Menu">
          <font>
              <Font size="24.0" />
          </font>
      </Label>
+   <Label layoutX="572.0" layoutY="31.0" text="Bem vindo, ">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+   <Label fx:id="userName" layoutX="666.0" layoutY="31.0" text="nome utilizador">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
 </AnchorPane>

@@ -2,18 +2,15 @@ package pt.isec.ui.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+import pt.isec.model.users.User;
+import pt.isec.model.users.UserInitializable;
 
-import java.io.IOException;
 
-public class HealthAndDietaryRestrictions_3Controller {
-
+public class HealthAndDietaryRestrictions_3Controller implements UserInitializable {
+    private User user;
     private SceneSwitcher sceneSwitcher;
 
     @FXML
@@ -149,20 +146,12 @@ public class HealthAndDietaryRestrictions_3Controller {
 
         System.out.println("Proceeding to the next step...");
 
-        /*try {
-            Parent root = FXMLLoader.load(getClass().getResource("../../../../../resources/fxml/TimeAndBudget.fxml"));
-            Stage stage = (Stage) next.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Error", "An error occurred while trying to load the next scene.");
-        }*/
-        sceneSwitcher.switchScene("fxml/TimeAndBudget.fxml", event);
+        sceneSwitcher.switchScene("fxml/TimeAndBudget.fxml", event, user);
     }
 
     @FXML
     public void previousHandler(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event, user);
     }
 
     private void showAlert(String title, String message) {
@@ -212,5 +201,10 @@ public class HealthAndDietaryRestrictions_3Controller {
 
         next.setDisable(!(vitaminOrMineralSelected && fatigueOrLowEnergySelected && foodRestrictionsSelected && medicationsSelected
                 && vitaminOrMineralFilled && foodRestrictionsFilled && medicationsFilled));
+    }
+
+    @Override
+    public void initializeUser(User user) {
+        this.user = user;
     }
 }
