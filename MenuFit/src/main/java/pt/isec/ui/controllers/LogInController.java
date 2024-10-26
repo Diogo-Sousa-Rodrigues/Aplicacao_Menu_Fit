@@ -52,7 +52,7 @@ public class LogInController {
 
         Optional<User> getResult= store.getUser(email, password);
 
-        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event); //TEMPORARY FOR TESTING
+        //sceneSwitcher.switchScene("fxml/MainMenu.fxml", event); //TEMPORARY FOR TESTING
         if(getResult.isEmpty()){
             invalidLogin.setVisible(true);
         }else{

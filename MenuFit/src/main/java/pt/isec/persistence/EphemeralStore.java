@@ -61,7 +61,7 @@ public class EphemeralStore {
      * empty otherwise.
      */
     public Optional<User> putUser(User user, String password) {
-        if (!isRegistered(user)) {
+        if (isRegistered(user)) {
             return Optional.empty();
         }
 
