@@ -9,43 +9,115 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-            prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="pt.isec.ui.controllers.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="859.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.MainMenuController">
     <ImageView fitHeight="58.0" fitWidth="100.0" layoutX="23.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../images/logo.png"/>
+        <Image url="@../images/logo.png" />
     </ImageView>
     <Label layoutX="116.0" layoutY="50.0" prefHeight="35.0" prefWidth="91.0" text="MenuFit">
         <font>
-            <Font size="24.0"/>
+            <Font size="24.0" />
         </font>
     </Label>
-    <Button layoutX="53.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleButtonAction"
-            text="Generate Weekly Meal Plan"/>
-    <Pane layoutX="53.0" layoutY="365.0" prefHeight="116.0" prefWidth="234.0"
-          style="-fx-border-color: grey; -fx-border-width: 2;">
-        <Label fx:id="mealTypeLabel" layoutX="85.0" layoutY="4.0" text="Breakfast">
+
+
+    <Pane layoutX="67.0" layoutY="97.0" prefHeight="125.0" prefWidth="450.0">
+        <children>
+            <Label fx:id="caloriesConsumedLabel" layoutX="50.0" layoutY="20.0" text="500/2000">
+                <font>
+                    <Font size="30.0" />
+                </font>
+            </Label>
+            <Label layoutX="31.0" layoutY="62.0" prefHeight="27.0" prefWidth="161.0" text="Calories Consumed">
             <font>
-                <Font size="16.0"/>
-            </font>
-        </Label>
-        <CheckBox fx:id="mealCheckBox" layoutX="204.0" layoutY="8.0" mnemonicParsing="false"
-                  onAction="#mealPreviewChangeHandler"/>
-        <Label fx:id="recipeNameLabel" layoutX="14.0" layoutY="35.0" text="Recipe Name">
+               <Font name="System Bold" size="18.0" />
+            </font></Label>
+
+            <Label fx:id="caloriesRemainingLabel" layoutX="249.0" layoutY="20.0" text="1500/2000">
+                <font>
+                    <Font size="30.0" />
+                </font>
+            </Label>
+            <Label layoutX="243.0" layoutY="62.0" prefHeight="27.0" prefWidth="163.0" text="Remaining Calories">
             <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <Label fx:id="recipeCaloriesLabel" layoutX="14.0" layoutY="58.0" text="-Calories"/>
-        <Label fx:id="recipeTimeLabel" layoutX="14.0" layoutY="75.0" text="-time"/>
-        <ImageView fx:id="recipeImage" fitHeight="71.0" fitWidth="82.0" layoutX="138.0" layoutY="31.0"
-                   pickOnBounds="true" preserveRatio="true">
-            <Image url="@../images/logo.png"/>
-        </ImageView>
+               <Font name="System Bold" size="18.0" />
+            </font></Label>
+        </children>
     </Pane>
+
     <Label layoutX="53.0" layoutY="329.0" text="Next Meal">
         <font>
-          <Font size="24.0"/>
+            <Font size="24.0" />
         </font>
     </Label>
+    <Pane layoutX="53.0" layoutY="365.0" prefHeight="116.0" prefWidth="234.0" style="-fx-border-color: grey; -fx-border-width: 2;">
+        <Label fx:id="mealTypeLabel" layoutX="85.0" layoutY="4.0" text="Breakfast">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label fx:id="recipeNameLabel" layoutX="14.0" layoutY="35.0" text="Recipe Name">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="recipeTimeLabel" layoutX="14.0" layoutY="75.0" text="-time" />
+        <ImageView fx:id="recipeImage" fitHeight="71.0" fitWidth="82.0" layoutX="138.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../images/logo.png" />
+        </ImageView>
+    </Pane>
+    <Button layoutX="53.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="234.0" text="Generate Weekly Meal Plan" />
+
+    <Pane layoutX="330.0" layoutY="365.0" prefHeight="116.0" prefWidth="234.0" style="-fx-border-color: grey; -fx-border-width: 2;">
+        <children>
+            <CheckBox fx:id="mealCheckBox" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#mealPreviewChangeHandler" />
+            <Label fx:id="recipeCaloriesLabel" layoutX="46.0" layoutY="14.0" prefHeight="17.0" prefWidth="73.0" text="Example 1" />
+            <CheckBox fx:id="mealCheckBox1" layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#mealPreviewChangeHandler" />
+            <Label fx:id="recipeCaloriesLabel1" layoutX="46.0" layoutY="41.0" prefHeight="17.0" prefWidth="73.0" text="Example 2" />
+        </children>
+    </Pane>
+    <Label layoutX="330.0" layoutY="329.0" text="Reminders">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Label>
+
+    <Pane layoutX="600.0" layoutY="149.0" prefHeight="362.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-width: 2;">
+
+        <Label fx:id="breakfastLabel" layoutX="10.0" layoutY="40.0" text="Breakfast">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Label fx:id="breakfastRecipeLabel" layoutX="12.0" layoutY="75.0" text="-">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+
+        <Label fx:id="lunchLabel" layoutX="10.0" layoutY="127.0" text="Lunch">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Label fx:id="lunchRecipeLabel" layoutX="12.0" layoutY="162.0" text="-">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+
+        <Label fx:id="dinnerLabel" layoutX="7.0" layoutY="247.0" text="Dinner">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Label fx:id="dinnerRecipeLabel" layoutX="12.0" layoutY="282.0" text="-">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+
+        <Button layoutX="149.0" layoutY="313.0" mnemonicParsing="false"  prefHeight="35.0" prefWidth="37.0" text="+" />
+    </Pane>
+     <Label layoutX="600.0" layoutY="107.0" text="Daily Menu">
+         <font>
+             <Font size="24.0" />
+         </font>
+     </Label>
 </AnchorPane>
