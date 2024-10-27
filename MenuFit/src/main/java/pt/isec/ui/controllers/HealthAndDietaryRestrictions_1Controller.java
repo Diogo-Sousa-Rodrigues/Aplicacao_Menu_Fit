@@ -61,7 +61,7 @@ public class HealthAndDietaryRestrictions_1Controller implements UserInitializab
 
         System.out.println("Health Data collected: " + healthData);
 
-        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event, user);
     }
 
     public void calculateBMI() {
