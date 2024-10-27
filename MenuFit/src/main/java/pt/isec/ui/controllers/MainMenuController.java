@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import pt.isec.model.meals.MealPlan;
 import pt.isec.model.users.User;
 import javafx.beans.property.IntegerProperty;
@@ -19,6 +20,7 @@ public class MainMenuController implements UserInitializable {
     public Label recipeCaloriesLabel;
     public Label recipeTimeLabel;
     public ImageView recipeImage;
+    public ImageView profile;
 
     @FXML
     private Label breakfastRecipeLabel;
@@ -52,6 +54,25 @@ public class MainMenuController implements UserInitializable {
         caloriesRemainingLabel.textProperty().bind(caloriesRemaining.asString().concat("/2000"));
     }
 
+    @FXML
+    private void handleProfileClick(MouseEvent event) {
+        ActionEvent actionEvent = new ActionEvent(event.getSource(), event.getTarget());
+        sceneSwitcher.switchScene("fxml/ProfileBasicInformation.fxml", actionEvent, user);
+    }
+
+    @FXML
+    private void handleProfileMouseEntered(MouseEvent event) {
+        profile.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
+        profile.setScaleX(1.1);
+        profile.setScaleY(1.1);
+    }
+
+    @FXML
+    private void handleProfileMouseExited(MouseEvent event) {
+        profile.setStyle("");
+        profile.setScaleX(1.0);
+        profile.setScaleY(1.0);
+    }
 
     @FXML
     private void handleButtonAction(ActionEvent event) {

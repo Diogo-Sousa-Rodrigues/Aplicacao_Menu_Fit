@@ -19,7 +19,6 @@
         </font>
     </Label>
 
-
     <Pane layoutX="67.0" layoutY="97.0" prefHeight="125.0" prefWidth="450.0">
         <children>
             <Label fx:id="caloriesConsumedLabel" layoutX="50.0" layoutY="20.0" text="500/2000">
@@ -27,10 +26,10 @@
                     <Font size="30.0" />
                 </font>
             </Label>
-            <Label layoutX="31.0" layoutY="62.0" prefHeight="27.0" prefWidth="161.0" text="Calories Consumed">
-            <font>
-               <Font name="System Bold" size="18.0" />
-            </font></Label>
+            <Label layoutX="31.0" layoutY="62.0" prefHeight="27.0" prefWidth="163.0" text="Calories Consumed">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font></Label>
 
             <Label fx:id="caloriesRemainingLabel" layoutX="249.0" layoutY="20.0" text="1500/2000">
                 <font>
@@ -38,9 +37,9 @@
                 </font>
             </Label>
             <Label layoutX="243.0" layoutY="62.0" prefHeight="27.0" prefWidth="163.0" text="Remaining Calories">
-            <font>
-               <Font name="System Bold" size="18.0" />
-            </font></Label>
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font></Label>
         </children>
     </Pane>
 
@@ -83,16 +82,15 @@
     </Label>
 
     <Pane layoutX="600.0" layoutY="149.0" prefHeight="362.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-width: 2;">
-
         <Label fx:id="breakfastLabel" layoutX="10.0" layoutY="40.0" text="Breakfast">
             <font>
                 <Font size="24.0" />
             </font>
         </Label>
         <Label fx:id="breakfastRecipeLabel" layoutX="12.0" layoutY="75.0" text="-">
-         <font>
-            <Font size="18.0" />
-         </font></Label>
+            <font>
+                <Font size="18.0" />
+            </font></Label>
 
         <Label fx:id="lunchLabel" layoutX="10.0" layoutY="127.0" text="Lunch">
             <font>
@@ -100,9 +98,9 @@
             </font>
         </Label>
         <Label fx:id="lunchRecipeLabel" layoutX="12.0" layoutY="162.0" text="-">
-         <font>
-            <Font size="18.0" />
-         </font></Label>
+            <font>
+                <Font size="18.0" />
+            </font></Label>
 
         <Label fx:id="dinnerLabel" layoutX="7.0" layoutY="247.0" text="Dinner">
             <font>
@@ -110,25 +108,35 @@
             </font>
         </Label>
         <Label fx:id="dinnerRecipeLabel" layoutX="12.0" layoutY="282.0" text="-">
-         <font>
-            <Font size="18.0" />
-         </font></Label>
+            <font>
+                <Font size="18.0" />
+            </font></Label>
 
         <Button layoutX="149.0" layoutY="313.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="37.0" text="+" />
     </Pane>
-     <Label layoutX="600.0" layoutY="107.0" text="Daily Menu">
-         <font>
-             <Font size="24.0" />
-         </font>
-     </Label>
-   <Label layoutX="572.0" layoutY="31.0" text="Bem vindo, ">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-   <Label fx:id="userName" layoutX="666.0" layoutY="31.0" text="nome utilizador">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
+    <Label layoutX="600.0" layoutY="107.0" text="Daily Menu">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Label>
+    <Label layoutX="481.0" layoutY="54.0" text="Bem vindo, ">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
+    <Label fx:id="userName" layoutX="575.0" layoutY="54.0" text="nome utilizador">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
+    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="profile" fitHeight="82.0" fitWidth="71.0" layoutX="729.0" layoutY="33.0"
+               pickOnBounds="true" preserveRatio="true"
+               onMouseClicked="#handleProfileClick"
+               onMouseEntered="#handleProfileMouseEntered"
+               onMouseExited="#handleProfileMouseExited">
+        <image>
+            <Image url="@../images/user.png" />
+        </image>
+    </ImageView>
 </AnchorPane>
