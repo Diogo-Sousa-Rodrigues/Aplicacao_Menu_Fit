@@ -73,4 +73,9 @@ public class ProfileRestrictionsController implements UserInitializable {
         loadDietaryRestrictions();
         loadDietType();
     }
+
+    @FXML
+    public void handleGoBackButton(ActionEvent event) {
+        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user);
+    }
 }

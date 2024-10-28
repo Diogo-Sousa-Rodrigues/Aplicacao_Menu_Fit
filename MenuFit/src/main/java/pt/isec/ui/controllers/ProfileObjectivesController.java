@@ -67,4 +67,9 @@ public class ProfileObjectivesController implements UserInitializable {
     public void handleLogOutButton(ActionEvent event) {
         sceneSwitcher.switchScene("fxml/Login.fxml", event, null);
     }
+
+    @FXML
+    public void handleGoBackButton(ActionEvent event) {
+        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user);
+    }
 }
