@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="editButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="859.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.ProfileObjectivesController">
+   <Pane fx:id="optionsPane" prefHeight="600.0" prefWidth="206.0" style="-fx-border-color: grey; -fx-border-width: 2;">
+      <children>
+          <ImageView fx:id="logoImageView" fitHeight="58.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+              <Image url="@../images/logo.png" />
+          </ImageView>
+          <Label fx:id="menuFitLabel" layoutX="81.0" layoutY="14.0" prefHeight="35.0" prefWidth="91.0" text="MenuFit">
+              <font>
+                  <Font size="24.0" />
+              </font>
+          </Label>
+         <Button fx:id="basicInformationButton" layoutX="4.0" layoutY="98.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="199.0" text="Basic Information" onAction="#handleBasicInformationButton"/>
+         <Button fx:id="restrictionsButton" layoutX="4.0" layoutY="184.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="199.0" text="Restrictions" onAction="#handleRestrictionsButton"/>
+         <Button fx:id="objectivesButton" layoutX="4.0" layoutY="271.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="199.0" text="Objectives" />
+         <Button fx:id="logOutButton" layoutX="58.0" layoutY="516.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="91.0" text="Log Out" onAction="#handleLogOutButton"/>
+      </children>
+   </Pane>
+   <Label fx:id="nameLabel" layoutX="249.0" layoutY="102.0" text="Objectives">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+   <Pane fx:id="userNamePane" layoutX="249.0" layoutY="138.0" prefHeight="295.0" prefWidth="531.0" style="-fx-border-color: grey; -fx-border-width: 2;">
+      <children>
+         <Label fx:id="userObjectiveWeightLabel" layoutX="14.0" layoutY="1.0" prefHeight="27.0" prefWidth="48.0" text="Weight: " />
+         <Label fx:id="userGainMuscleLabel" layoutX="14.0" layoutY="31.0" prefHeight="27.0" prefWidth="521.0" text="Gain Muscle" />
+         <Label fx:id="userEatHealthierLabel" layoutX="14.0" layoutY="58.0" prefHeight="27.0" prefWidth="521.0" text="Eat Healthier" />
+         <Label fx:id="userDailyCalorieIntakeLabel" layoutX="14.0" layoutY="85.0" prefHeight="27.0" prefWidth="521.0" text="2200 daily calorie intake" />
+         <Label fx:id="userWeightNumberLabel" layoutX="62.0" layoutY="1.0" prefHeight="27.0" prefWidth="48.0" text="number" />
+      </children>
+   </Pane>
+   <Label fx:id="menuFitLabel1" layoutX="421.0" layoutY="31.0" prefHeight="35.0" prefWidth="124.0" text="User Profile">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
+   <Button fx:id="editObjectivesButton" layoutX="706.0" layoutY="31.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="73.0" text="Edit" />
+</AnchorPane>
