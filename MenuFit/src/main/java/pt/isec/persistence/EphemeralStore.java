@@ -2,6 +2,7 @@ package pt.isec.persistence;
 
 import pt.isec.model.meals.Meal;
 import pt.isec.model.meals.MealPlan;
+import pt.isec.model.users.HealthData;
 import pt.isec.model.users.User;
 
 import java.util.HashMap;
@@ -143,7 +144,7 @@ public class EphemeralStore {
     }
 
     /**
-     * Puts the given Meals n the Store and associates them
+     * Puts the given Meals in the Store and associates them
      * to a given MealPlan.
      * Overrides existing Meals for that MealPlan.
      *
@@ -162,6 +163,50 @@ public class EphemeralStore {
         this.meals.put(mealPlan, meals);
 
         return Optional.of(meals);
+    }
+
+    /**
+     * Gets the HealthData assigned to the given User.
+     *
+     * @param user The User instance.
+     *
+     * @return An Optional containing the HealthData assigned
+     * to the given User, or empty otherwise.
+     */
+    public Optional<HealthData> getHealthData(User user) {
+        if (!isRegistered(user)) {
+            return Optional.empty();
+        }
+
+        if (this.healthData.containsKey(user)) {
+            HealthData healthData = this.healthData.get(user);
+
+            return Optional.of(healthData);
+        }
+
+        return Optional.empty();
+    }
+
+    /**
+     * Puts the given HealthData in the Store and associates them
+     * to a given User.
+     * Overrides an existing HealData for that User.
+     *
+     * @param user A registered User instance.
+     * @param healthData The HealthData to assign to the given User.
+     *
+     * @return An Optional containing the HealthData instance
+     * if the User is registered within the Store, or
+     * empty otherwise.
+     */
+    public Optional<HealthData> putHealthData(User user, HealthData healthData) {
+        if (!isRegistered(user)) {
+            return Optional.empty();
+        }
+
+        this.healthData.put(user, healthData);
+
+        return Optional.of(healthData);
     }
 
     private boolean isRegistered(User user) {
@@ -192,6 +237,8 @@ public class EphemeralStore {
         this.mealPlans = new HashMap<>();
 
         this.meals = new HashMap<>();
+
+        this.healthData = new HashMap<>();
     }
 
     private final Map<String, User> users;
@@ -201,4 +248,6 @@ public class EphemeralStore {
     private final Map<User, MealPlan> mealPlans;
 
     private final Map<MealPlan, List<Meal>> meals;
+
+    private final Map<User, HealthData> healthData;
 }
