@@ -1,0 +1,19 @@
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  image: maven:3.8.1-openjdk-17-slim
+  script:
+    - export NEW_VERSION=${CI_COMMIT_SHA:0:8}-${CI_COMMIT_REF_NAME}
+    - mvn versions:set -DnewVersion=1-$NEW_VERSION
+    - mvn -s ci_settings.xml deploy
+  only:
+    - qa
+    - main
+
+unit-test-job:
+  stage: test
+  script:
+    - echo "Replace with the command to run unit tests"
