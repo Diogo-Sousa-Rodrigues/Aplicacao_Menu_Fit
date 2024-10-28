@@ -277,3 +277,73 @@ Mitigation actions:
 - Story Points: 5S+1M+1S(incomplete)
 
 ##### Sprint Review
+- Analysis: 
+
+- Story Points:
+
+- Version: 0.1 
+
+- Client analysis: 
+
+- Conclusions:
+
+
+##### Sprint Retrospective
+
+
+
+***
+
+#### Sprint 2
+##### Sprint Plan
+
+- Goal:
+  - Integrate AI
+  - Database connection
+  - Finish data management
+  - Improve UI
+
+- Dates: from 29/Out to 12/Nov, 2 weeks
+
+- Roles:
+  - Product Owner: Júlio Pacheco
+  - Scrum Master: Juliano Babaroca
+  - QA: Bárbara Trindade
+
+- To do:
+  - US2: As a user, I want to be able to use my credentials to access the app so that I can access and manage my information and meal plan.
+    - Task1: Remember me
+    - Task2: Access data
+  - US3: As a user, I want to be able to save my health data and my dietary restrictions, So that I can get meals that follow those parameters.
+    - Task1: AI Prompt
+    - Task2: Profile Data
+  - US4: As a user, I want my available time and budget to be considered in the making of the meal plan so that it will generate recipes that will better meet my preferred time expectations and budget.
+    - Task1: AI Prompt
+  - US12: As a user, I want the app to have a user profile that keeps track and changes my informations such as user data, restrictions and objectives. And also that allows me to log out of my acount.
+    - Manage Data
+  - US7: As a user, I want quick and easy access to the weekly meal plan in the meal prep app, so that I can efficiently plan and organize my meals without hassle.
+    - Task 1: AI Prompt
+    - Task 2: Manage meal
+    - Task 3: Generate new Weekly Plan (Redirect to US3)
+    - Task 4: Form UI
+  - US6: As a user, I want to keep track of my daily goals, so that I can stay on top of my progress and ensure I meet my nutritional objectives consistently.
+    - Task 1: Calorie Counter
+  - US8: As a user, I want to be able to see the ingredients and step-by-step of each recipe so that I can follow it and prepare meals easily and accurately without missing any details.
+    - Task 1: Meal Plan Data
+    - Task 2: Form UI
+  - US5: As a user, I want to review the meal plan I'm about to generate, so that I can make adjustments in my inputs and so that I can see what I'm about to commit to, without commitment.
+    - Task 1: Meals Data
+  - US11: As a user, I want the app to have a interface that shows all the meals for the day and that allows me to add meals
+    - Task 1: Manage Data
+  - US13: As a user, I want the app to tell me the next expected meal of the day.
+    - Task 1: Manage Data
+  - US9: As a user, I want the app to tell me if there is anything I need to do ahead of time in a meal so that I can prepare for it.
+    - Task 1: Reminder Data
+    - Task 2: Manage Reminder
+  - US10: As a user, I want to be able to save my favorite meals and to delete the ones I dont like, so that I can quickly access the meals I enjoy and keep my meal plan organized
+    - Task 1: UI
+    - Task 2: Recipe Data
+    - Task 3: Manage Recipe
+    
+  
+- Story Points: 1S+1M+1L + 8S(only some tasks) + 1M(only some tasks)
