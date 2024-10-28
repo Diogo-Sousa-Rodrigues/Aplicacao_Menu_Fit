@@ -17,7 +17,7 @@ unit-test-job:
   stage: test
   script:
     - echo "Replace with the command to run unit tests"
-    -
+
 
 variables:
   SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
