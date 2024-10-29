@@ -5,15 +5,23 @@ public class Meal {
         this.recipe = recipe;
     }
 
+    /**
+     * Gets the Meal's recipe.
+     *
+     * @return The Meal's Recipe.
+     */
     public Recipe getRecipe() {
         return this.recipe;
     }
 
+    /**
+     * Set's a new Recipe for the Meal.
+     *
+     * @param recipe The new Recipe.
+     */
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
-
-    // TODO: A Meal has a time to be eaten
 
     private Recipe recipe;
 }
