@@ -1,7 +1,7 @@
 package pt.isec.model.meals;
 
 /**
- * Represents macro values
+ * Represents macro values, in grams
  */
 public record Macros(float proteins, float carbs, float fats) {
     @Override

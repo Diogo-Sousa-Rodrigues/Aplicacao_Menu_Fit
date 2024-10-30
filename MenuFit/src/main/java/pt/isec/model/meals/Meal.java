@@ -1,5 +1,7 @@
 package pt.isec.model.meals;
 
+import java.time.Duration;
+
 public class Meal {
     public Meal(Recipe recipe) {
         this.recipe = recipe;
@@ -23,5 +25,16 @@ public class Meal {
         this.recipe = recipe;
     }
 
+    /**
+     * Gets the Meal's type.
+     *
+     * @return The Meal's MealType.
+     */
+    public MealType getType() {
+        return this.type;
+    }
+
+    private MealType type;
+    private Duration prep;
     private Recipe recipe;
 }

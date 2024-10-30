@@ -22,6 +22,6 @@ import java.util.List;
 //          }
 //      ]
 // }
-public record Recipe(String name, String description,
+public record Recipe(String name, String description, int servings,
                      List<String> reminders, List<Ingredient> ingredients) {
 }
