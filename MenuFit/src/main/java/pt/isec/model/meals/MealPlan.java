@@ -4,6 +4,7 @@ import pt.isec.model.users.User;
 
 public class MealPlan {
     public MealPlan(User user) {
+        // test
     }
 
     // TODO: A MealPlan has a duration, a Goal
