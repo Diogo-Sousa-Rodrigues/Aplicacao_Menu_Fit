@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.MealPlanController">
+   <children>
+      <Button fx:id="manageRecipesBtn" layoutX="504.0" layoutY="41.0" mnemonicParsing="false" onAction="#handleManageRecipesBtnAction" text="Manage Recipes" />
+      <Button fx:id="goBackBtn" layoutX="669.0" layoutY="41.0" mnemonicParsing="false" onAction="#handleGoBackBtnAction" text="Go Back" />
+   </children>
+</AnchorPane>

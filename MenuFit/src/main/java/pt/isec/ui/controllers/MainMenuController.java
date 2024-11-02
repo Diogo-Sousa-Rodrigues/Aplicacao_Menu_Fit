@@ -2,6 +2,7 @@ package pt.isec.ui.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -21,6 +22,7 @@ public class MainMenuController implements UserInitializable {
     public Label recipeTimeLabel;
     public ImageView recipeImage;
     public ImageView profile;
+    public Button seeMealPlanBtn;
 
     @FXML
     private Label breakfastRecipeLabel;
@@ -33,8 +35,7 @@ public class MainMenuController implements UserInitializable {
     private Label caloriesConsumedLabel; // Label para calorias consumidas
     @FXML
     private Label caloriesRemainingLabel; // Label para calorias restantes
-    @FXML
-    private Label userName;
+
 
     //Propriedades calorias
     private IntegerProperty caloriesConsumed = new SimpleIntegerProperty(100); // valor inicial
@@ -79,6 +80,11 @@ public class MainMenuController implements UserInitializable {
         sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_1.fxml", event, user);
     }
 
+    @FXML
+    private void handleSeeMealPlanBtnAction(ActionEvent event) {
+        sceneSwitcher.switchScene("fxml/MealPlan.fxml", event, user);
+    }
+
     /*@FXML
     public void initialize() {
         //TODO para mostrar logo a receita suposta quando se entra nesta scene
@@ -92,7 +98,6 @@ public class MainMenuController implements UserInitializable {
 
     public void initializeUser(User user) {
         this.user = user;
-        userName.setText(user.getFirstName());
     }
 
 
