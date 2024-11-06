@@ -1,10 +1,13 @@
 package pt.isec.model.meals;
 
+import java.time.Duration;
 import java.util.List;
 
 // {
 //      "name": "Recipe name",
 //      "description": "Recipe description",
+//      "servings": 1,
+//      "prep": 60, // minutes
 //      "reminders": ["preheat the oven at 250º"],
 //      "ingredients" : [
 //          {
@@ -22,6 +25,6 @@ import java.util.List;
 //          }
 //      ]
 // }
-public record Recipe(String name, String description, int servings,
+public record Recipe(String name, String description, int servings, Duration prep,
                      List<String> reminders, List<Ingredient> ingredients) {
 }

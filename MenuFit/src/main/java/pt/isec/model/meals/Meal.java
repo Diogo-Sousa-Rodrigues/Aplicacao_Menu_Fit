@@ -35,6 +35,5 @@ public class Meal {
     }
 
     private MealType type;
-    private Duration prep;
     private Recipe recipe;
 }
