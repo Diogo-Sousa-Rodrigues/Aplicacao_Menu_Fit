@@ -277,15 +277,15 @@ Mitigation actions:
 - Story Points: 5S+1M+1S(incomplete)
 
 ##### Sprint Review
-- Analysis: 
+- Analysis: We worked well but were not able to match all the objectives
 
-- Story Points:
+- Story Points: 1 User Story + 20 Tasks
 
 - Version: 0.1 
 
-- Client analysis: 
+- Client analysis: Client was overall happy, however some things were not done
 
-- Conclusions:
+- Conclusions: Need better estimation for next Sprints
 
 
 ##### Sprint Retrospective
@@ -347,3 +347,31 @@ Mitigation actions:
     
   
 - Story Points: 1S+1M+1L + 8S(only some tasks) + 1M(only some tasks)
+
+##### Sprint Review
+- Analysis:
+
+- Story Points:
+
+- Version:
+
+- Client analysis:
+
+- Conclusions:
+
+
+##### Sprint Retrospective
+
+### Release 2
+
+- Goal: MVP - We define our MVP as an app that will offer this possibilities and functionalities to the user:
+  - Manage weekly meal plan
+  - Time and Budget considerations
+  - Recipe management
+  - Data persistence accross instances (database)
+  - Nutricionist (to be discussed)
+  - (...)  
+
+- Dates: 12/Nov
+- Team capacity: 4 * 4 * 5 = 80 hours
+- Release: V1.0
