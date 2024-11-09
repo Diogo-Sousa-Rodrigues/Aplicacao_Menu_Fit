@@ -126,6 +126,7 @@ public class MainMenuController implements UserInitializable {
     public void initializeUser(User user) {
         this.user = user;
         initializeNextMealPreview();
+        initializeDailyMealsPreview();
     }
 
     private void initializeNextMealPreview() {
@@ -166,6 +167,41 @@ public class MainMenuController implements UserInitializable {
         long minutes = recipe.prep().toMinutes();
         nextMealPrepTimeLabel.setText("- " + minutes + "m");
     }
+
+    private void initializeDailyMealsPreview() {
+        EphemeralStore store = EphemeralStore.getInstance();
+        Optional<MealPlan> optionalMealPlan = store.getMealPlan(user);
+
+        if (optionalMealPlan.isPresent()) {
+            Optional<List<Meal>> optionalMeals = store.getMeals(optionalMealPlan.get());
+
+            if (optionalMeals.isPresent()) {
+                List<Meal> meals = optionalMeals.get();
+
+                for (Meal meal : meals) {
+                    Recipe recipe = meal.getRecipe();
+                    switch (meal.getType()) {
+                        case Breakfast:
+                            breakfastRecipeLabel.setText(recipe.name());
+                            break;
+                        case Lunch:
+                            lunchRecipeLabel.setText(recipe.name());
+                            break;
+                        case Dinner:
+                            dinnerRecipeLabel.setText(recipe.name());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        } else {
+            breakfastRecipeLabel.setText("No breakfast planned");
+            lunchRecipeLabel.setText("No lunch planned");
+            dinnerRecipeLabel.setText("No dinner planned");
+        }
+    }
+
 
 
     // Métodos para atualizar os valores das calorias

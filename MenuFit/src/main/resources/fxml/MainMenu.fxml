@@ -49,22 +49,22 @@
         </font>
     </Label>
     <Pane layoutX="56.0" layoutY="582.0" prefHeight="167.0" prefWidth="331.0" style="-fx-border-color: grey; -fx-border-width: 2;">
-        <Label fx:id="nextMealTypeLabel" layoutX="14.0" layoutY="16.0" text="Breakfast">
+        <Label fx:id="nextMealTypeLabel" layoutX="14.0" layoutY="16.0">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label fx:id="nextMealNameLabel" layoutX="15.0" layoutY="58.0" text="Leite Com Cereais">
+        <Label fx:id="nextMealNameLabel" layoutX="15.0" layoutY="58.0">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label fx:id="nextMealCaloriesLabel" layoutX="29.0" layoutY="84.0" text="- 250cal" />
-        <Label fx:id="nextMealPrepTimeLabel" layoutX="29.0" layoutY="101.0" text="- 5 min" />
+        <Label fx:id="nextMealCaloriesLabel" layoutX="29.0" layoutY="84.0" />
+        <Label fx:id="nextMealPrepTimeLabel" layoutX="29.0" layoutY="101.0" />
         <ImageView fx:id="recipeImage" fitHeight="71.0" fitWidth="82.0" layoutX="227.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/logo.png" />
         </ImageView>
-      <Button fx:id="nextMealDoneButton" layoutX="249.0" layoutY="12.0" mnemonicParsing="false" text="Done" onAction="#mealPreviewChangeHandler"/>
+      <Button fx:id="nextMealDoneButton" layoutX="249.0" layoutY="12.0" mnemonicParsing="false" onAction="#mealPreviewChangeHandler" text="Done" />
     </Pane>
     <Button layoutX="809.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="234.0" text="Generate Weekly Meal Plan" />
 
@@ -88,7 +88,7 @@
                 <Font size="24.0" />
             </font>
         </Label>
-        <Label fx:id="breakfastRecipeLabel" layoutX="12.0" layoutY="75.0" text="- Leite Com Cereais">
+        <Label fx:id="breakfastRecipeLabel" layoutX="12.0" layoutY="75.0">
             <font>
                 <Font size="18.0" />
             </font></Label>
@@ -98,7 +98,7 @@
                 <Font size="24.0" />
             </font>
         </Label>
-        <Label fx:id="lunchRecipeLabel" layoutX="13.0" layoutY="164.0" text="- Bacalhau à Brás">
+        <Label fx:id="lunchRecipeLabel" layoutX="13.0" layoutY="164.0">
             <font>
                 <Font size="18.0" />
             </font></Label>
@@ -108,7 +108,7 @@
                 <Font size="24.0" />
             </font>
         </Label>
-        <Label fx:id="dinnerRecipeLabel" layoutX="14.0" layoutY="261.0" text="- Cozido à Portuguesa">
+        <Label fx:id="dinnerRecipeLabel" layoutX="14.0" layoutY="261.0">
             <font>
                 <Font size="18.0" />
             </font></Label>
@@ -120,7 +120,6 @@
             <Font size="24.0" />
         </font>
     </Label>
-    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
     <ImageView fx:id="profile" fitHeight="82.0" fitWidth="71.0" layoutX="1068.0" layoutY="32.0" onMouseClicked="#handleProfileClick" onMouseEntered="#handleProfileMouseEntered" onMouseExited="#handleProfileMouseExited" pickOnBounds="true" preserveRatio="true">
         <image>
             <Image url="@../images/user.png" />
