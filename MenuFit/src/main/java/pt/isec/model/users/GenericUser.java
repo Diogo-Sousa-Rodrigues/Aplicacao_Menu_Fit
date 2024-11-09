@@ -89,6 +89,16 @@ public abstract class GenericUser implements User {
         this.currentRecipe = recipe;
     }
 
+    @Override
+    public int getCurrentMeal() {
+        return currentMeal;
+    }
+
+    @Override
+    public void setCurrentMeal(int currentMeal) {
+        this.currentMeal = currentMeal;
+    }
+
     private String firstName, lastName, email;
 
     private Date birthdate;
@@ -98,4 +108,6 @@ public abstract class GenericUser implements User {
     private HealthData healthData;
 
     private String currentRecipe;
+
+    private int currentMeal;
 }

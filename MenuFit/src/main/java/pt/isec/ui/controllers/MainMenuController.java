@@ -7,22 +7,29 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import pt.isec.model.meals.Meal;
 import pt.isec.model.meals.MealPlan;
+import pt.isec.model.meals.Recipe;
 import pt.isec.model.users.User;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.EphemeralStore;
+
+import java.util.List;
+import java.util.Optional;
 
 
 public class MainMenuController implements UserInitializable {
-    public Label mealTypeLabel;
     public CheckBox mealCheckBox;
-    public Label recipeNameLabel;
-    public Label recipeCaloriesLabel;
-    public Label recipeTimeLabel;
     public ImageView recipeImage;
     public ImageView profile;
     public Button seeMealPlanBtn;
+    public Label nextMealTypeLabel;
+    public Label nextMealNameLabel;
+    public Label nextMealCaloriesLabel;
+    public Label nextMealPrepTimeLabel;
+    public Button nextMealDoneButton;
 
     @FXML
     private Label breakfastRecipeLabel;
@@ -85,19 +92,79 @@ public class MainMenuController implements UserInitializable {
         sceneSwitcher.switchScene("fxml/MealPlan.fxml", event, user);
     }
 
-    /*@FXML
-    public void initialize() {
-        //TODO para mostrar logo a receita suposta quando se entra nesta scene
-    }*/
-
+    @FXML
     public void mealPreviewChangeHandler(ActionEvent event) {
-        //TODO mudar a receita em display quando a checkbox é selecionada
+        boolean mealFound = false;
+        user.setCurrentMeal(user.getCurrentMeal()+1);
+        int index = user.getCurrentMeal();
+        EphemeralStore store = EphemeralStore.getInstance();
+        Optional<MealPlan> mealPlan = store.getMealPlan(user);
+        if(mealPlan.isPresent()) {
+            Optional<List<Meal>> meals = store.getMeals(mealPlan.get());
+            if (meals.isPresent()) {
+                for (Meal meal : meals.get()) {
+                    if (meal.getMealIndex() == index) {
+                        updateNextMealPreview(meal);
+                        mealFound = true;
+                        break;
+                    }
+                }
+                if(!mealFound) {
+                    nextMealNameLabel.setText("End of meals");
+                    nextMealTypeLabel.setVisible(false);
+                    nextMealCaloriesLabel.setVisible(false);
+                    nextMealPrepTimeLabel.setVisible(false);
+                    nextMealDoneButton.setVisible(false);
+                    recipeImage.setVisible(false);
+                }
+            }
+        }
     }
 
     private MealPlan mealPlan;
 
     public void initializeUser(User user) {
         this.user = user;
+        initializeNextMealPreview();
+    }
+
+    private void initializeNextMealPreview() {
+        int index = user.getCurrentMeal();
+        EphemeralStore store = EphemeralStore.getInstance();
+        Optional<MealPlan> mealPlan = store.getMealPlan(user);
+        if(mealPlan.isPresent()) {
+            nextMealTypeLabel.setVisible(true);
+            nextMealNameLabel.setVisible(true);
+            nextMealCaloriesLabel.setVisible(true);
+            nextMealPrepTimeLabel.setVisible(true);
+            nextMealDoneButton.setVisible(true);
+            recipeImage.setVisible(true);
+            Optional<List<Meal>> meals = store.getMeals(mealPlan.get());
+            if(meals.isPresent()) {
+                for(Meal meal : meals.get()){
+                    if(meal.getMealIndex() == index){
+                        updateNextMealPreview(meal);
+                        break;
+                    }
+                }
+            }
+        }else {
+            nextMealTypeLabel.setVisible(false);
+            nextMealNameLabel.setText("No meal plan generated yet");
+            nextMealCaloriesLabel.setVisible(false);
+            nextMealPrepTimeLabel.setVisible(false);
+            nextMealDoneButton.setVisible(false);
+            recipeImage.setVisible(false);
+        }
+    }
+
+    private void updateNextMealPreview(Meal meal) {
+        Recipe recipe = meal.getRecipe();
+        nextMealTypeLabel.setText(meal.getType().name());
+        nextMealNameLabel.setText(recipe.name());
+        nextMealCaloriesLabel.setText("- " + recipe.calories() + "cal");
+        long minutes = recipe.prep().toMinutes();
+        nextMealPrepTimeLabel.setText("- " + minutes + "m");
     }
 
 

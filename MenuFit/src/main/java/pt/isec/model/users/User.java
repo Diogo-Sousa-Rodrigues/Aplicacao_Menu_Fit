@@ -118,4 +118,17 @@ public interface User {
      * @return The name of the recipe
      */
     String getCurrentRecipe();
+
+    /**
+     * Sets the index of the current meal of the user
+     *
+     * @param currentMeal index of the current meal
+     */
+    void setCurrentMeal(int currentMeal);
+
+    /**
+     * Gets the index of the current meal of the user
+     * @return The index of the current meal
+     */
+    int getCurrentMeal();
 }

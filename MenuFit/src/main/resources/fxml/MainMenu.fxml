@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="859.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.MainMenuController">
     <ImageView fitHeight="58.0" fitWidth="100.0" layoutX="23.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../images/logo.png" />
     </ImageView>
@@ -19,7 +19,7 @@
         </font>
     </Label>
 
-    <Pane layoutX="67.0" layoutY="97.0" prefHeight="125.0" prefWidth="450.0">
+    <Pane layoutX="173.0" layoutY="225.0" prefHeight="133.0" prefWidth="447.0">
         <children>
             <Label fx:id="caloriesConsumedLabel" layoutX="50.0" layoutY="20.0" text="500/2000">
                 <font>
@@ -43,46 +43,46 @@
         </children>
     </Pane>
 
-    <Label layoutX="53.0" layoutY="329.0" text="Next Meal">
+    <Label layoutX="56.0" layoutY="546.0" text="Next Meal">
         <font>
             <Font size="24.0" />
         </font>
     </Label>
-    <Pane layoutX="53.0" layoutY="365.0" prefHeight="116.0" prefWidth="234.0" style="-fx-border-color: grey; -fx-border-width: 2;">
-        <Label fx:id="mealTypeLabel" layoutX="85.0" layoutY="4.0" text="Breakfast">
+    <Pane layoutX="56.0" layoutY="582.0" prefHeight="167.0" prefWidth="331.0" style="-fx-border-color: grey; -fx-border-width: 2;">
+        <Label fx:id="nextMealTypeLabel" layoutX="14.0" layoutY="16.0" text="Breakfast">
             <font>
-                <Font size="16.0" />
+                <Font size="18.0" />
             </font>
         </Label>
-        <Label fx:id="recipeNameLabel" layoutX="14.0" layoutY="35.0" text="Leite Com Cereais">
+        <Label fx:id="nextMealNameLabel" layoutX="15.0" layoutY="58.0" text="Leite Com Cereais">
             <font>
-                <Font size="14.0" />
+                <Font size="18.0" />
             </font>
         </Label>
-        <Label fx:id="recipeCaloriesLabel" layoutX="14.0" layoutY="58.0" text="- 250cal" />
-        <Label fx:id="recipeTimeLabel" layoutX="14.0" layoutY="75.0" text="- 5 min" />
-        <ImageView fx:id="recipeImage" fitHeight="71.0" fitWidth="82.0" layoutX="138.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+        <Label fx:id="nextMealCaloriesLabel" layoutX="29.0" layoutY="84.0" text="- 250cal" />
+        <Label fx:id="nextMealPrepTimeLabel" layoutX="29.0" layoutY="101.0" text="- 5 min" />
+        <ImageView fx:id="recipeImage" fitHeight="71.0" fitWidth="82.0" layoutX="227.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/logo.png" />
         </ImageView>
-      <CheckBox layoutX="204.0" layoutY="8.0" mnemonicParsing="false" />
+      <Button fx:id="nextMealDoneButton" layoutX="249.0" layoutY="12.0" mnemonicParsing="false" text="Done" onAction="#mealPreviewChangeHandler"/>
     </Pane>
-    <Button layoutX="460.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="234.0" text="Generate Weekly Meal Plan" />
+    <Button layoutX="809.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="234.0" text="Generate Weekly Meal Plan" />
 
-    <Pane layoutX="330.0" layoutY="365.0" prefHeight="116.0" prefWidth="234.0" style="-fx-border-color: grey; -fx-border-width: 2;">
+    <Pane layoutX="425.0" layoutY="582.0" prefHeight="251.0" prefWidth="368.0" style="-fx-border-color: grey; -fx-border-width: 2;">
         <children>
             <CheckBox fx:id="mealCheckBox" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#mealPreviewChangeHandler" />
-            <Label fx:id="reminder1" layoutX="46.0" layoutY="14.0" prefHeight="17.0" prefWidth="121.0" text="Demolhar o Bacalhau" />
+            <Label fx:id="reminder1" layoutX="46.0" layoutY="14.0" prefHeight="25.0" prefWidth="300.0" text="Demolhar o Bacalhau" />
             <CheckBox fx:id="mealCheckBox1" layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#mealPreviewChangeHandler" />
-            <Label fx:id="reminder2" layoutX="46.0" layoutY="41.0" prefHeight="17.0" prefWidth="113.0" text="Example 2" />
+            <Label fx:id="reminder2" layoutX="46.0" layoutY="41.0" prefHeight="25.0" prefWidth="300.0" text="Example 2" />
         </children>
     </Pane>
-    <Label layoutX="330.0" layoutY="329.0" text="Reminders">
+    <Label layoutX="425.0" layoutY="546.0" text="Reminders">
         <font>
             <Font size="24.0" />
         </font>
     </Label>
 
-    <Pane layoutX="600.0" layoutY="149.0" prefHeight="362.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-width: 2;">
+    <Pane layoutX="830.0" layoutY="279.0" prefHeight="555.0" prefWidth="313.0" style="-fx-border-color: grey; -fx-border-width: 2;">
         <Label fx:id="breakfastLabel" layoutX="10.0" layoutY="40.0" text="Breakfast">
             <font>
                 <Font size="24.0" />
@@ -113,18 +113,18 @@
                 <Font size="18.0" />
             </font></Label>
 
-        <Button layoutX="149.0" layoutY="313.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="37.0" text="+" />
+        <Button layoutX="250.0" layoutY="490.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="37.0" text="+" />
     </Pane>
-    <Label layoutX="600.0" layoutY="107.0" text="Daily Menu">
+    <Label layoutX="830.0" layoutY="225.0" text="Daily Menu">
         <font>
             <Font size="24.0" />
         </font>
     </Label>
     <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-    <ImageView fx:id="profile" fitHeight="82.0" fitWidth="71.0" layoutX="729.0" layoutY="33.0" onMouseClicked="#handleProfileClick" onMouseEntered="#handleProfileMouseEntered" onMouseExited="#handleProfileMouseExited" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="profile" fitHeight="82.0" fitWidth="71.0" layoutX="1068.0" layoutY="32.0" onMouseClicked="#handleProfileClick" onMouseEntered="#handleProfileMouseEntered" onMouseExited="#handleProfileMouseExited" pickOnBounds="true" preserveRatio="true">
         <image>
             <Image url="@../images/user.png" />
         </image>
     </ImageView>
-   <Button fx:id="seeMealPlanBtn" onAction="#handleSeeMealPlanBtnAction" layoutX="53.0" layoutY="495.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="234.0" text="See Meal Plan" textAlignment="CENTER" />
+   <Button fx:id="seeMealPlanBtn" layoutX="56.0" layoutY="798.0" mnemonicParsing="false" onAction="#handleSeeMealPlanBtnAction" prefHeight="36.0" prefWidth="331.0" text="See Meal Plan" textAlignment="CENTER" />
 </AnchorPane>

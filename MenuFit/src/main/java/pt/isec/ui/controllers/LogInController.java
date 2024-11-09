@@ -61,6 +61,7 @@ public class LogInController {
         }else{
             //métod o temporário para poder ter um meal plan (incompleto) acessivel na base de dados
             createTemporaryMealPlanForTesting(store, getResult.get());
+            getResult.get().setCurrentMeal(0);
             sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, getResult.get());
         }
     }
@@ -154,9 +155,17 @@ public class LogInController {
 
         // Criar as refeições usando as receitas
         Meal breakfast = new Meal(breakfastRecipe);
+        breakfast.setMealIndex(0);
+        breakfast.setType(MealType.Breakfast);
         Meal lunch = new Meal(lunchRecipe);
+        lunch.setMealIndex(1);
+        lunch.setType(MealType.Lunch);
         Meal dinner = new Meal(dinnerRecipe);
+        dinner.setMealIndex(2);
+        dinner.setType(MealType.Dinner);
         Meal dinner2 = new Meal(complexRecipe);
+        dinner2.setMealIndex(3);
+        dinner2.setType(MealType.Dinner);
 
         // Criar o MealPlan e adicionar ao usuário
         MealPlan mealPlan = new MealPlan(user);

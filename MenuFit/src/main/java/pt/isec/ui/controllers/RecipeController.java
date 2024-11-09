@@ -58,8 +58,8 @@ public class RecipeController implements UserInitializable {
                         showRecipe(meal.getRecipe());
                     }
                 }
-            }else System.out.println("no meals");
-        }else System.out.println("No meal plan");
+            }
+        }
     }
 
     public void showRecipe(Recipe recipe){
