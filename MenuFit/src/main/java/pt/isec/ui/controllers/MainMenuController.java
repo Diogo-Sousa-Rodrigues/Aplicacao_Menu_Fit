@@ -60,9 +60,7 @@ public class MainMenuController implements UserInitializable {
 
     @FXML
     public void initialize() {
-        // Vinculação dos Labels para mostrar os valores de calorias (Contador de calorias)
-        caloriesConsumedLabel.textProperty().bind(caloriesConsumed.asString().concat("/2000"));
-        caloriesRemainingLabel.textProperty().bind(caloriesRemaining.asString().concat("/2000"));
+
     }
 
     @FXML
@@ -131,10 +129,15 @@ public class MainMenuController implements UserInitializable {
 
     private MealPlan mealPlan;
 
+    @Override
     public void initializeUser(User user) {
         this.user = user;
         initializeNextMealPreview();
         initializeDailyMealsPreview();
+        if (user.getHealthData()!=null) {
+            caloriesConsumedLabel.textProperty().bind(caloriesConsumed.asString().concat("/" + user.getHealthData().getDailyCalorieCount()));
+            caloriesRemainingLabel.textProperty().bind(caloriesRemaining.asString().concat("/" + user.getHealthData().getDailyCalorieCount()));
+        }
     }
 
     private void initializeNextMealPreview() {

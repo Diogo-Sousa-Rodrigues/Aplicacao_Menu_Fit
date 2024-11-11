@@ -57,7 +57,7 @@ public class HealthAndDietaryRestrictions_1Controller implements UserInitializab
                 dailyCalorieCount
         );
 
-        //this.user.setHealthData(healthData);
+        this.user.setHealthData(healthData);
 
         System.out.println("Health Data collected: " + healthData);
 
@@ -179,6 +179,7 @@ public class HealthAndDietaryRestrictions_1Controller implements UserInitializab
 
     @FXML
     private ComboBox<String> levelOfFitnessComboBox;
+
 
     @Override
     public void initializeUser(User user) {
