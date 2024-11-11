@@ -11,10 +11,10 @@
 
 <ScrollPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.MealPlanController">
     <content>
-        <AnchorPane>
+        <AnchorPane maxHeight="1000.0" maxWidth="1200.0" prefHeight="1000.0" prefWidth="1200.0">
             <children>
-                <Button fx:id="manageRecipesBtn" layoutX="574.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleManageRecipesBtnAction" text="Manage Recipes" />
-                <Button fx:id="goBackBtn" layoutX="700.0" layoutY="65.0" mnemonicParsing="false" onAction="#handleGoBackBtnAction" text="Go Back" />
+                <Button fx:id="manageRecipesBtn" layoutX="884.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleManageRecipesBtnAction" text="Manage Recipes" />
+                <Button fx:id="goBackBtn" layoutX="1047.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleGoBackBtnAction" text="Go Back" />
                 <ImageView fitHeight="58.0" fitWidth="100.0" layoutX="33.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../images/logo.png" />

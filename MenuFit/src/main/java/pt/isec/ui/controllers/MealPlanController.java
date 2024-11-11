@@ -104,10 +104,17 @@ public class MealPlanController implements UserInitializable {
         newRecipeButton.setLayoutX(100);
         newRecipeButton.setLayoutY(5);
         newRecipeButton.setFont(new Font(9));
+        //newRecipeButton.setOnAction(event -> handleNewRecipeBtn(meal));
 
         CheckBox selectCheckBox = new CheckBox();
         selectCheckBox.setLayoutX(170);
         selectCheckBox.setLayoutY(6);
+        if(user.getCurrentMeal() == meal.getMealIndex()){
+            selectCheckBox.setDisable(false);
+        }else{
+            selectCheckBox.setDisable(true);
+        }
+        selectCheckBox.setOnAction(event -> handleCheckMealDone(meal, selectCheckBox, event));
 
         Recipe recipe = meal.getRecipe();
         if (recipe != null) {
@@ -133,6 +140,49 @@ public class MealPlanController implements UserInitializable {
             mealPane.getChildren().addAll(mealTypeLabel, newRecipeButton, selectCheckBox, noRecipeLabel);
         }
 
+        if(meal.getMealIndex() < user.getCurrentMeal()){
+            mealPane.setDisable(true);
+        }
         return mealPane;
     }
+
+    private void handleCheckMealDone(Meal meal, CheckBox selectCheckBox, ActionEvent event) {
+        if(selectCheckBox.isSelected()){
+            user.setCurrentMeal(meal.getMealIndex() + 1);
+            sceneSwitcher.switchScene("fxml/MealPlan.fxml", event, user);
+        }
+    }
+
+    private void handleNewRecipeBtn(Meal meal) {
+        // Gera a nova Meal
+        Meal newMeal = generateNewMealPrompt();
+
+        // Obtém o MealPlan e a lista de Meals associada ao usuário
+        EphemeralStore store = EphemeralStore.getInstance();
+        MealPlan mealPlan = store.getMealPlan(user).orElse(null);
+
+        if (mealPlan != null) {
+            List<Meal> meals = store.getMeals(mealPlan).orElse(List.of());
+
+            // Encontra o índice da Meal original e substitui pela nova
+            int mealIndex = meals.indexOf(meal);
+            if (mealIndex != -1) {
+                meals.set(mealIndex, newMeal);
+            }
+
+            // Atualiza a lista de Meals no MealPlan
+            store.putMeals(mealPlan, meals);
+
+            // Opcional: Atualiza a visualização da Meal substituída, se necessário
+            initializeDailyMealsPreview();
+        }
+    }
+
+
+    private Meal generateNewMealPrompt() {
+        // Lógica para gerar uma nova Meal (substitua com a implementação necessária)
+        //return new Meal();
+        return null;
+    }
+
 }
