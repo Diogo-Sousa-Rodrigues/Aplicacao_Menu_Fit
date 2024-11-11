@@ -43,6 +43,9 @@ public class MainMenuController implements UserInitializable {
     @FXML
     private Label caloriesRemainingLabel; // Label para calorias restantes
 
+    @FXML
+    private Button myRecipeButton;
+
 
     //Propriedades calorias
     private IntegerProperty caloriesConsumed = new SimpleIntegerProperty(100); // valor inicial
@@ -90,6 +93,11 @@ public class MainMenuController implements UserInitializable {
     @FXML
     private void handleSeeMealPlanBtnAction(ActionEvent event) {
         sceneSwitcher.switchScene("fxml/MealPlan.fxml", event, user);
+    }
+
+    @FXML
+    private void handleMyRecipesBtnAction(ActionEvent event) {
+        sceneSwitcher.switchScene("fxml/Favorite.fxml", event, user);
     }
 
     @FXML
