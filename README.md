@@ -333,7 +333,7 @@ Mitigation actions:
     - Task 2: Form UI
   - US5: As a user, I want to review the meal plan I'm about to generate, so that I can make adjustments in my inputs and so that I can see what I'm about to commit to, without commitment.
     - Task 1: Meals Data
-  - US11: As a user, I want the app to have a interface that shows all the meals for the day and that allows me to add meals
+  - US11: As a user, I want the app to have a interface that shows all the meals for the day.
     - Task 1: Manage Data
   - US13: As a user, I want the app to tell me the next expected meal of the day.
     - Task 1: Manage Data
