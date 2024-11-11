@@ -34,7 +34,4 @@ public record Ingredient(String name, String description, int quantity,
                 "Calories: " + calories,
                 "Allergens: " + String.join(",", allergens));
     }
-    public String toSimpleString() {
-        return quantity + units + " " + name;
-    }
 }

@@ -92,7 +92,7 @@ public class LogInController {
                 1,
                 300,
                 Duration.ofMinutes(5),
-                List.of("Prepare na noite anterior."),
+                List.of(new Reminder("Prepare na noite anterior.")),
                 List.of(
                         new Ingredient("Aveia", "Aveia integral", 50, "g", 200, new Macros(7, 34, 5), List.of("Glúten")),
                         new Ingredient("Iogurte", "Iogurte grego", 100, "ml", 100, new Macros(5, 4, 10), List.of("Lactose"))
@@ -105,7 +105,7 @@ public class LogInController {
                 1,
                 450,
                 Duration.ofMinutes(15),
-                List.of("Corte os legumes.", "Misture com grão-de-bico."),
+                List.of(new Reminder("Corte os legumes."), new Reminder("Misture com grão-de-bico.")),
                 List.of(
                         new Ingredient("Grão-de-Bico", "Grão cozido", 150, "g", 150, new Macros(8, 45, 2), List.of()),
                         new Ingredient("Tomate", "Tomate fresco", 100, "g", 20, new Macros(1, 4, 0), List.of())
@@ -118,7 +118,7 @@ public class LogInController {
                 1,
                 400,
                 Duration.ofMinutes(20),
-                List.of("Grelhe o frango.", "Cozinhe os legumes no vapor."),
+                List.of(new Reminder("Grelhe o frango."), new Reminder("Cozinhe os legumes no vapor.")),
                 List.of(
                         new Ingredient("Frango", "Peito de frango grelhado", 150, "g", 200, new Macros(30, 0, 5), List.of()),
                         new Ingredient("Brócolis", "Brócolis no vapor", 100, "g", 40, new Macros(4, 7, 0), List.of())
@@ -142,7 +142,7 @@ public class LogInController {
                 4,
                 700,
                 Duration.ofMinutes(60),
-                List.of("Prepare o molho com antecedência.", "Deixe descansar antes de cortar."),
+                List.of(new Reminder("Prepare o molho com antecedência."), new Reminder("Deixe descansar antes de cortar.")),
                 List.of(
                         new Ingredient("Massa de Lasanha", "Massa de lasanha seca ou fresca", 200, "g", 300, new Macros(10, 60, 2), List.of("Glúten")),
                         new Ingredient("Queijo Mussarela", "Queijo mussarela ralado", 150, "g", 400, new Macros(20, 2, 30), List.of("Lactose")),

@@ -1,14 +1,9 @@
 package pt.isec.model.users;
 
 public class HealthData {
-    private String weight;
-    private String height;
-    private String objective;
-    private String levelOfFitness;
-    private String desiredWeight;
-    private String dailyCalorieCount;
-
-    public HealthData(String weight, String height, String objective, String levelOfFitness, String desiredWeight, String dailyCalorieCount) {
+    public HealthData(String weight, String height,
+                      String objective, String levelOfFitness,
+                      String desiredWeight, String dailyCalorieCount) {
         this.weight = weight;
         this.height = height;
         this.objective = objective;
@@ -76,4 +71,11 @@ public class HealthData {
                 ", dailyCalorieCount='" + dailyCalorieCount + '\'' +
                 '}';
     }
+
+    private String weight;
+    private String height;
+    private String objective;
+    private String levelOfFitness;
+    private String desiredWeight;
+    private String dailyCalorieCount;
 }

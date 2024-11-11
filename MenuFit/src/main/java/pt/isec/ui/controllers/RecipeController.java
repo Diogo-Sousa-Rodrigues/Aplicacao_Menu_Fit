@@ -71,7 +71,10 @@ public class RecipeController implements UserInitializable {
         caloriesLabel.setText(String.valueOf(recipe.calories()));
         ingredientsListView.getItems().clear();
         for (Ingredient ingredient : recipe.ingredients()) {
-            ingredientsListView.getItems().add(ingredient.toSimpleString());
+            String ingredientsListViewRow = ingredient.quantity() + ingredient.units() +
+                    " " + ingredient.name();
+
+            ingredientsListView.getItems().add(ingredientsListViewRow);
         }
     }
 }

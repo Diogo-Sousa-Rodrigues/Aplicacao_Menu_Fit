@@ -1,9 +1,16 @@
 package pt.isec.model.meals;
 
-import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class Meal {
     public Meal(Recipe recipe) {
+        // TODO: To be removed
+        this.recipe = recipe;
+    }
+
+    public Meal(MealType type, LocalDateTime date, Recipe recipe) {
+        this.type = type;
+        this.date = date;
         this.recipe = recipe;
     }
 
@@ -48,6 +55,7 @@ public class Meal {
      *
      * @return the Meal's index
      */
+    // TODO: To be removed
     public int getMealIndex() {
         return mealIndex;
     }
@@ -57,11 +65,25 @@ public class Meal {
      *
      * @param mealIndex the meal's index
      */
+    // TODO: To be removed
     public void setMealIndex(int mealIndex) {
         this.mealIndex = mealIndex;
     }
 
+    @Override
+    public String toString() {
+        return String.join("\n",
+                "Type: " + type,
+                "Date: " + date,
+                "Recipe: " + recipe.toString());
+    }
+
     private MealType type;
+
+    private LocalDateTime date;
+
     private Recipe recipe;
+
+    // TODO: To be removed
     private int mealIndex;
 }
