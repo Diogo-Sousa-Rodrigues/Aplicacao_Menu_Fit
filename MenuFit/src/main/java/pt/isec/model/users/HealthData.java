@@ -60,6 +60,14 @@ public class HealthData {
         this.dailyCalorieCount = dailyCalorieCount;
     }
 
+    public Integer getDailyCalorieSum(){
+        return dailyCalorieSum;
+    }
+
+    public void setDailyCalorieSum(Integer dailyCalorieSum) {
+        this.dailyCalorieSum = dailyCalorieSum;
+    }
+
     @Override
     public String toString() {
         return "HealthData{" +
@@ -78,4 +86,5 @@ public class HealthData {
     private String levelOfFitness;
     private String desiredWeight;
     private String dailyCalorieCount;
+    private Integer dailyCalorieSum;
 }

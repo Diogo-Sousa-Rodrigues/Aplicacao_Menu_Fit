@@ -1,12 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.RecipesListController">
-   <children>
-      <Button fx:id="goBackBtn" layoutX="620.0" layoutY="39.0" mnemonicParsing="false" onAction="#handleGoBackBtnAction" text="Go Back" textAlignment="CENTER" />
-      <Button fx:id="viewRecipeBtn" layoutX="299.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleViewRecipeBtn" text="See recipe temporary" />
-   </children>
+    <ImageView fx:id="logoImageView" fitHeight="50.0" fitWidth="50.0" layoutX="20.0" layoutY="20.0" preserveRatio="true">
+        <Image url="@../images/logo.png" />
+    </ImageView>
+    <Label fx:id="appTitleLabel" layoutX="80.0" layoutY="30.0" style="-fx-font-size: 24; -fx-font-weight: bold;" text="MenuFit - Recipes" />
+    <Button fx:id="viewRecipeBtn" layoutX="80.0" layoutY="397.0" mnemonicParsing="false" onAction="#handleViewRecipeBtn" text="See recipe temporary" />
+
+    <Button fx:id="goBackBtn" layoutX="700.0" layoutY="20.0" onAction="#onGoBackClicked" text="Go back" />
+
+    <VBox fx:id="favoritesVBox" layoutX="80.0" layoutY="100.0" spacing="10.0">
+        <Label style="-fx-font-size: 18;" text="Favorites" />
+
+        <HBox fx:id="favoriteRecipe1" spacing="10.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-padding: 5;">
+            <Label fx:id="favoriteRecipe1Label" style="-fx-font-size: 16;" text="Recipe 1" />
+            <HBox fx:id="favoriteRecipe1Actions" alignment="CENTER_RIGHT" spacing="5.0">
+                <ImageView fx:id="favoriteRecipe1Star" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#toggleFavorite" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/star.png" />
+               </image></ImageView>
+                <ImageView fx:id="favoriteRecipe1Edit" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#editRecipe" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/pencil.png" />
+               </image></ImageView>
+                <ImageView fx:id="favoriteRecipe1Delete" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#deleteRecipe" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/trash.png" />
+               </image></ImageView>
+            </HBox>
+        </HBox>
+
+        <HBox fx:id="favoriteRecipe2" spacing="10.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-padding: 5;">
+            <Label fx:id="favoriteRecipe2Label" style="-fx-font-size: 16;" text="Recipe 2" />
+            <HBox fx:id="favoriteRecipe2Actions" alignment="CENTER_RIGHT" spacing="5.0">
+                <ImageView fx:id="favoriteRecipe2Star" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#toggleFavorite" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/star.png" />
+               </image></ImageView>
+                <ImageView fx:id="favoriteRecipe2Edit" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#editRecipe" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/pencil.png" />
+               </image></ImageView>
+                <ImageView fx:id="favoriteRecipe2Delete" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#deleteRecipe" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/trash.png" />
+               </image></ImageView>
+            </HBox>
+        </HBox>
+    </VBox>
+
+    <Line endX="575.0" endY="280.0" startX="75.0" startY="280.0" stroke="black" strokeWidth="1.0" />
+
+    <VBox fx:id="recentsVBox" layoutX="80.0" layoutY="300.0" spacing="10.0">
+        <Label style="-fx-font-size: 18;" text="Recents" />
+
+        <HBox fx:id="recentRecipe1" spacing="10.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-padding: 5;">
+            <Label fx:id="recentRecipe1Label" style="-fx-font-size: 16;" text="Recipe 3" />
+            <HBox fx:id="recentRecipe1Actions" alignment="CENTER_RIGHT" spacing="5.0">
+                <ImageView fx:id="recentRecipe1Star" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#toggleFavorite" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/star.png" />
+               </image></ImageView>
+                <ImageView fx:id="recentRecipe1Edit" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#editRecipe" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/pencil.png" />
+               </image></ImageView>
+                <ImageView fx:id="recentRecipe1Delete" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#deleteRecipe" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/trash.png" />
+               </image></ImageView>
+            </HBox>
+        </HBox>
+    </VBox>
 </AnchorPane>

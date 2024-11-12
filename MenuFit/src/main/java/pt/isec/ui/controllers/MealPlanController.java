@@ -9,13 +9,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import pt.isec.model.meals.*;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
-import pt.isec.model.meals.Meal;
-import pt.isec.model.meals.MealPlan;
-import pt.isec.model.meals.Recipe;
 import pt.isec.persistence.EphemeralStore;
 
+import java.time.Duration;
 import java.util.List;
 
 public class MealPlanController implements UserInitializable {
@@ -104,7 +103,7 @@ public class MealPlanController implements UserInitializable {
         newRecipeButton.setLayoutX(100);
         newRecipeButton.setLayoutY(5);
         newRecipeButton.setFont(new Font(9));
-        //newRecipeButton.setOnAction(event -> handleNewRecipeBtn(meal));
+        newRecipeButton.setOnAction(event -> handleNewRecipeBtn(meal, event));
 
         CheckBox selectCheckBox = new CheckBox();
         selectCheckBox.setLayoutX(170);
@@ -127,7 +126,7 @@ public class MealPlanController implements UserInitializable {
             caloriesLabel.setLayoutY(58);
             caloriesLabel.setFont(new Font(9));
 
-            Label timeLabel = new Label("- " + recipe.prep());
+            Label timeLabel = new Label("- " + recipe.prep().toMinutes() + " min");
             timeLabel.setLayoutX(8);
             timeLabel.setLayoutY(75);
             timeLabel.setFont(new Font(9));
@@ -148,15 +147,28 @@ public class MealPlanController implements UserInitializable {
 
     private void handleCheckMealDone(Meal meal, CheckBox selectCheckBox, ActionEvent event) {
         if(selectCheckBox.isSelected()){
+            int sum = user.getHealthData().getDailyCalorieSum();
+            user.getHealthData().setDailyCalorieSum(sum + meal.getRecipe().calories());
             user.setCurrentMeal(meal.getMealIndex() + 1);
             sceneSwitcher.switchScene("fxml/MealPlan.fxml", event, user);
         }
     }
 
-    private void handleNewRecipeBtn(Meal meal) {
+    private void handleNewRecipeBtn(Meal meal, ActionEvent event) {
         // Gera a nova Meal
-        Meal newMeal = generateNewMealPrompt();
-
+        //Meal newMeal = generateNewMealPrompt();
+        Recipe dinnerRecipe = new Recipe(
+                "Frango com Legumes",
+                "1. Tempere o frango com sal e pimenta.\n2. Grelhe o frango até dourar.\n3. Cozinhe os brócolis no vapor.\n4. Sirva o frango acompanhado dos brócolis.",
+                1,
+                400,
+                Duration.ofMinutes(20),
+                List.of(new Reminder("Grelhe o frango."), new Reminder("Cozinhe os legumes no vapor.")),
+                List.of(
+                        new Ingredient("Frango", "Peito de frango grelhado", 150, "g", 200, new Macros(30, 0, 5), List.of()),
+                        new Ingredient("Brócolis", "Brócolis no vapor", 100, "g", 40, new Macros(4, 7, 0), List.of())
+                )
+        );
         // Obtém o MealPlan e a lista de Meals associada ao usuário
         EphemeralStore store = EphemeralStore.getInstance();
         MealPlan mealPlan = store.getMealPlan(user).orElse(null);
@@ -166,15 +178,20 @@ public class MealPlanController implements UserInitializable {
 
             // Encontra o índice da Meal original e substitui pela nova
             int mealIndex = meals.indexOf(meal);
-            if (mealIndex != -1) {
-                meals.set(mealIndex, newMeal);
+//            if (mealIndex != -1) {
+//                meals.set(mealIndex, newMeal);
+//            }
+            for(Meal meal1: meals){
+                if(meal1.getMealIndex() == mealIndex){
+                    meal1.setRecipe(dinnerRecipe);
+                }
             }
 
             // Atualiza a lista de Meals no MealPlan
             store.putMeals(mealPlan, meals);
 
             // Opcional: Atualiza a visualização da Meal substituída, se necessário
-            initializeDailyMealsPreview();
+            sceneSwitcher.switchScene("fxml/MealPlan.fxml", event, user);
         }
     }
 
@@ -182,7 +199,26 @@ public class MealPlanController implements UserInitializable {
     private Meal generateNewMealPrompt() {
         // Lógica para gerar uma nova Meal (substitua com a implementação necessária)
         //return new Meal();
-        return null;
+
+
+        //temporary solution
+        Recipe dinnerRecipe = new Recipe(
+                "Frango com Legumes",
+                "1. Tempere o frango com sal e pimenta.\n2. Grelhe o frango até dourar.\n3. Cozinhe os brócolis no vapor.\n4. Sirva o frango acompanhado dos brócolis.",
+                1,
+                400,
+                Duration.ofMinutes(20),
+                List.of(new Reminder("Grelhe o frango."), new Reminder("Cozinhe os legumes no vapor.")),
+                List.of(
+                        new Ingredient("Frango", "Peito de frango grelhado", 150, "g", 200, new Macros(30, 0, 5), List.of()),
+                        new Ingredient("Brócolis", "Brócolis no vapor", 100, "g", 40, new Macros(4, 7, 0), List.of())
+                )
+        );
+        Meal dinner = new Meal(dinnerRecipe);
+        dinner.setType(MealType.Dinner);
+
+
+        return dinner;
     }
 
 }

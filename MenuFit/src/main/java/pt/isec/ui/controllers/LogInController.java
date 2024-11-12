@@ -60,8 +60,8 @@ public class LogInController {
             invalidLogin.setVisible(true);
         }else{
             //métod o temporário para poder ter um meal plan (incompleto) acessivel na base de dados
-            createTemporaryMealPlanForTesting(store, getResult.get());
-            getResult.get().setCurrentMeal(0);
+            //createTemporaryMealPlanForTesting(store, getResult.get());
+            //getResult.get().setCurrentMeal(0);
             sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, getResult.get());
         }
     }
@@ -160,19 +160,18 @@ public class LogInController {
         Meal lunch = new Meal(lunchRecipe);
         lunch.setMealIndex(1);
         lunch.setType(MealType.Lunch);
-        Meal dinner = new Meal(dinnerRecipe);
-        dinner.setMealIndex(2);
-        dinner.setType(MealType.Dinner);
+        //Meal dinner = new Meal(dinnerRecipe);
+        //dinner.setMealIndex(2);
+        //dinner.setType(MealType.Dinner);
         Meal dinner2 = new Meal(complexRecipe);
-        dinner2.setMealIndex(3);
+        dinner2.setMealIndex(2);
         dinner2.setType(MealType.Dinner);
 
         // Criar o MealPlan e adicionar ao usuário
         MealPlan mealPlan = new MealPlan(user);
         store.putMealPlan(user, mealPlan);
-
         // Associar as refeições ao MealPlan
-        store.putMeals(mealPlan, List.of(breakfast, lunch, dinner, dinner2));
+        store.putMeals(mealPlan, List.of(breakfast, lunch, dinner2));
         //este setCurrentRecipe depois deverá ser chamado quando uma receita for escolhida na lista de receitas
         user.setCurrentRecipe("Lasagna de Legumes");
     }

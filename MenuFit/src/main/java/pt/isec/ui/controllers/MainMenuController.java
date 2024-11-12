@@ -48,8 +48,8 @@ public class MainMenuController implements UserInitializable {
 
 
     //Propriedades calorias
-    private IntegerProperty caloriesConsumed = new SimpleIntegerProperty(100); // valor inicial
-    private IntegerProperty caloriesRemaining = new SimpleIntegerProperty(1900); // valor inicial
+    private IntegerProperty caloriesConsumed = new SimpleIntegerProperty(0); // valor inicial
+    private IntegerProperty caloriesRemaining = new SimpleIntegerProperty(2000); // valor inicial
 
     private User user;
     SceneSwitcher sceneSwitcher;
@@ -95,7 +95,7 @@ public class MainMenuController implements UserInitializable {
 
     @FXML
     private void handleMyRecipesBtnAction(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/Favorite.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/RecipesList.fxml", event, user);
     }
 
     @FXML

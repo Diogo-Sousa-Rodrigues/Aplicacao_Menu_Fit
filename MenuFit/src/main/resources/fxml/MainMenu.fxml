@@ -70,9 +70,9 @@
 
     <Pane layoutX="425.0" layoutY="582.0" prefHeight="251.0" prefWidth="368.0" style="-fx-border-color: grey; -fx-border-width: 2;">
         <children>
-            <CheckBox fx:id="mealCheckBox" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#mealPreviewChangeHandler" />
+            <CheckBox fx:id="mealCheckBox" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" />
             <Label fx:id="reminder1" layoutX="46.0" layoutY="14.0" prefHeight="25.0" prefWidth="300.0" text="Demolhar o Bacalhau" />
-            <CheckBox fx:id="mealCheckBox1" layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#mealPreviewChangeHandler" />
+            <CheckBox fx:id="mealCheckBox1" layoutX="14.0" layoutY="41.0" mnemonicParsing="false" />
             <Label fx:id="reminder2" layoutX="46.0" layoutY="41.0" prefHeight="25.0" prefWidth="300.0" text="Example 2" />
         </children>
     </Pane>
