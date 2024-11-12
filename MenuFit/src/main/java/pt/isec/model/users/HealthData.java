@@ -1,14 +1,9 @@
 package pt.isec.model.users;
 
 public class HealthData {
-    private String weight;
-    private String height;
-    private String objective;
-    private String levelOfFitness;
-    private String desiredWeight;
-    private String dailyCalorieCount;
-
-    public HealthData(String weight, String height, String objective, String levelOfFitness, String desiredWeight, String dailyCalorieCount) {
+    public HealthData(String weight, String height,
+                      String objective, String levelOfFitness,
+                      String desiredWeight, String dailyCalorieCount) {
         this.weight = weight;
         this.height = height;
         this.objective = objective;
@@ -65,6 +60,14 @@ public class HealthData {
         this.dailyCalorieCount = dailyCalorieCount;
     }
 
+    public Integer getDailyCalorieSum(){
+        return dailyCalorieSum;
+    }
+
+    public void setDailyCalorieSum(Integer dailyCalorieSum) {
+        this.dailyCalorieSum = dailyCalorieSum;
+    }
+
     @Override
     public String toString() {
         return "HealthData{" +
@@ -76,4 +79,12 @@ public class HealthData {
                 ", dailyCalorieCount='" + dailyCalorieCount + '\'' +
                 '}';
     }
+
+    private String weight;
+    private String height;
+    private String objective;
+    private String levelOfFitness;
+    private String desiredWeight;
+    private String dailyCalorieCount;
+    private Integer dailyCalorieSum;
 }

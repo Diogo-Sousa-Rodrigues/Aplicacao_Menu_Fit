@@ -1,5 +1,7 @@
 package pt.isec.model.users;
 
+import pt.isec.model.meals.Recipe;
+
 import java.util.Date;
 
 public interface User {
@@ -102,4 +104,31 @@ public interface User {
      * @return The User's health data as a HealthData
      */
     HealthData getHealthData();
+
+    /**
+     * Sets the name of the recipe the user wants to view
+     *
+     * @param currentRecipe The name of the recipe
+     */
+    void setCurrentRecipe(String currentRecipe);
+
+    /**
+     * Gets the name of the recipe the user wants to view
+     *
+     * @return The name of the recipe
+     */
+    String getCurrentRecipe();
+
+    /**
+     * Sets the index of the current meal of the user
+     *
+     * @param currentMeal index of the current meal
+     */
+    void setCurrentMeal(int currentMeal);
+
+    /**
+     * Gets the index of the current meal of the user
+     * @return The index of the current meal
+     */
+    int getCurrentMeal();
 }

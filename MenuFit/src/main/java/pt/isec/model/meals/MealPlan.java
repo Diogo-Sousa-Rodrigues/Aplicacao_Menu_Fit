@@ -2,11 +2,32 @@ package pt.isec.model.meals;
 
 import pt.isec.model.users.User;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+//  {
+//      "meals": [
+//          {
+//              // ...
+//          },
+//          {
+//              // ...
+//          }
+//      ],
+//      "goal": "",
+//      "duration": ""
+//  }
+//
 public class MealPlan {
     public MealPlan(User user) {
         // test
     }
 
-    // TODO: A MealPlan has a duration, a Goal
-    // and some other info...
+    private List<Meal> meals;
+
+    private String goal;
+
+    private LocalDateTime begin;
+
+    private LocalDateTime end;
 }

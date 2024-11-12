@@ -2,7 +2,9 @@ package pt.isec.persistence;
 
 import pt.isec.model.meals.Meal;
 import pt.isec.model.meals.MealPlan;
+import pt.isec.model.meals.Recipe;
 import pt.isec.model.users.HealthData;
+import pt.isec.model.users.TimeBudget;
 import pt.isec.model.users.User;
 
 import java.util.HashMap;
@@ -138,6 +140,7 @@ public class EphemeralStore {
             return Optional.empty();
         }
 
+        // TODO: remove
         List<Meal> meals = this.meals.get(mealPlan);
 
         return Optional.of(meals);
@@ -209,6 +212,50 @@ public class EphemeralStore {
         return Optional.of(healthData);
     }
 
+    /**
+     * Gets the TimeBudget assigned to the given User.
+     *
+     * @param user The User instance.
+     *
+     * @return An Optional containing the TimeBudget assigned
+     * to the given User, or empty otherwise.
+     */
+    public Optional<TimeBudget> getTimeBudget(User user) {
+        if (!isRegistered(user)) {
+            return Optional.empty();
+        }
+
+        if (this.timeBudget.containsKey(user)) {
+            TimeBudget timeBudget = this.timeBudget.get(user);
+
+            return Optional.of(timeBudget);
+        }
+
+        return Optional.empty();
+    }
+
+    /**
+     * Puts the given TimeBudget in the Store and associates them
+     * to a given User.
+     * Overrides an existing TimeBudget for that User.
+     *
+     * @param user A registered User instance.
+     * @param timeBudget The TimeBudget to assign to the given User.
+     *
+     * @return An Optional containing the TimeBudget instance
+     * if the User is registered within the Store, or
+     * empty otherwise.
+     */
+    public Optional<TimeBudget> putTimeBudget(User user, TimeBudget timeBudget) {
+        if (!isRegistered(user)) {
+            return Optional.empty();
+        }
+
+        this.timeBudget.put(user, timeBudget);
+
+        return Optional.of(timeBudget);
+    }
+
     private boolean isRegistered(User user) {
         for (var u : this.users.values()) {
             if (u == user) {
@@ -236,18 +283,29 @@ public class EphemeralStore {
 
         this.mealPlans = new HashMap<>();
 
+        //TODO: remove
         this.meals = new HashMap<>();
 
         this.healthData = new HashMap<>();
+
+        this.timeBudget = new HashMap<>();
     }
 
+    // Maps User e-mails to User instances
     private final Map<String, User> users;
 
+    // Maps User passwords to User e-mails
     private final Map<String, String> credentials;
 
+    // Maps User instances to MealPlans
     private final Map<User, MealPlan> mealPlans;
 
+    // TODO: remove
     private final Map<MealPlan, List<Meal>> meals;
 
+    // Maps User instances to HealthData information
     private final Map<User, HealthData> healthData;
+
+    // Maps User instances to TimeBudget information
+    private final Map<User, TimeBudget> timeBudget;
 }

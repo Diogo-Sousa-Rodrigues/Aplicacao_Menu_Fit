@@ -6,11 +6,11 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.image.Image?>
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.HealthAndDietaryRestrictions_1Controller">
    <children>
       <Label layoutX="294.0" layoutY="98.0" text="Introduce your health data">
@@ -33,28 +33,28 @@
       <TextField fx:id="objectiveTextField" alignment="TOP_LEFT" layoutX="97.0" layoutY="230.0" prefHeight="159.0" prefWidth="212.0" promptText="Objective:" />
       <ComboBox fx:id="levelOfFitnessComboBox" layoutX="366.0" layoutY="151.0" prefHeight="25.0" prefWidth="280.0" promptText="Level of Fitness" />
       <Label layoutX="366.0" layoutY="230.0" text="Do you have a desired weight?" />
-      <TextField fx:id="desiredWeightTextField" layoutX="414.0" layoutY="262.0" prefHeight="25.0" prefWidth="25.0" />
-      <Label fx:id="BMI" alignment="TOP_LEFT" layoutX="514.0" layoutY="260.0" prefHeight="38.0" prefWidth="220.0" text="According to your BMI healthy range, your weight should be between X and Y" wrapText="true" />
-      <Label layoutX="366.0" layoutY="326.0" text="Do you have a daily calorie count?" />
-      <TextField fx:id="dailyCalorieCountTextField" layoutX="414.0" layoutY="358.0" prefHeight="25.0" prefWidth="25.0" />
+      <TextField fx:id="desiredWeightTextField" layoutX="428.0" layoutY="263.0" prefHeight="36.0" prefWidth="73.0" />
+      <Label fx:id="BMI" alignment="TOP_LEFT" layoutX="400.0" layoutY="310.0" prefHeight="61.0" prefWidth="393.0" text="According to your BMI healthy range, your weight should be between X and Y" wrapText="true" />
+      <Label layoutX="367.0" layoutY="398.0" text="Do you have a daily calorie count?" />
+      <TextField fx:id="dailyCalorieCountTextField" layoutX="428.0" layoutY="428.0" prefHeight="36.0" prefWidth="95.0" />
       <RadioButton fx:id="desiredWeightNoRadioButton" layoutX="365.0" layoutY="254.0" mnemonicParsing="false" text="No">
          <toggleGroup>
             <ToggleGroup fx:id="A" />
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="desiredWeightYesRadioButton" layoutX="365.0" layoutY="284.0" mnemonicParsing="false" text="Yes" toggleGroup="$A" />
-      <RadioButton fx:id="dailyCalorieNoCountRadioButton" layoutX="364.0" layoutY="349.0" mnemonicParsing="false" text="No">
+      <RadioButton fx:id="dailyCalorieNoCountRadioButton" layoutX="365.0" layoutY="421.0" mnemonicParsing="false" text="No">
          <toggleGroup>
             <ToggleGroup fx:id="C" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="dailyCalorieYesCountRadioButton" layoutX="364.0" layoutY="379.0" mnemonicParsing="false" text="Yes" toggleGroup="$C" />
-      <RadioButton fx:id="kgRadioButton" layoutX="457.0" layoutY="254.0" mnemonicParsing="false" text="kg">
+      <RadioButton fx:id="dailyCalorieYesCountRadioButton" layoutX="365.0" layoutY="451.0" mnemonicParsing="false" text="Yes" toggleGroup="$C" />
+      <RadioButton fx:id="kgRadioButton" layoutX="509.0" layoutY="256.0" mnemonicParsing="false" text="kg">
          <toggleGroup>
             <ToggleGroup fx:id="B" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="lbsRadioButton" layoutX="457.0" layoutY="284.0" mnemonicParsing="false" text="lbs" toggleGroup="$B" />
+      <RadioButton fx:id="lbsRadioButton" layoutX="507.0" layoutY="286.0" mnemonicParsing="false" text="lbs" toggleGroup="$B" />
 
    </children>
 </AnchorPane>

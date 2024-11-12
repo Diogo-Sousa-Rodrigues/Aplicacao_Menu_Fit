@@ -19,10 +19,11 @@
                   <Font size="24.0" />
               </font>
           </Label>
-         <Button fx:id="basicInformationButton" layoutX="4.0" layoutY="98.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="199.0" text="Basic Information" onAction="#handleBasicInformationButton"/>
-         <Button fx:id="restrictionsButton" layoutX="4.0" layoutY="184.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="199.0" text="Restrictions" onAction="#handleRestrictionsButton"/>
+         <Button fx:id="basicInformationButton" layoutX="4.0" layoutY="98.0" mnemonicParsing="false" onAction="#handleBasicInformationButton" prefHeight="58.0" prefWidth="199.0" text="Basic Information" />
+         <Button fx:id="restrictionsButton" layoutX="4.0" layoutY="184.0" mnemonicParsing="false" onAction="#handleRestrictionsButton" prefHeight="58.0" prefWidth="199.0" text="Restrictions" />
          <Button fx:id="objectivesButton" layoutX="4.0" layoutY="271.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="199.0" text="Objectives" />
-         <Button fx:id="logOutButton" layoutX="58.0" layoutY="516.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="91.0" text="Log Out" onAction="#handleLogOutButton"/>
+         <Button fx:id="logOutButton" layoutX="58.0" layoutY="516.0" mnemonicParsing="false" onAction="#handleLogOutButton" prefHeight="48.0" prefWidth="91.0" text="Log Out" />
+         <Button fx:id="goBackButton" layoutX="58.0" layoutY="443.0" mnemonicParsing="false" onAction="#handleGoBackButton" prefHeight="48.0" prefWidth="91.0" text="Go Back" />
       </children>
    </Pane>
    <Label fx:id="nameLabel" layoutX="249.0" layoutY="102.0" text="Objectives">
