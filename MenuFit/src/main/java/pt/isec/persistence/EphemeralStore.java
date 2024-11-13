@@ -128,47 +128,6 @@ public class EphemeralStore {
     }
 
     /**
-     * Gets the Meal's assigned to the given MealPlan.
-     *
-     * @param mealPlan The MealPlan instance.
-     *
-     * @return An Optional containing the Meal's assigned
-     * to the given MealPlan, or empty otherwise.
-     */
-    public Optional<List<Meal>> getMeals(MealPlan mealPlan) {
-        if (!isRegistered(mealPlan)) {
-            return Optional.empty();
-        }
-
-        // TODO: remove
-        List<Meal> meals = this.meals.get(mealPlan);
-
-        return Optional.of(meals);
-    }
-
-    /**
-     * Puts the given Meals in the Store and associates them
-     * to a given MealPlan.
-     * Overrides existing Meals for that MealPlan.
-     *
-     * @param mealPlan A registered MealPlan instance.
-     * @param meals The Meals to assign to the given MealPlan.
-     *
-     * @return An Optional containing the List of Meals
-     * if the MealPlan is registered within the Store, or
-     * empty otherwise.
-     */
-    public Optional<List<Meal>> putMeals(MealPlan mealPlan, List<Meal> meals) {
-        if (!isRegistered(mealPlan)) {
-            return Optional.empty();
-        }
-
-        this.meals.put(mealPlan, meals);
-
-        return Optional.of(meals);
-    }
-
-    /**
      * Gets the HealthData assigned to the given User.
      *
      * @param user The User instance.

@@ -104,25 +104,24 @@ public class MainMenuController implements UserInitializable {
         user.setCurrentMeal(user.getCurrentMeal()+1);
         int index = user.getCurrentMeal();
         EphemeralStore store = EphemeralStore.getInstance();
-        Optional<MealPlan> mealPlan = store.getMealPlan(user);
-        if(mealPlan.isPresent()) {
-            Optional<List<Meal>> meals = store.getMeals(mealPlan.get());
-            if (meals.isPresent()) {
-                for (Meal meal : meals.get()) {
-                    if (meal.getMealIndex() == index) {
-                        updateNextMealPreview(meal);
-                        mealFound = true;
-                        break;
-                    }
+        Optional<MealPlan> mealPlanResult = store.getMealPlan(user);
+        if(mealPlanResult.isPresent()) {
+            MealPlan mealPlan = mealPlanResult.get();
+            List<Meal> meals = mealPlan.getMeals();
+            for (Meal meal : meals) {
+                if (meal.getMealIndex() == index) {
+                    updateNextMealPreview(meal);
+                    mealFound = true;
+                    break;
                 }
-                if(!mealFound) {
-                    nextMealNameLabel.setText("End of meals");
-                    nextMealTypeLabel.setVisible(false);
-                    nextMealCaloriesLabel.setVisible(false);
-                    nextMealPrepTimeLabel.setVisible(false);
-                    nextMealDoneButton.setVisible(false);
-                    recipeImage.setVisible(false);
-                }
+            }
+            if(!mealFound) {
+                nextMealNameLabel.setText("End of meals");
+                nextMealTypeLabel.setVisible(false);
+                nextMealCaloriesLabel.setVisible(false);
+                nextMealPrepTimeLabel.setVisible(false);
+                nextMealDoneButton.setVisible(false);
+                recipeImage.setVisible(false);
             }
         }
     }
@@ -143,21 +142,20 @@ public class MainMenuController implements UserInitializable {
     private void initializeNextMealPreview() {
         int index = user.getCurrentMeal();
         EphemeralStore store = EphemeralStore.getInstance();
-        Optional<MealPlan> mealPlan = store.getMealPlan(user);
-        if(mealPlan.isPresent()) {
+        Optional<MealPlan> mealPlanResult = store.getMealPlan(user);
+        if(mealPlanResult.isPresent()) {
+            MealPlan mealPlan = mealPlanResult.get();
             nextMealTypeLabel.setVisible(true);
             nextMealNameLabel.setVisible(true);
             nextMealCaloriesLabel.setVisible(true);
             nextMealPrepTimeLabel.setVisible(true);
             nextMealDoneButton.setVisible(true);
             recipeImage.setVisible(true);
-            Optional<List<Meal>> meals = store.getMeals(mealPlan.get());
-            if(meals.isPresent()) {
-                for(Meal meal : meals.get()){
-                    if(meal.getMealIndex() == index){
-                        updateNextMealPreview(meal);
-                        break;
-                    }
+            List<Meal> meals = mealPlan.getMeals();
+            for(Meal meal : meals){
+                if(meal.getMealIndex() == index){
+                    updateNextMealPreview(meal);
+                    break;
                 }
             }
         }else {
@@ -184,26 +182,23 @@ public class MainMenuController implements UserInitializable {
         Optional<MealPlan> optionalMealPlan = store.getMealPlan(user);
 
         if (optionalMealPlan.isPresent()) {
-            Optional<List<Meal>> optionalMeals = store.getMeals(optionalMealPlan.get());
+            MealPlan mealPlan = optionalMealPlan.get();
+            List<Meal> meals = mealPlan.getMeals();
 
-            if (optionalMeals.isPresent()) {
-                List<Meal> meals = optionalMeals.get();
-
-                for (Meal meal : meals) {
-                    Recipe recipe = meal.getRecipe();
-                    switch (meal.getType()) {
-                        case Breakfast:
-                            breakfastRecipeLabel.setText(recipe.name());
-                            break;
-                        case Lunch:
-                            lunchRecipeLabel.setText(recipe.name());
-                            break;
-                        case Dinner:
-                            dinnerRecipeLabel.setText(recipe.name());
-                            break;
-                        default:
-                            break;
-                    }
+            for (Meal meal : meals) {
+                Recipe recipe = meal.getRecipe();
+                switch (meal.getType()) {
+                    case Breakfast:
+                        breakfastRecipeLabel.setText(recipe.name());
+                        break;
+                    case Lunch:
+                        lunchRecipeLabel.setText(recipe.name());
+                        break;
+                    case Dinner:
+                        dinnerRecipeLabel.setText(recipe.name());
+                        break;
+                    default:
+                        break;
                 }
             }
         } else {

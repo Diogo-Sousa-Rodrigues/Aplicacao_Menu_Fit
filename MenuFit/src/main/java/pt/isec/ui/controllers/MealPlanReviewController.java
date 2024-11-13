@@ -198,7 +198,7 @@ public class MealPlanReviewController implements UserInitializable {
         MealPlan mealPlan = new MealPlan(user);
         store.putMealPlan(user, mealPlan);
         // Associar as refeições ao MealPlan
-        store.putMeals(mealPlan, List.of(breakfast, lunch, dinner2));
+        mealPlan.putMeals(List.of(breakfast, lunch, dinner2));
         //este setCurrentRecipe depois deverá ser chamado quando uma receita for escolhida na lista de receitas
         user.setCurrentRecipe("Lasagna de Legumes");
     }

@@ -169,9 +169,10 @@ public class LogInController {
 
         // Criar o MealPlan e adicionar ao usuário
         MealPlan mealPlan = new MealPlan(user);
+        mealPlan.putMeals(List.of(breakfast, lunch, dinner2));
+
         store.putMealPlan(user, mealPlan);
-        // Associar as refeições ao MealPlan
-        store.putMeals(mealPlan, List.of(breakfast, lunch, dinner2));
+
         //este setCurrentRecipe depois deverá ser chamado quando uma receita for escolhida na lista de receitas
         user.setCurrentRecipe("Lasagna de Legumes");
     }

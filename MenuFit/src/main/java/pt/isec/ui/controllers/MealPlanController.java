@@ -48,7 +48,7 @@ public class MealPlanController implements UserInitializable {
         MealPlan mealPlan = store.getMealPlan(user).orElse(null);
 
         if (mealPlan != null) {
-            List<Meal> meals = store.getMeals(mealPlan).orElse(List.of());
+            List<Meal> meals = mealPlan.getMeals();
 
             // Agrupando refeições por dia
             String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -174,7 +174,7 @@ public class MealPlanController implements UserInitializable {
         MealPlan mealPlan = store.getMealPlan(user).orElse(null);
 
         if (mealPlan != null) {
-            List<Meal> meals = store.getMeals(mealPlan).orElse(List.of());
+            List<Meal> meals = mealPlan.getMeals();
 
             // Encontra o índice da Meal original e substitui pela nova
             int mealIndex = meals.indexOf(meal);
@@ -187,8 +187,7 @@ public class MealPlanController implements UserInitializable {
                 }
             }
 
-            // Atualiza a lista de Meals no MealPlan
-            store.putMeals(mealPlan, meals);
+            mealPlan.putMeals(meals);
 
             // Opcional: Atualiza a visualização da Meal substituída, se necessário
             sceneSwitcher.switchScene("fxml/MealPlan.fxml", event, user);
