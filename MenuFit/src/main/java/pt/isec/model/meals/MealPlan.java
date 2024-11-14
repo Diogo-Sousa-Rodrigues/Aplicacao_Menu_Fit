@@ -3,6 +3,7 @@ package pt.isec.model.meals;
 import pt.isec.model.users.User;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 //  {
@@ -21,6 +22,7 @@ import java.util.List;
 //
 public class MealPlan {
     public MealPlan(User user) {
+        this.meals = new ArrayList<>();
     }
 
     public boolean putMeal(Meal meal) {
