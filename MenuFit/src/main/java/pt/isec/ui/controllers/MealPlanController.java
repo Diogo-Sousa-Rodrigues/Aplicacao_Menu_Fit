@@ -108,7 +108,7 @@ public class MealPlanController implements UserInitializable {
         CheckBox selectCheckBox = new CheckBox();
         selectCheckBox.setLayoutX(170);
         selectCheckBox.setLayoutY(6);
-        if(user.getCurrentMeal() == meal.getMealIndex()){
+        if(user.getCurrentMealIndex() == meal.getMealIndex()){
             selectCheckBox.setDisable(false);
         }else{
             selectCheckBox.setDisable(true);
@@ -139,7 +139,7 @@ public class MealPlanController implements UserInitializable {
             mealPane.getChildren().addAll(mealTypeLabel, newRecipeButton, selectCheckBox, noRecipeLabel);
         }
 
-        if(meal.getMealIndex() < user.getCurrentMeal()){
+        if(meal.getMealIndex() < user.getCurrentMealIndex()){
             mealPane.setDisable(true);
         }
         return mealPane;
@@ -149,7 +149,7 @@ public class MealPlanController implements UserInitializable {
         if(selectCheckBox.isSelected()){
             int sum = user.getHealthData().getDailyCalorieSum();
             user.getHealthData().setDailyCalorieSum(sum + meal.getRecipe().calories());
-            user.setCurrentMeal(meal.getMealIndex() + 1);
+            user.setCurrentMealIndex(meal.getMealIndex() + 1);
             sceneSwitcher.switchScene("fxml/MealPlan.fxml", event, user);
         }
     }

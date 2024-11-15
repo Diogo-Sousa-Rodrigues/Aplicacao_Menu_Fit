@@ -1,6 +1,6 @@
 package pt.isec.model.users;
 
-import pt.isec.model.meals.Recipe;
+import pt.isec.model.meals.Meal;
 
 import java.util.Date;
 
@@ -124,11 +124,15 @@ public interface User {
      *
      * @param currentMeal index of the current meal
      */
-    void setCurrentMeal(int currentMeal);
+    void setCurrentMealIndex(int currentMeal);
 
     /**
      * Gets the index of the current meal of the user
      * @return The index of the current meal
      */
-    int getCurrentMeal();
+    int getCurrentMealIndex();
+
+    void setCurrentMeal(Meal meal);
+
+    Meal getCurrentMeal();
 }

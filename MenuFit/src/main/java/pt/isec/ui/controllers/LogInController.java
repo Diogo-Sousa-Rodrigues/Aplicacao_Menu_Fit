@@ -61,7 +61,7 @@ public class LogInController {
         }else{
             //métod o temporário para poder ter um meal plan (incompleto) acessivel na base de dados
             //createTemporaryMealPlanForTesting(store, getResult.get());
-            //getResult.get().setCurrentMeal(0);
+            //getResult.get().setCurrentMealIndex(0);
             sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, getResult.get());
         }
     }
