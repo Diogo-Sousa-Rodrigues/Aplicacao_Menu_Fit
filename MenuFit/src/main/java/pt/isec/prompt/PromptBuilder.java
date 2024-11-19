@@ -1,11 +1,5 @@
 package pt.isec.prompt;
 
-import pt.isec.model.users.HealthData;
-import pt.isec.model.users.User;
-import pt.isec.persistence.EphemeralStore;
-
-import java.util.Optional;
-
 public class PromptBuilder {
     private static PromptBuilder instance = null;
 
@@ -13,25 +7,59 @@ public class PromptBuilder {
         if (instance == null) {
             instance = new PromptBuilder();
         }
+
         return instance;
     }
 
-    public String buildMealPlanPrompt(User user) {
-        EphemeralStore store = EphemeralStore.getInstance();
+    private PromptBuilder() {};
 
-        Optional<HealthData> healthData = store.getHealthData(user);
+    public String getIngredientPrompt() {
+        String prompt = null;
 
-        if (healthData.isEmpty()) {
-            // throw might be more appropriate
-            return null;
-        }
+        prompt = "Give me a JSON that represents an ingredient of a meal. Follow the following template: " + ingredientJSONTemplate + "\n";
+        prompt += String.join("\n", replyRequirements);
 
-        // Build prompt...
-
-        return "TODO";
+        return prompt;
     }
 
-    private PromptBuilder() {
-        // TODO: ...
+    public String getRecipePrompt() {
+        String prompt = null;
+
+        prompt = "Give me a JSON that represents a recipe for a meal. Follow the following template: " + recipeJSONTemplate + "\n";
+        prompt += String.join("\n", replyRequirements);
+
+        return prompt;
     }
+
+    private static final String ingredientJSONTemplate =
+            "{" +
+                    "name:string," +
+                    "description:string," +
+                    "quantity:int," +
+                    "units:string," +
+                    "calories:int," +
+                    "macros: {" +
+                    "proteins:float," +
+                    "carbs:float," +
+                    "fats:float" +
+                    "}," +
+                    "allergens:[string]" +
+                    "}";
+
+    private static final String recipeJSONTemplate =
+            "{" +
+                    "name:string," +
+                    "description:string," +
+                    "servings:int," +
+                    "prep:int," +
+                    "macros: {" +
+                    "reminders:[string]" +
+                    "ingredients:[" + ingredientJSONTemplate + "]" +
+                    "}";
+
+    private static final String[] replyRequirements = {
+            "Reply with the JSON only.",
+            "Do not reply in MD format (markdown).",
+            "Reply using plain text only."
+    };
 }
