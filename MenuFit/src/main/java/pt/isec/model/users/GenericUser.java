@@ -1,5 +1,7 @@
 package pt.isec.model.users;
 
+import pt.isec.model.meals.Meal;
+
 import java.util.Date;
 
 public abstract class GenericUser implements User {
@@ -90,12 +92,22 @@ public abstract class GenericUser implements User {
     }
 
     @Override
-    public int getCurrentMeal() {
+    public int getCurrentMealIndex() {
+        return currentMealIndex;
+    }
+
+    @Override
+    public void setCurrentMealIndex(int currentMeal) {
+        this.currentMealIndex = currentMeal;
+    }
+
+    @Override
+    public Meal getCurrentMeal(){
         return currentMeal;
     }
 
     @Override
-    public void setCurrentMeal(int currentMeal) {
+    public void setCurrentMeal(Meal currentMeal) {
         this.currentMeal = currentMeal;
     }
 
@@ -109,5 +121,7 @@ public abstract class GenericUser implements User {
 
     private String currentRecipe;
 
-    private int currentMeal;
+    private int currentMealIndex;
+
+    private Meal currentMeal;
 }

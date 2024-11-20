@@ -51,6 +51,15 @@ public class Meal {
     }
 
     /**
+     * Gets the Meal's date.
+     *
+     * @return The Meal's date.
+     */
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    /**
      * Gets the Meal's index
      *
      * @return the Meal's index

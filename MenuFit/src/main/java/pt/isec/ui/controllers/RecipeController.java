@@ -49,14 +49,13 @@ public class RecipeController implements UserInitializable {
 
     public void initialize(){
         EphemeralStore store = EphemeralStore.getInstance();
-        Optional<MealPlan> mealPlan = store.getMealPlan(user);
-        if(mealPlan.isPresent()){
-            Optional<List<Meal>> meals = store.getMeals(mealPlan.get());
-            if(meals.isPresent()){
-                for(Meal meal : meals.get()){
-                    if(meal.getRecipe().name().equals(user.getCurrentRecipe())){
-                        showRecipe(meal.getRecipe());
-                    }
+        Optional<MealPlan> mealPlanResult = store.getMealPlan(user);
+        if(mealPlanResult.isPresent()){
+            MealPlan mealPlan = mealPlanResult.get();
+            List<Meal> meals = mealPlan.getMeals();
+            for(Meal meal : meals){
+                if(meal.getRecipe().name().equals(user.getCurrentRecipe())){
+                    showRecipe(meal.getRecipe());
                 }
             }
         }

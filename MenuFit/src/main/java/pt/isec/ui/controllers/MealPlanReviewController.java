@@ -13,6 +13,9 @@ import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.EphemeralStore;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,7 +109,7 @@ public class MealPlanReviewController implements UserInitializable {
     public void btnAcceptHandler(ActionEvent event) {
         EphemeralStore store = EphemeralStore.getInstance();
         createTemporaryMealPlanForTesting(store, user);
-        user.setCurrentMeal(0);
+        user.setCurrentMealIndex(0);
         user.getHealthData().setDailyCalorieSum(0);
         sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user);
     }
@@ -180,25 +183,63 @@ public class MealPlanReviewController implements UserInitializable {
                 )
         );
 
+        Recipe smoothieRecipe = new Recipe(
+                "Smoothie Verde",
+                "1. Coloque todos os ingredientes no liquidificador.\n2. Bata até obter uma mistura homogênea.\n3. Sirva imediatamente.",
+                1,
+                250,
+                Duration.ofMinutes(5),
+                List.of(new Reminder("Certifique-se de que todos os ingredientes estão frescos.")),
+                List.of(
+                        new Ingredient("Espinafre", "Espinafre fresco", 50, "g", 15, new Macros(2, 1, 0), List.of("Vitamina K")),
+                        new Ingredient("Banana", "Banana madura", 100, "g", 89, new Macros(1, 23, 0), List.of("Potássio")),
+                        new Ingredient("Leite", "Leite sem lactose", 200, "ml", 100, new Macros(7, 10, 3), List.of("Sem lactose")),
+                        new Ingredient("Mel", "Mel natural", 10, "g", 30, new Macros(0, 8, 0), List.of("Açúcares naturais"))
+                )
+        );
+
+        Recipe veggieOmeletteRecipe = new Recipe(
+                "Omelete de Vegetais",
+                "1. Bata os ovos em uma tigela com sal e pimenta.\n2. Aqueça uma frigideira antiaderente com azeite.\n3. Adicione os vegetais picados e refogue por 2 minutos.\n4. Despeje os ovos batidos sobre os vegetais.\n5. Cozinhe em fogo baixo até firmar e vire para dourar o outro lado.\n6. Sirva quente.",
+                1,
+                250,
+                Duration.ofMinutes(10),
+                List.of(new Reminder("Prepare os vegetais antes de começar a cozinhar.")),
+                List.of(
+                        new Ingredient("Ovo", "Ovo grande", 2, "unidades", 140, new Macros(12, 1, 10), List.of("Proteínas")),
+                        new Ingredient("Pimentão", "Pimentão vermelho picado", 50, "g", 20, new Macros(1, 5, 0), List.of("Vitamina C")),
+                        new Ingredient("Cebola", "Cebola picada", 30, "g", 12, new Macros(0, 3, 0), List.of("Antioxidantes")),
+                        new Ingredient("Azeite de Oliva", "Azeite extra virgem", 10, "ml", 80, new Macros(0, 0, 9), List.of("Gorduras saudáveis"))
+                )
+        );
+
+
         // Criar as refeições usando as receitas
-        Meal breakfast = new Meal(breakfastRecipe);
+        Meal breakfast = new Meal(MealType.Breakfast, LocalDateTime.now(), breakfastRecipe);
         breakfast.setMealIndex(0);
-        breakfast.setType(MealType.Breakfast);
-        Meal lunch = new Meal(lunchRecipe);
+        //breakfast.setType(MealType.Breakfast);
+        Meal lunch = new Meal(MealType.Lunch, LocalDateTime.now(), lunchRecipe);
         lunch.setMealIndex(1);
-        lunch.setType(MealType.Lunch);
+        //lunch.setType(MealType.Lunch);
         //Meal dinner = new Meal(dinnerRecipe);
         //dinner.setMealIndex(2);
         //dinner.setType(MealType.Dinner);
-        Meal dinner2 = new Meal(complexRecipe);
+        Meal dinner2 = new Meal(MealType.Dinner, LocalDateTime.now(), complexRecipe);
         dinner2.setMealIndex(2);
-        dinner2.setType(MealType.Dinner);
+        //dinner2.setType(MealType.Dinner);
+
+
+        Meal breakfast2 = new Meal(MealType.Breakfast, LocalDateTime.now().plusDays(1), smoothieRecipe);
+        breakfast2.setMealIndex(3);
+
+        Meal lunch2 = new Meal(MealType.Lunch, LocalDateTime.now().plusDays(1), veggieOmeletteRecipe);
+        lunch2.setMealIndex(4);
 
         // Criar o MealPlan e adicionar ao usuário
         MealPlan mealPlan = new MealPlan(user);
         store.putMealPlan(user, mealPlan);
         // Associar as refeições ao MealPlan
-        store.putMeals(mealPlan, List.of(breakfast, lunch, dinner2));
+        mealPlan.putMeals(List.of(breakfast, lunch, dinner2, breakfast2, lunch2));
         //este setCurrentRecipe depois deverá ser chamado quando uma receita for escolhida na lista de receitas
         user.setCurrentRecipe("Lasagna de Legumes");
     }

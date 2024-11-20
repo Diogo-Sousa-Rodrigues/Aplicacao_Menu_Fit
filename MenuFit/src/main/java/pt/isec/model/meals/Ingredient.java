@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Represents an Ingredient
  */
-public record Ingredient(String name, String description, int quantity,
+public record Ingredient(String name, String description, float quantity,
                          String units, int calories, Macros macros, List<String> allergens) {
 
     @Override
