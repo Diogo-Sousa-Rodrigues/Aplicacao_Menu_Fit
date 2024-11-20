@@ -376,16 +376,13 @@ Mitigation actions:
 
 ## Increments
 
-### Sprint 1
+### Sprint 3
 ##### Sprint Plan
 
 - Goal: <!-- Create the base architecture of the app and basic interface. -->
-  - Register
-  - Login
-  - Meal plan form
-  - Reminders
-  - Generate weekly meal plan
-  - Daily Goals
+  - AI Prompts
+  - DataBase creation and connection
+  - Remember me
 
 - Dates: from 11/Nov to 26/Nov, 2 weeks
 
