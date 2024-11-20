@@ -10,6 +10,7 @@ import javafx.scene.text.TextFlow;
 import pt.isec.model.meals.*;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.BDManager;
 import pt.isec.persistence.EphemeralStore;
 
 import java.time.Duration;
@@ -62,7 +63,7 @@ public class MealPlanReviewController implements UserInitializable {
 
 
     @Override
-    public void initializeUser(User user) {
+    public void initializeUser(User user, BDManager bdManager) {
         this.user = user;
 
         // Exemplo de como adicionar refeições para testar

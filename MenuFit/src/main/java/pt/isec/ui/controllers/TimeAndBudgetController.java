@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.BDManager;
 
 import java.io.IOException;
 import java.net.URL;
@@ -51,7 +52,7 @@ public class TimeAndBudgetController implements Initializable, UserInitializable
 
     @FXML
     void previousHandler(ActionEvent event) throws IOException {
-        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_3.fxml", event);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_3.fxml", event, null, null);
     }
     @FXML
     void finishHandler(ActionEvent event) throws IOException{
@@ -63,7 +64,7 @@ public class TimeAndBudgetController implements Initializable, UserInitializable
     }
 
     @Override
-    public void initializeUser(User user) {
+    public void initializeUser(User user, BDManager bdManager) {
         this.user = user;
     }
 }

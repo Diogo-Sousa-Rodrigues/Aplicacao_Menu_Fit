@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import pt.isec.model.meals.*;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.BDManager;
 import pt.isec.persistence.EphemeralStore;
 
 import java.time.Duration;
@@ -30,7 +31,7 @@ public class MealPlanController implements UserInitializable {
     }
 
     @Override
-    public void initializeUser(User user) {
+    public void initializeUser(User user, BDManager bdManager) {
         this.user = user;
         initializeDailyMealsPreview();
     }

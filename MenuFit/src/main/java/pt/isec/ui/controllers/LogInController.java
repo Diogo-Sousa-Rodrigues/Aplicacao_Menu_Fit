@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import pt.isec.model.meals.*;
 import pt.isec.model.users.User;
+import pt.isec.persistence.BDManager;
 import pt.isec.persistence.EphemeralStore;
 
 import java.io.IOException;
@@ -28,9 +29,14 @@ public class LogInController {
     public CheckBox showPassword;
     @FXML
     public Label invalidLogin;
+    BDManager bdManager;
 
     public LogInController(){
         this.sceneSwitcher = new SceneSwitcher();
+    }
+
+    public void setBDManager(BDManager bdManager){
+        this.bdManager = bdManager;
     }
 
     @FXML
@@ -62,13 +68,13 @@ public class LogInController {
             //métod o temporário para poder ter um meal plan (incompleto) acessivel na base de dados
             //createTemporaryMealPlanForTesting(store, getResult.get());
             //getResult.get().setCurrentMealIndex(0);
-            sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, getResult.get());
+            sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, getResult.get(), bdManager);
         }
     }
 
     @FXML
     void registerNowHandler(ActionEvent event) throws IOException {
-        sceneSwitcher.switchScene("fxml/Register.fxml", event);
+        sceneSwitcher.switchScene("fxml/Register.fxml", event, bdManager);
     }
 
     @FXML

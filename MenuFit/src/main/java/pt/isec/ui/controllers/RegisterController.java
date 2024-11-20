@@ -7,6 +7,7 @@ import javafx.scene.control.Alert.AlertType;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.Gender;
 import pt.isec.model.users.User;
+import pt.isec.persistence.BDManager;
 import pt.isec.persistence.EphemeralStore;
 
 import java.text.ParseException;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 public class RegisterController {
     SceneSwitcher sceneSwitcher;
+    BDManager bdManager;
 
     @FXML
     private TextField firstNameField;
@@ -38,12 +40,22 @@ public class RegisterController {
     public RegisterController(){
         this.sceneSwitcher = new SceneSwitcher();
     }
+
+    public void setBDManager(BDManager bdManager){
+        this.bdManager = bdManager;
+    }
+
     @FXML
     private void handleRegister(ActionEvent event) {
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
         String email = emailField.getText();
         String password = passwordField.getText();
+        String gender = genderComboBox.getValue().toString();
+        if(birthDatePicker.getValue() == null){
+            showAlert("Invalid Date", "Please enter a date");
+            return;
+        }
         String birthDateString = birthDatePicker.getValue().toString();
 
         Date birthDate;
@@ -55,29 +67,29 @@ public class RegisterController {
             return;
         }
 
-        // Alterar a lógica do gênero quando necessário
-        Gender gender = Gender.Male;
-
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || birthDate == null) {
             showAlert("Validation Error", "Please enter all details");
             return;
         }
 
-        EphemeralStore store = EphemeralStore.getInstance();
-        BasicUser newUser = new BasicUser(firstName, lastName, email, birthDate, gender);
+//        EphemeralStore store = EphemeralStore.getInstance();
+//        BasicUser newUser = new BasicUser(firstName, lastName, email, birthDate, gender);
+//
+//        // Tenta inserir o usuário na store
+//        store.putUser(newUser, password);
+//
+//        // Verifica se a inserção foi efetuada corretamente
+//        Optional<User> registeredUser = store.getUser(email, password);
+//        if (registeredUser.isEmpty()) {
+//            showAlert("Registration Error", "There was an error registering the user. Please try again.");
+//            return;
+//        }
 
-        // Tenta inserir o usuário na store
-        store.putUser(newUser, password);
-
-        // Verifica se a inserção foi efetuada corretamente
-        Optional<User> registeredUser = store.getUser(email, password);
-        if (registeredUser.isEmpty()) {
-            showAlert("Registration Error", "There was an error registering the user. Please try again.");
-            return;
-        }
+        String fullName = firstName + " " + lastName;
+        bdManager.registerUser(fullName, email, password, gender, birthDateString);
 
         showAlert("Registration Successful", "User Registered Successfully!");
-        sceneSwitcher.switchScene("fxml/LogIn.fxml", event);
+        sceneSwitcher.switchScene("fxml/LogIn.fxml", event, bdManager);
     }
 
 
@@ -92,7 +104,7 @@ public class RegisterController {
         genderComboBox.setValue(null);
 
         // Switch back to login scene if desired
-        sceneSwitcher.switchScene("fxml/LogIn.fxml", event);
+        sceneSwitcher.switchScene("fxml/LogIn.fxml", event, bdManager);
     }
 
     private void showAlert(String title, String message) {

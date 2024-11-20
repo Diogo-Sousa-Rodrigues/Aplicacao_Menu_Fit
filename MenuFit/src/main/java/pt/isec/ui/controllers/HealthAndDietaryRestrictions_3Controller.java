@@ -7,6 +7,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.BDManager;
 
 
 public class HealthAndDietaryRestrictions_3Controller implements UserInitializable {
@@ -204,7 +205,7 @@ public class HealthAndDietaryRestrictions_3Controller implements UserInitializab
     }
 
     @Override
-    public void initializeUser(User user) {
+    public void initializeUser(User user, BDManager bdManager) {
         this.user = user;
     }
 }

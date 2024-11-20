@@ -21,7 +21,7 @@
 
     <Pane layoutX="173.0" layoutY="225.0" prefHeight="133.0" prefWidth="447.0">
         <children>
-            <Label fx:id="caloriesConsumedLabel" layoutX="50.0" layoutY="20.0" text="500/2000">
+            <Label fx:id="caloriesConsumedLabel" layoutX="50.0" layoutY="20.0" text="----/----">
                 <font>
                     <Font size="30.0" />
                 </font>
@@ -31,7 +31,7 @@
                     <Font name="System Bold" size="18.0" />
                 </font></Label>
 
-            <Label fx:id="caloriesRemainingLabel" layoutX="249.0" layoutY="20.0" text="1500/2000">
+            <Label fx:id="caloriesRemainingLabel" layoutX="249.0" layoutY="20.0" text="----/----">
                 <font>
                     <Font size="30.0" />
                 </font>

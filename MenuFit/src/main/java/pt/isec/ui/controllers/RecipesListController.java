@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.BDManager;
 
 
 public class RecipesListController implements UserInitializable {
@@ -53,7 +54,7 @@ public class RecipesListController implements UserInitializable {
     }
 
     @Override
-    public void initializeUser(User user) {
+    public void initializeUser(User user, BDManager bdManager) {
         this.user = user;
         loadFavoriteRecipes();
         loadRecentRecipes();

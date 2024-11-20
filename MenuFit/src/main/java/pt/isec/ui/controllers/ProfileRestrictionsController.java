@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.BDManager;
 
 public class ProfileRestrictionsController implements UserInitializable {
 
@@ -64,11 +65,11 @@ public class ProfileRestrictionsController implements UserInitializable {
 
     @FXML
     public void logOutHandler(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/Login.fxml", event, null);
+        sceneSwitcher.switchScene("fxml/Login.fxml", event, null, null);
     }
 
     @Override
-    public void initializeUser(User user) {
+    public void initializeUser(User user, BDManager bdManager) {
         this.user = user;
         loadDietaryRestrictions();
         loadDietType();

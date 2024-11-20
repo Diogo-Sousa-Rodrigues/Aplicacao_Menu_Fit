@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.BDManager;
 
 import java.io.IOException;
 
@@ -23,9 +24,14 @@ public class SceneSwitcher {
      * @param fxmlFile The path to the FXML file for the new scene.
      * @param event The ActionEvent triggering the scene switch, used to obtain the current stage.
      */
-    public void switchScene(String fxmlFile, ActionEvent event) {
+    public void switchScene(String fxmlFile, ActionEvent event, BDManager bdManager) {
         try {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource(fxmlFile));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Register.fxml"));
+            Parent root = loader.load();
+
+            // Obter o controlador e inicializar com argumentos
+            RegisterController controller = loader.getController();
+            controller.setBDManager(bdManager);
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -44,14 +50,32 @@ public class SceneSwitcher {
      * @param user The user data to pass to the controller, if it implements {@link UserInitializable}.
      * @throws IOException if an error occurs while loading the FXML file.
      */
-    public void switchScene(String fxmlFile, ActionEvent event, User user) {
+    public void switchScene(String fxmlFile, ActionEvent event, User user, BDManager bdManager) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlFile));
             Parent root = loader.load();
 
             Object controller = loader.getController();
             if (controller instanceof UserInitializable) {
-                ((UserInitializable) controller).initializeUser(user);
+                ((UserInitializable) controller).initializeUser(user, bdManager);
+            }
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void switchScene(String fxmlFile, ActionEvent event, User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlFile));
+            Parent root = loader.load();
+
+            BDManager bdManager = new BDManager();
+            Object controller = loader.getController();
+            if (controller instanceof UserInitializable) {
+                ((UserInitializable) controller).initializeUser(user, bdManager);
             }
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);

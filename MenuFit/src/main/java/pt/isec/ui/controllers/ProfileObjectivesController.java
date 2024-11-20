@@ -8,6 +8,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.BDManager;
 
 public class ProfileObjectivesController implements UserInitializable {
 
@@ -35,7 +36,7 @@ public class ProfileObjectivesController implements UserInitializable {
     }
 
     @Override
-    public void initializeUser(User user) {
+    public void initializeUser(User user, BDManager bdManager) {
         this.user = user;
         //loadObjectives();
     }
@@ -65,7 +66,7 @@ public class ProfileObjectivesController implements UserInitializable {
 
     @FXML
     public void handleLogOutButton(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/Login.fxml", event, null);
+        sceneSwitcher.switchScene("fxml/Login.fxml", event, null, null);
     }
 
     @FXML

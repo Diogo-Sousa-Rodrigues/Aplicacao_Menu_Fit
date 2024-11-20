@@ -8,6 +8,7 @@ import javafx.scene.control.ListView;
 import pt.isec.model.meals.*;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.BDManager;
 import pt.isec.persistence.EphemeralStore;
 
 import java.time.Duration;
@@ -40,7 +41,7 @@ public class RecipeController implements UserInitializable {
     }
 
     @Override
-    public void initializeUser(User user) {
+    public void initializeUser(User user, BDManager bdManager) {
         this.user = user;
 
         initialize();

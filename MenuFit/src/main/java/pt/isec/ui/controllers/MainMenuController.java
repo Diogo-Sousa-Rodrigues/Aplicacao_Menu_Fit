@@ -15,6 +15,7 @@ import pt.isec.model.users.User;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.BDManager;
 import pt.isec.persistence.EphemeralStore;
 
 import java.util.*;
@@ -131,7 +132,7 @@ public class MainMenuController implements UserInitializable {
     }
 
     @Override
-    public void initializeUser(User user) {
+    public void initializeUser(User user, BDManager bdManager) {
         this.user = user;
         initializeNextMealPreview();
         initializeDailyMealsPreview();

@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import pt.isec.model.users.HealthData;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.BDManager;
 
 public class ProfileBasicInformationController implements UserInitializable {
 
@@ -89,7 +90,7 @@ public class ProfileBasicInformationController implements UserInitializable {
     }
 
     @Override
-    public void initializeUser(User user) {
+    public void initializeUser(User user, BDManager bdManager) {
         this.user = user;
         updateUserInfo();
     }
@@ -121,7 +122,7 @@ public class ProfileBasicInformationController implements UserInitializable {
 
     @FXML
     public void handleLogOutButton(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/Login.fxml", event, null);
+        sceneSwitcher.switchScene("fxml/Login.fxml", event, null, null);
     }
 
     @FXML
