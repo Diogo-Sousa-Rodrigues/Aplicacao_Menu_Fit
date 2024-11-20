@@ -361,13 +361,59 @@ Mitigation actions:
 ### Release 2
 
 - Goal: MVP - We define our MVP as an app that will offer this possibilities and functionalities to the user:
-  - Manage weekly meal plan
-  - Time and Budget considerations
-  - Recipe management
+  - Recipe management (favorite/delete)
   - Data persistence accross instances (database)
+  - Remember me
+  - AI Prompts
   - Nutricionist (to be discussed)
   - (...)  
 
 - Dates: 12/Nov
 - Team capacity: 4 * 4 * 5 = 80 hours
 - Release: V1.0
+
+***
+
+## Increments
+
+### Sprint 3
+##### Sprint Plan
+
+- Goal: <!-- Create the base architecture of the app and basic interface. -->
+  - AI Prompts
+  - DataBase creation and connection
+  - Remember me
+
+- Dates: from 11/Nov to 26/Nov, 2 weeks
+
+- Roles:
+  - Product Owner: Bárbara Trindade
+  - Scrum Master: Diogo Rodrigues
+  - QA: Juliano Babaroca
+
+- To do:
+  - US12: 
+    - Task1: Manage Data
+
+  - US10:
+    - Task1: Recipe data
+    - Task2: Manage recipes
+
+  - US14:
+    - Task1: Database CRUD
+    - Task2: Database connection
+    - Task3: Create database tables
+    - Spike: see database options
+
+  - US15:
+    - Task1: Remember me (Login controller) changes
+    - Task2: Remember me UI changes
+    - Task3: Remember me logic
+  
+  - US16:
+    - Task1: Substitute recipe prompt
+    - Task2: Meal plan prompt
+    - Task3: API implementation
+    - Spike: AI API
+  
+- Story Points: 1S, 3M, 1L
