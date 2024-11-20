@@ -15,6 +15,10 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * @deprecated Use {@link GroqLLM} instead.
+ */
+@Deprecated
 public class GeminiLLM implements CommonLLM {
     private static GeminiLLM instance = null;
 

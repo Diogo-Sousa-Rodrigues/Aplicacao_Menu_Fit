@@ -33,33 +33,37 @@ public class PromptBuilder {
 
     private static final String ingredientJSONTemplate =
             "{" +
-                    "name:string," +
-                    "description:string," +
-                    "quantity:int," +
-                    "units:string," +
-                    "calories:int," +
-                    "macros: {" +
+                "name:string," +
+                "description:string," +
+                "quantity:float," +
+                "units:string," +
+                "calories:int," +
+                "macros: {" +
                     "proteins:float," +
                     "carbs:float," +
                     "fats:float" +
-                    "}," +
-                    "allergens:[string]" +
-                    "}";
+                "}," +
+                "allergens:[string]" +
+            "}";
 
     private static final String recipeJSONTemplate =
             "{" +
-                    "name:string," +
-                    "description:string," +
-                    "servings:int," +
-                    "prep:int," +
-                    "macros: {" +
-                    "reminders:[string]" +
-                    "ingredients:[" + ingredientJSONTemplate + "]" +
-                    "}";
+                "name:string," +
+                "description:string," +
+                "servings:int," +
+                "calories:int," +
+                "prep:int (time in minutes)," +
+                "reminders:[{ data: string }]" +
+                "ingredients:[" + ingredientJSONTemplate + "]" +
+            "}";
 
     private static final String[] replyRequirements = {
             "Reply with the JSON only.",
             "Do not reply in MD format (markdown).",
-            "Reply using plain text only."
+            "Reply using plain text only.",
+            "Do not use measurements like '1/2' or '3/4'. Always spell ou the value like '0.5' or '0.25'.",
+            "Make sure the JSON is in the correct format. Keys must be wrapped in \"'s.",
+            "Do not forget to match every closing bracket in the JSON. {}'s and []'s.",
+            "The JSON must be in {}'s. Do not forget the ending }.",
     };
 }
