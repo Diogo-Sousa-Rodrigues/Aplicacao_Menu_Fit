@@ -8,7 +8,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public class InstanceBuilder implements JsonDeserializer {
+public class InstanceBuilder implements SimpleJsonDeserializer {
     public <T> Optional<T> getInstance(String prompt, CommonLLM llm,
                                               Class<T> type, int attempts)
             throws RuntimeException {
