@@ -11,6 +11,10 @@ import pt.isec.model.users.HealthData;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class ProfileBasicInformationController implements UserInitializable {
 
     @FXML
@@ -79,6 +83,8 @@ public class ProfileBasicInformationController implements UserInitializable {
     private User user;
     private SceneSwitcher sceneSwitcher;
 
+    private static final String REMEMBER_ME_FILE = System.getProperty("user.home") + "/remember_me.txt";
+
     public ProfileBasicInformationController() {
         this.sceneSwitcher = new SceneSwitcher();
     }
@@ -121,7 +127,19 @@ public class ProfileBasicInformationController implements UserInitializable {
 
     @FXML
     public void handleLogOutButton(ActionEvent event) {
+        deleteRememberMeFile();
         sceneSwitcher.switchScene("fxml/Login.fxml", event, null);
+    }
+
+    // Método para apagar o ficheiro caso o utilizador dê Logout
+    private void deleteRememberMeFile() {
+        try {
+            FileWriter fileWriter = new FileWriter(REMEMBER_ME_FILE);
+            fileWriter.write("");
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
