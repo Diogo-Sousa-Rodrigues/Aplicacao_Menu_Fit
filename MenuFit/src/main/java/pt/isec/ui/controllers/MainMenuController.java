@@ -31,6 +31,7 @@ public class MainMenuController implements UserInitializable {
     public Label nextMealPrepTimeLabel;
     public Button nextMealDoneButton;
     public VBox vboxReminders;
+    public Label greetingLabel;
 
     @FXML
     private Label breakfastRecipeLabel;
@@ -53,10 +54,28 @@ public class MainMenuController implements UserInitializable {
     private IntegerProperty caloriesRemaining = new SimpleIntegerProperty(2000); // valor inicial
 
     private User user;
+    private MealPlan mealPlan;
     SceneSwitcher sceneSwitcher;
+    BDManager bdManager;
 
     public MainMenuController(){
         this.sceneSwitcher = new SceneSwitcher();
+    }
+
+    @Override
+    public void initializeUser(User user, BDManager bdManager) {
+        this.user = user;
+        this.bdManager = bdManager;
+        mealPlan = bdManager.getMealPlan(user.getIdUser());
+        System.out.println(mealPlan.getGoal());
+        initializeNextMealPreview();
+        initializeDailyMealsPreview();
+        initializeDailyReminders();
+        greetingLabel.setText("Bem vindo/a, " + user.getFirstName());
+        if (user.getHealthData()!=null) {
+            caloriesConsumedLabel.textProperty().bind(caloriesConsumed.asString().concat("/" + user.getHealthData().getDailyCalorieCount()));
+            caloriesRemainingLabel.textProperty().bind(caloriesRemaining.asString().concat("/" + user.getHealthData().getDailyCalorieCount()));
+        }
     }
 
     @FXML
@@ -128,18 +147,6 @@ public class MainMenuController implements UserInitializable {
                 user.setCurrentMeal(null);
                 initializeDailyReminders();
             }
-        }
-    }
-
-    @Override
-    public void initializeUser(User user, BDManager bdManager) {
-        this.user = user;
-        initializeNextMealPreview();
-        initializeDailyMealsPreview();
-        initializeDailyReminders();
-        if (user.getHealthData()!=null) {
-            caloriesConsumedLabel.textProperty().bind(caloriesConsumed.asString().concat("/" + user.getHealthData().getDailyCalorieCount()));
-            caloriesRemainingLabel.textProperty().bind(caloriesRemaining.asString().concat("/" + user.getHealthData().getDailyCalorieCount()));
         }
     }
 

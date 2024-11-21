@@ -104,7 +104,7 @@ public class MealPlanController implements UserInitializable {
         newRecipeButton.setLayoutX(100);
         newRecipeButton.setLayoutY(5);
         newRecipeButton.setFont(new Font(9));
-        newRecipeButton.setOnAction(event -> handleNewRecipeBtn(meal, event));
+        //newRecipeButton.setOnAction(event -> handleNewRecipeBtn(meal, event));
 
         CheckBox selectCheckBox = new CheckBox();
         selectCheckBox.setLayoutX(170);
@@ -155,70 +155,70 @@ public class MealPlanController implements UserInitializable {
         }
     }
 
-    private void handleNewRecipeBtn(Meal meal, ActionEvent event) {
-        // Gera a nova Meal
-        //Meal newMeal = generateNewMealPrompt();
-        Recipe dinnerRecipe = new Recipe(
-                "Frango com Legumes",
-                "1. Tempere o frango com sal e pimenta.\n2. Grelhe o frango até dourar.\n3. Cozinhe os brócolis no vapor.\n4. Sirva o frango acompanhado dos brócolis.",
-                1,
-                400,
-                Duration.ofMinutes(20),
-                List.of(new Reminder("Grelhe o frango."), new Reminder("Cozinhe os legumes no vapor.")),
-                List.of(
-                        new Ingredient("Frango", "Peito de frango grelhado", 150, "g", 200, new Macros(30, 0, 5), List.of()),
-                        new Ingredient("Brócolis", "Brócolis no vapor", 100, "g", 40, new Macros(4, 7, 0), List.of())
-                )
-        );
-        // Obtém o MealPlan e a lista de Meals associada ao usuário
-        EphemeralStore store = EphemeralStore.getInstance();
-        MealPlan mealPlan = store.getMealPlan(user).orElse(null);
-
-        if (mealPlan != null) {
-            List<Meal> meals = mealPlan.getMeals();
-
-            // Encontra o índice da Meal original e substitui pela nova
-            int mealIndex = meals.indexOf(meal);
-//            if (mealIndex != -1) {
-//                meals.set(mealIndex, newMeal);
+//    private void handleNewRecipeBtn(Meal meal, ActionEvent event) {
+//        // Gera a nova Meal
+//        //Meal newMeal = generateNewMealPrompt();
+//        Recipe dinnerRecipe = new Recipe(
+//                "Frango com Legumes",
+//                "1. Tempere o frango com sal e pimenta.\n2. Grelhe o frango até dourar.\n3. Cozinhe os brócolis no vapor.\n4. Sirva o frango acompanhado dos brócolis.",
+//                1,
+//                400,
+//                Duration.ofMinutes(20),
+//                List.of(new Reminder("Grelhe o frango."), new Reminder("Cozinhe os legumes no vapor.")),
+//                List.of(
+//                        new Ingredient("Frango", "Peito de frango grelhado", 150, "g", 200, new Macros(30, 0, 5), List.of()),
+//                        new Ingredient("Brócolis", "Brócolis no vapor", 100, "g", 40, new Macros(4, 7, 0), List.of())
+//                )
+//        );
+//        // Obtém o MealPlan e a lista de Meals associada ao usuário
+//        EphemeralStore store = EphemeralStore.getInstance();
+//        MealPlan mealPlan = store.getMealPlan(user).orElse(null);
+//
+//        if (mealPlan != null) {
+//            List<Meal> meals = mealPlan.getMeals();
+//
+//            // Encontra o índice da Meal original e substitui pela nova
+//            int mealIndex = meals.indexOf(meal);
+////            if (mealIndex != -1) {
+////                meals.set(mealIndex, newMeal);
+////            }
+//            for(Meal meal1: meals){
+//                if(meal1.getMealIndex() == mealIndex){
+//                    meal1.setRecipe(dinnerRecipe);
+//                }
 //            }
-            for(Meal meal1: meals){
-                if(meal1.getMealIndex() == mealIndex){
-                    meal1.setRecipe(dinnerRecipe);
-                }
-            }
-
-            mealPlan.putMeals(meals);
-
-            // Opcional: Atualiza a visualização da Meal substituída, se necessário
-            sceneSwitcher.switchScene("fxml/MealPlan.fxml", event, user);
-        }
-    }
+//
+//            mealPlan.putMeals(meals);
+//
+//            // Opcional: Atualiza a visualização da Meal substituída, se necessário
+//            sceneSwitcher.switchScene("fxml/MealPlan.fxml", event, user);
+//        }
+//    }
 
 
-    private Meal generateNewMealPrompt() {
-        // Lógica para gerar uma nova Meal (substitua com a implementação necessária)
-        //return new Meal();
-
-
-        //temporary solution
-        Recipe dinnerRecipe = new Recipe(
-                "Frango com Legumes",
-                "1. Tempere o frango com sal e pimenta.\n2. Grelhe o frango até dourar.\n3. Cozinhe os brócolis no vapor.\n4. Sirva o frango acompanhado dos brócolis.",
-                1,
-                400,
-                Duration.ofMinutes(20),
-                List.of(new Reminder("Grelhe o frango."), new Reminder("Cozinhe os legumes no vapor.")),
-                List.of(
-                        new Ingredient("Frango", "Peito de frango grelhado", 150, "g", 200, new Macros(30, 0, 5), List.of()),
-                        new Ingredient("Brócolis", "Brócolis no vapor", 100, "g", 40, new Macros(4, 7, 0), List.of())
-                )
-        );
-        Meal dinner = new Meal(dinnerRecipe);
-        dinner.setType(MealType.Dinner);
-
-
-        return dinner;
-    }
+//    private Meal generateNewMealPrompt() {
+//        // Lógica para gerar uma nova Meal (substitua com a implementação necessária)
+//        //return new Meal();
+//
+//
+//        //temporary solution
+//        Recipe dinnerRecipe = new Recipe(
+//                "Frango com Legumes",
+//                "1. Tempere o frango com sal e pimenta.\n2. Grelhe o frango até dourar.\n3. Cozinhe os brócolis no vapor.\n4. Sirva o frango acompanhado dos brócolis.",
+//                1,
+//                400,
+//                Duration.ofMinutes(20),
+//                List.of(new Reminder("Grelhe o frango."), new Reminder("Cozinhe os legumes no vapor.")),
+//                List.of(
+//                        new Ingredient("Frango", "Peito de frango grelhado", 150, "g", 200, new Macros(30, 0, 5), List.of()),
+//                        new Ingredient("Brócolis", "Brócolis no vapor", 100, "g", 40, new Macros(4, 7, 0), List.of())
+//                )
+//        );
+//        Meal dinner = new Meal(dinnerRecipe);
+//        dinner.setType(MealType.Dinner);
+//
+//
+//        return dinner;
+//    }
 
 }

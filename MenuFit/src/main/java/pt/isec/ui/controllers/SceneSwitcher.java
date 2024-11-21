@@ -26,14 +26,19 @@ public class SceneSwitcher {
      */
     public void switchScene(String fxmlFile, ActionEvent event, BDManager bdManager) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Register.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlFile));
             Parent root = loader.load();
 
             // Obter o controlador e inicializar com argumentos
-            RegisterController controller = loader.getController();
-            controller.setBDManager(bdManager);
-            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            Object controller = loader.getController();
+            if (controller instanceof RegisterController) { // Substitua por outros controladores conforme necessário
+                ((RegisterController) controller).setBDManager(bdManager);
+            } else if (controller instanceof LogInController) {
+                ((LogInController) controller).setBDManager(bdManager);
+            }
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

@@ -123,4 +123,9 @@
     </ImageView>
    <Button fx:id="seeMealPlanBtn" layoutX="56.0" layoutY="798.0" mnemonicParsing="false" onAction="#handleSeeMealPlanBtnAction" prefHeight="36.0" prefWidth="331.0" text="See Meal Plan" textAlignment="CENTER" />
    <Button fx:id="myRecipesBtn" layoutX="809.0" layoutY="90.0" mnemonicParsing="false" onAction="#handleMyRecipesBtnAction" prefHeight="26.0" prefWidth="234.0" text="My Recipes" />
+   <Label fx:id="greetingLabel" layoutX="335.0" layoutY="61.0" text="greeting">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
 </AnchorPane>

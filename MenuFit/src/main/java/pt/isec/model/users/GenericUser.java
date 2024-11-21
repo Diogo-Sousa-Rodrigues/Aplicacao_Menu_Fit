@@ -5,13 +5,24 @@ import pt.isec.model.meals.Meal;
 import java.util.Date;
 
 public abstract class GenericUser implements User {
-    public GenericUser(String firstName, String lastName, String email,
+    public GenericUser(Integer idUser, String firstName, String lastName, String email,
                        Date birthdate, Gender gender) {
+        this.idUser = idUser;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.birthdate = birthdate;
         this.gender = gender;
+    }
+
+    @Override
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
+    }
+
+    @Override
+    public Integer getIdUser() {
+        return idUser;
     }
 
     @Override
@@ -112,6 +123,7 @@ public abstract class GenericUser implements User {
     }
 
     private String firstName, lastName, email;
+    private Integer idUser;
 
     private Date birthdate;
 

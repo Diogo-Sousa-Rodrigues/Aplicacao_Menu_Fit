@@ -5,6 +5,9 @@ import pt.isec.model.meals.Meal;
 import java.util.Date;
 
 public interface User {
+    Integer getIdUser();
+
+    void setIdUser(Integer id);
     /**
      * Gets the User's first name.
      *

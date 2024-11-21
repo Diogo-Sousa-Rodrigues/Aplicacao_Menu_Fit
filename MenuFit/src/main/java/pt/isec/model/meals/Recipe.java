@@ -25,8 +25,10 @@ import java.util.List;
 //          }
 //      ]
 // }
-public record Recipe(String name, String description, int servings, int calories, Duration prep,
+public record Recipe(Integer recipeID, String name, String description, int servings, int calories, Duration prep,
                      List<Reminder> reminders, List<Ingredient> ingredients) {
+
+
     @Override
     public String toString() {
         return String.join("\n",
