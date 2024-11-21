@@ -39,4 +39,14 @@ public record Recipe(String name, String description, int servings, int calories
                 "Ingredients: " + ingredients
             );
     }
+
+    public int getCalories() {
+        int sum = 0;
+
+        for (var ingredient : ingredients) {
+            sum += ingredient.calories();
+        }
+
+        return sum;
+    }
 }
