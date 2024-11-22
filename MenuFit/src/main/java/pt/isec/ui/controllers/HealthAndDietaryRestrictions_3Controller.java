@@ -5,13 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
 
 
 public class HealthAndDietaryRestrictions_3Controller implements UserInitializable {
-    private User user;
+    private BasicUser user;
     private SceneSwitcher sceneSwitcher;
 
     @FXML
@@ -205,7 +206,7 @@ public class HealthAndDietaryRestrictions_3Controller implements UserInitializab
     }
 
     @Override
-    public void initializeUser(User user, BDManager bdManager) {
+    public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
     }
 }

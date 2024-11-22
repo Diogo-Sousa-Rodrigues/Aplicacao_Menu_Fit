@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
@@ -55,7 +56,7 @@ public class SceneSwitcher {
      * @param user The user data to pass to the controller, if it implements {@link UserInitializable}.
      * @throws IOException if an error occurs while loading the FXML file.
      */
-    public void switchScene(String fxmlFile, ActionEvent event, User user, BDManager bdManager) {
+    public void switchScene(String fxmlFile, ActionEvent event, BasicUser user, BDManager bdManager) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlFile));
             Parent root = loader.load();
@@ -72,7 +73,7 @@ public class SceneSwitcher {
             e.printStackTrace();
         }
     }
-    public void switchScene(String fxmlFile, ActionEvent event, User user) {
+    public void switchScene(String fxmlFile, ActionEvent event, BasicUser user) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlFile));
             Parent root = loader.load();

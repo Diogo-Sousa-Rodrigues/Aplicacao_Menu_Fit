@@ -36,10 +36,8 @@ public class MealPlan {
     }
 
     public boolean putMeal(Meal meal) {
-        if(this.meals != null){
-            if (!this.meals.contains(meal)) {
-                return this.meals.add(meal);
-            }
+        if (!this.meals.contains(meal)) {
+            return this.meals.add(meal);
         }
         return false;
     }
@@ -94,7 +92,7 @@ public class MealPlan {
         return mealPlanID;
     }
 
-    private List<Meal> meals;
+    private List<Meal> meals = new ArrayList<>();
 
     private String goal;
 

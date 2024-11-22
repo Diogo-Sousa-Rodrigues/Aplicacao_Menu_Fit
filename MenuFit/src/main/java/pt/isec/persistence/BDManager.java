@@ -3,19 +3,15 @@ package pt.isec.persistence;
 import pt.isec.model.meals.*;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.Gender;
-import pt.isec.model.users.User;
 
 import java.io.Serializable;
 import java.sql.*;
 import java.sql.Date;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class BDManager implements Serializable {
     private String dbURL;
-    private String dbName;
 
     private Connection dbConn;
 
@@ -136,13 +132,14 @@ public class BDManager implements Serializable {
     private boolean saveMeals(Optional<MealPlan> mealPlan, Integer mealPlanID) {
         boolean success = true;
         for(Meal meal : mealPlan.get().getMeals()){
-           String sql = "INSERT INTO MEAL (MealPlanID, Type, Date) VALUES (?, ?, ?)";
+           String sql = "INSERT INTO MEAL (MealPlanID, Type, Date, 'Check') VALUES (?, ?, ?, ?)";
 
             try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
                 // Configurar os parâmetros do PreparedStatement
                 pstmt.setInt(1, mealPlanID);
                 pstmt.setString(2, meal.getType().toString());
                 pstmt.setString(3, meal.getDate().toString());
+                pstmt.setInt(4, 0);
 
                 // Executar a inserção
                 int rowsAffected = pstmt.executeUpdate();
@@ -173,11 +170,11 @@ public class BDManager implements Serializable {
         try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
             // Configurar os parâmetros do PreparedStatement
             pstmt.setInt(1, mealID);
-            pstmt.setString(2, recipe.name());
-            pstmt.setString(3, recipe.description());
-            pstmt.setInt(4, recipe.servings());
-            pstmt.setInt(5, recipe.calories());
-            pstmt.setString(6, recipe.prep().toString());
+            pstmt.setString(2, recipe.getName());
+            pstmt.setString(3, recipe.getDescription());
+            pstmt.setInt(4, recipe.getServings());
+            pstmt.setInt(5, recipe.getCalories());
+            pstmt.setString(6, recipe.getPrep().toString());
 
             // Executar a inserção
             int rowsAffected = pstmt.executeUpdate();
@@ -200,7 +197,7 @@ public class BDManager implements Serializable {
 
     private boolean saveReminders(Recipe recipe, Integer recipeID) {
         boolean success = true;
-        for(Reminder reminder : recipe.reminders()){
+        for(Reminder reminder : recipe.getReminders()){
             String sql = "INSERT INTO REMINDERS (RecipeID, 'Check', Text) VALUES (?, ?, ?)";
 
             try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
@@ -224,7 +221,7 @@ public class BDManager implements Serializable {
 
     private boolean saveIngredients(Recipe recipe, Integer recipeID) {
         boolean success = true;
-        for(Ingredient ingredient : recipe.ingredients()){
+        for(Ingredient ingredient : recipe.getIngredients()){
             String sql = "INSERT INTO INGREDIENTS (RecipeID, Name, Description, Quantity, Units, Calories, Allergens, Proteins, Carbs, Fats) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
@@ -294,8 +291,9 @@ public class BDManager implements Serializable {
                     Integer mealID = rs.getInt("MealID");
                     String type = rs.getString("Type");
                     String date = rs.getString("Date");
+                    Boolean check = rs.getInt("Check") != 0;
 
-                    Meal meal = new Meal(mealID, type, date);
+                    Meal meal = new Meal(mealID, type, date, check);
 
                     // Carregar a receita associada à refeição
                     loadRecipeForMeal(meal);
@@ -326,19 +324,17 @@ public class BDManager implements Serializable {
 
                     Duration durationPrep = Duration.parse(prepTime);
 
-
-
                     // Carregar os ingredientes da receita
                     List<Ingredient> ingredients =  loadIngredientsForRecipe(recipeID);
 
                     // Carregar os lembretes da receita
                     List<Reminder> reminders = loadRemindersForRecipe(recipeID);
 
-                    Recipe recipe = new Recipe(recipeID, name, description, servings, calories, durationPrep, reminders, ingredients);
-
+                    Recipe recipe = new Recipe(name, description, servings, durationPrep, reminders, ingredients);
+                    recipe.setRecipeID(recipeID);
+                    recipe.setCalories(calories);
                     // Associar a receita à refeição
                     meal.setRecipe(recipe);
-
                 }
             }
         } catch (SQLException e) {
@@ -369,7 +365,7 @@ public class BDManager implements Serializable {
 
                     Macros macros = new Macros(proteins, carbs, fats);
 
-                    Ingredient ingredient = new Ingredient(ingredientID, name, description, quantity, units, calories, macros, Collections.singletonList(allergens));
+                    Ingredient ingredient = new Ingredient(name, description, quantity, units, calories, macros, Collections.singletonList(allergens));
 
                     // Adicionar ingrediente à receita
                     ingredients.add(ingredient);
@@ -407,4 +403,117 @@ public class BDManager implements Serializable {
         return reminders;
     }
 
+    public boolean checkMeal(Meal meal) {
+        Integer mealID = meal.getMealID();
+        String query = "UPDATE MEAL SET 'Check' = ? WHERE MealID = ?";
+
+        try (PreparedStatement pstmt = dbConn.prepareStatement(query)) {
+            pstmt.setInt(1, 1);
+            pstmt.setInt(2, mealID);
+
+            int affectedRows = pstmt.executeUpdate();
+            if(affectedRows > 0)
+                return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return false;
+    }
+
+    public boolean checkReminder(Reminder reminder) {
+        Integer remniderID = reminder.getReminderID();
+        String query = "UPDATE REMINDERS SET 'Check' = ? WHERE ReminderID = ?";
+
+        try (PreparedStatement pstmt = dbConn.prepareStatement(query)) {
+            pstmt.setInt(1, 1);
+            pstmt.setInt(2, remniderID);
+
+            int affectedRows = pstmt.executeUpdate();
+            if(affectedRows > 0)
+                return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return false;
+    }
+
+    public boolean updateMealRecipe(Meal meal, Optional<Recipe> newRecipe) {
+        Integer recipeID = meal.getRecipe().getRecipeID();
+        String query = "UPDATE RECIPE SET (Name, Description, Servings, Calories, Prep_Time) = (?, ?, ?, ?, ?) WHERE RecipeID = ?";
+
+        if(newRecipe.isPresent()) {
+            try (PreparedStatement pstmt = dbConn.prepareStatement(query)) {
+                pstmt.setString(1, newRecipe.get().getName());
+                pstmt.setString(2, newRecipe.get().getDescription());
+                pstmt.setInt(3, newRecipe.get().getServings());
+                pstmt.setInt(4, newRecipe.get().getCalories());
+                pstmt.setString(5, newRecipe.get().getPrep().toString());
+                pstmt.setInt(6, recipeID);
+
+                int affectedRows = pstmt.executeUpdate();
+                if(affectedRows > 0){
+                    return(updateIngredients(newRecipe.get(), meal.getRecipe()) && updateReminders(newRecipe.get(), meal.getRecipe()));
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+        }
+        return false;
+    }
+
+    private boolean updateReminders(Recipe newRecipe, Recipe mealRecipe) {
+        String sql = "INSERT INTO REMINDERS (RecipeID, 'Check', Text) VALUES (?, ?, ?)";
+
+        //se for necessário chamar aqui uma função apra apagar os reminders da receita antiga
+
+        for(Reminder reminder : newRecipe.getReminders()){
+            try (PreparedStatement pstmt = dbConn.prepareStatement(sql)) {
+                pstmt.setInt(1, mealRecipe.getRecipeID());
+                pstmt.setInt(2, 0);
+                pstmt.setString(3, reminder.getData());
+
+                int affectedRows = pstmt.executeUpdate();
+                if(affectedRows > 0){
+                    return true;
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+        }
+        return false;
+    }
+
+    private boolean updateIngredients(Recipe newRecipe, Recipe mealRecipe) {
+        String sql = "INSERT INTO INGREDIENTS (RecipeID, Name, Description, Quantity, Units, Calories, Allergens, Proteins, Carbs, Fats) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        //se for necessário chamar aqui uma função apra apagar os ingredients da receita antiga
+
+        for(Ingredient ingredient : newRecipe.getIngredients()){
+            try (PreparedStatement pstmt = dbConn.prepareStatement(sql)) {
+                pstmt.setInt(1, mealRecipe.getRecipeID());
+                pstmt.setString(2, ingredient.name());
+                pstmt.setString(3, ingredient.description());
+                pstmt.setFloat(4, ingredient.quantity());
+                pstmt.setString(5, ingredient.units());
+                pstmt.setInt(6, ingredient.calories());
+                pstmt.setString(7, String.valueOf(ingredient.allergens()));
+                pstmt.setFloat(8, ingredient.macros().proteins());
+                pstmt.setFloat(9, ingredient.macros().carbs());
+                pstmt.setFloat(10, ingredient.macros().fats());
+
+                int affectedRows = pstmt.executeUpdate();
+                if(affectedRows > 0){
+                    return true;
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+        }
+        return false;
+    }
 }

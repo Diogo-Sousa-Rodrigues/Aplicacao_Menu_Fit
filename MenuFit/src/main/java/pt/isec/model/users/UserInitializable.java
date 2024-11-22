@@ -16,5 +16,5 @@ public interface UserInitializable {
      * @param user The {@link User} object containing user-specific information
      *             to initialize the controller.
      */
-    void initializeUser(User user, BDManager bdManager);
+    void initializeUser(BasicUser user, BDManager bdManager);
 }

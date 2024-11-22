@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
@@ -23,7 +24,7 @@ public class ProfileObjectivesController implements UserInitializable {
     @FXML
     private Button basicInformationButton;
 
-    private User user;
+    private BasicUser user;
     private SceneSwitcher sceneSwitcher;
 
     public ProfileObjectivesController() {
@@ -36,7 +37,7 @@ public class ProfileObjectivesController implements UserInitializable {
     }
 
     @Override
-    public void initializeUser(User user, BDManager bdManager) {
+    public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
         //loadObjectives();
     }

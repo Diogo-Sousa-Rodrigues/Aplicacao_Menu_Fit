@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
@@ -15,7 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TimeAndBudgetController implements Initializable, UserInitializable {
-    private User user;
+    private BasicUser user;
     SceneSwitcher sceneSwitcher;
     Integer budget, time;
     @FXML
@@ -64,7 +65,7 @@ public class TimeAndBudgetController implements Initializable, UserInitializable
     }
 
     @Override
-    public void initializeUser(User user, BDManager bdManager) {
+    public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
     }
 }

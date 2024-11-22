@@ -21,6 +21,13 @@ public class Meal {
         this.date = LocalDateTime.parse(date);
     }
 
+    public Meal(Integer mealID, String type, String date, Boolean check) {
+        this.mealID = mealID;
+        this.type = MealType.valueOf(type);
+        this.date = LocalDateTime.parse(date);
+        this.check = check;
+    }
+
     /**
      * Gets the Meal's recipe.
      *
@@ -94,6 +101,14 @@ public class Meal {
         this.mealIndex = mealIndex;
     }
 
+    public boolean getCheck() {
+        return this.check;
+    }
+
+    public void setCheck(Boolean check) {
+        this.check = check;
+    }
+
     @Override
     public String toString() {
         return String.join("\n",
@@ -110,6 +125,9 @@ public class Meal {
 
     private Integer mealID;
 
+    private Boolean check;
+
     // TODO: To be removed
     private int mealIndex;
+
 }

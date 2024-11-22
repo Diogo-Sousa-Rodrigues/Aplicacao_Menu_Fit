@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.HealthData;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
@@ -77,7 +78,7 @@ public class ProfileBasicInformationController implements UserInitializable {
     @FXML
     private Button editBasicInformationButton;
 
-    private User user;
+    private BasicUser user;
     private SceneSwitcher sceneSwitcher;
 
     public ProfileBasicInformationController() {
@@ -90,7 +91,7 @@ public class ProfileBasicInformationController implements UserInitializable {
     }
 
     @Override
-    public void initializeUser(User user, BDManager bdManager) {
+    public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
         updateUserInfo();
     }

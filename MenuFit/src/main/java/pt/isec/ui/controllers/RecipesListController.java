@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
@@ -15,7 +16,7 @@ import pt.isec.persistence.BDManager;
 
 public class RecipesListController implements UserInitializable {
     public Button viewRecipeBtn;
-    private User user;
+    private BasicUser user;
     private SceneSwitcher sceneSwitcher;
 
     @FXML private ImageView logoImageView;
@@ -54,7 +55,7 @@ public class RecipesListController implements UserInitializable {
     }
 
     @Override
-    public void initializeUser(User user, BDManager bdManager) {
+    public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
         loadFavoriteRecipes();
         loadRecentRecipes();

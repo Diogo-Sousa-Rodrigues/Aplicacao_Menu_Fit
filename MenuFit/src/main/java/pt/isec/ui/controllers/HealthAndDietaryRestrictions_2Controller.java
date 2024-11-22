@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
@@ -12,7 +13,7 @@ import pt.isec.persistence.BDManager;
 public class HealthAndDietaryRestrictions_2Controller implements UserInitializable {
 
     private SceneSwitcher sceneSwitcher;
-    private User user;
+    private BasicUser user;
 
     @FXML
     private RadioButton allergiesOrIntolerancesYesRadioButton;
@@ -223,7 +224,7 @@ public class HealthAndDietaryRestrictions_2Controller implements UserInitializab
     }
 
     @Override
-    public void initializeUser(User user, BDManager bdManager) {
+    public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
     }
 }

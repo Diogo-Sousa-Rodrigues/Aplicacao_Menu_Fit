@@ -25,9 +25,48 @@ import java.util.List;
 //          }
 //      ]
 // }
-public record Recipe(Integer recipeID, String name, String description, int servings, int calories, Duration prep,
-                     List<Reminder> reminders, List<Ingredient> ingredients) {
+public class Recipe {
+    private final String name;
+    private final String description;
+    private final int servings;
+    private final Duration prep;
+    private final List<Reminder> reminders;
+    private final List<Ingredient> ingredients;
+    private Integer recipeID; // Inicialmente null
+    private int calories;
 
+    public Recipe(String name, String description, int servings, Duration prep,
+                  List<Reminder> reminders, List<Ingredient> ingredients) {
+        this.name = name;
+        this.description = description;
+        this.servings = servings;
+        this.prep = prep;
+        this.reminders = reminders;
+        this.ingredients = ingredients;
+    }
+
+    // Getters
+    public String getName() { return name; }
+    public String getDescription() { return description; }
+    public int getServings() { return servings; }
+    public Duration getPrep() { return prep; }
+    public List<Reminder> getReminders() { return reminders; }
+    public List<Ingredient> getIngredients() { return ingredients; }
+    public Integer getRecipeID() { return recipeID; }
+    public int getCalories() {
+        int sum = 0;
+
+        for (var ingredient : ingredients) {
+            sum += ingredient.calories();
+        }
+
+        return sum;
+    }
+
+
+    // Setters para campos opcionais
+    public void setRecipeID(Integer recipeID) { this.recipeID = recipeID; }
+    public void setCalories(int calories) { this.calories = calories; }
 
     @Override
     public String toString() {
@@ -38,7 +77,8 @@ public record Recipe(Integer recipeID, String name, String description, int serv
                 "Calories: " + calories,
                 "Prep: " + prep,
                 "Reminders: " + reminders,
-                "Ingredients: " + ingredients
-            );
+                "Ingredients: " + ingredients,
+                "Recipe ID: " + recipeID
+        );
     }
 }

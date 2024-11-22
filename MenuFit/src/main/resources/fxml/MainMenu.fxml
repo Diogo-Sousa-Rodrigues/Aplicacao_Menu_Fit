@@ -78,39 +78,8 @@
         </font>
     </Label>
 
-    <Pane layoutX="830.0" layoutY="279.0" prefHeight="555.0" prefWidth="313.0" style="-fx-border-color: grey; -fx-border-width: 2;">
-        <Label fx:id="breakfastLabel" layoutX="10.0" layoutY="40.0" text="Breakfast">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Label>
-        <Label fx:id="breakfastRecipeLabel" layoutX="12.0" layoutY="75.0">
-            <font>
-                <Font size="18.0" />
-            </font></Label>
-
-        <Label fx:id="lunchLabel" layoutX="11.0" layoutY="129.0" text="Lunch">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Label>
-        <Label fx:id="lunchRecipeLabel" layoutX="13.0" layoutY="164.0">
-            <font>
-                <Font size="18.0" />
-            </font></Label>
-
-        <Label fx:id="dinnerLabel" layoutX="9.0" layoutY="226.0" text="Dinner">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Label>
-        <Label fx:id="dinnerRecipeLabel" layoutX="14.0" layoutY="261.0">
-            <font>
-                <Font size="18.0" />
-            </font></Label>
-
-        <Button layoutX="250.0" layoutY="490.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="37.0" text="+" />
-    </Pane>
+    <VBox fx:id="dailyMealsContainer" layoutX="830.0" layoutY="279.0" prefHeight="555.0" prefWidth="313.0" style="-fx-border-color: grey; -fx-border-width: 2; -fx-padding: 20">
+    </VBox>
     <Label layoutX="830.0" layoutY="225.0" text="Daily Menu">
         <font>
             <Font size="24.0" />

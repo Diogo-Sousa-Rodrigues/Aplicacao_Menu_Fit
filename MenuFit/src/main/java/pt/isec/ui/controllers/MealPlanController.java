@@ -10,17 +10,19 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import pt.isec.model.meals.*;
-import pt.isec.model.users.User;
+import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
-import pt.isec.persistence.EphemeralStore;
+import pt.isec.prompt.InstanceBuilder;
 
-import java.time.Duration;
 import java.util.List;
+import java.util.Optional;
 
 public class MealPlanController implements UserInitializable {
-    private User user;
+    private BasicUser user;
     private SceneSwitcher sceneSwitcher;
+    private MealPlan mealPlan;
+    private BDManager bdManager;
 
 
     @FXML
@@ -31,8 +33,15 @@ public class MealPlanController implements UserInitializable {
     }
 
     @Override
-    public void initializeUser(User user, BDManager bdManager) {
+    public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
+        this.bdManager = bdManager;
+        if(user.getMealPlan() != null){
+            mealPlan = user.getMealPlan();
+        }else{
+            mealPlan = bdManager.getMealPlan(user.getIdUser());
+            user.setMealPlan(mealPlan);
+        }
         initializeDailyMealsPreview();
     }
 
@@ -45,8 +54,8 @@ public class MealPlanController implements UserInitializable {
     }
 
     private void initializeDailyMealsPreview() {
-        EphemeralStore store = EphemeralStore.getInstance();
-        MealPlan mealPlan = store.getMealPlan(user).orElse(null);
+        //EphemeralStore store = EphemeralStore.getInstance();
+        //MealPlan mealPlan = store.getMealPlan(user).orElse(null);
 
         if (mealPlan != null) {
             List<Meal> meals = mealPlan.getMeals();
@@ -65,7 +74,7 @@ public class MealPlanController implements UserInitializable {
 
                 // Filtra as refeições para o dia específico
                 List<Meal> dayMeals = meals.stream()
-                        //.filter(meal -> meal.getDay().equalsIgnoreCase(day)) // Ajuste conforme o atributo do dia em Meal
+                        .filter(meal -> meal.getDate().getDayOfWeek().toString().equalsIgnoreCase(day)) // Ajuste conforme o atributo do dia em Meal
                         .toList();
 
                 // Se houver refeições, adiciona os painéis das refeições, senão mostra mensagem
@@ -104,7 +113,7 @@ public class MealPlanController implements UserInitializable {
         newRecipeButton.setLayoutX(100);
         newRecipeButton.setLayoutY(5);
         newRecipeButton.setFont(new Font(9));
-        //newRecipeButton.setOnAction(event -> handleNewRecipeBtn(meal, event));
+        newRecipeButton.setOnAction(event -> handleNewRecipeBtn(meal, event));
 
         CheckBox selectCheckBox = new CheckBox();
         selectCheckBox.setLayoutX(170);
@@ -118,16 +127,16 @@ public class MealPlanController implements UserInitializable {
 
         Recipe recipe = meal.getRecipe();
         if (recipe != null) {
-            Label recipeNameLabel = new Label(recipe.name());
+            Label recipeNameLabel = new Label(recipe.getName());
             recipeNameLabel.setLayoutX(8);
             recipeNameLabel.setLayoutY(41);
 
-            Label caloriesLabel = new Label("- " + recipe.calories() + " cal");
+            Label caloriesLabel = new Label("- " + recipe.getCalories() + " cal");
             caloriesLabel.setLayoutX(8);
             caloriesLabel.setLayoutY(58);
             caloriesLabel.setFont(new Font(9));
 
-            Label timeLabel = new Label("- " + recipe.prep().toMinutes() + " min");
+            Label timeLabel = new Label("- " + recipe.getPrep().toMinutes() + " min");
             timeLabel.setLayoutX(8);
             timeLabel.setLayoutY(75);
             timeLabel.setFont(new Font(9));
@@ -149,76 +158,52 @@ public class MealPlanController implements UserInitializable {
     private void handleCheckMealDone(Meal meal, CheckBox selectCheckBox, ActionEvent event) {
         if(selectCheckBox.isSelected()){
             int sum = user.getHealthData().getDailyCalorieSum();
-            user.getHealthData().setDailyCalorieSum(sum + meal.getRecipe().calories());
+            user.getHealthData().setDailyCalorieSum(sum + meal.getRecipe().getCalories());
             user.setCurrentMealIndex(meal.getMealIndex() + 1);
             sceneSwitcher.switchScene("fxml/MealPlan.fxml", event, user);
         }
     }
 
-//    private void handleNewRecipeBtn(Meal meal, ActionEvent event) {
-//        // Gera a nova Meal
-//        //Meal newMeal = generateNewMealPrompt();
-//        Recipe dinnerRecipe = new Recipe(
-//                "Frango com Legumes",
-//                "1. Tempere o frango com sal e pimenta.\n2. Grelhe o frango até dourar.\n3. Cozinhe os brócolis no vapor.\n4. Sirva o frango acompanhado dos brócolis.",
-//                1,
-//                400,
-//                Duration.ofMinutes(20),
-//                List.of(new Reminder("Grelhe o frango."), new Reminder("Cozinhe os legumes no vapor.")),
-//                List.of(
-//                        new Ingredient("Frango", "Peito de frango grelhado", 150, "g", 200, new Macros(30, 0, 5), List.of()),
-//                        new Ingredient("Brócolis", "Brócolis no vapor", 100, "g", 40, new Macros(4, 7, 0), List.of())
-//                )
-//        );
-//        // Obtém o MealPlan e a lista de Meals associada ao usuário
-//        EphemeralStore store = EphemeralStore.getInstance();
-//        MealPlan mealPlan = store.getMealPlan(user).orElse(null);
-//
-//        if (mealPlan != null) {
-//            List<Meal> meals = mealPlan.getMeals();
-//
-//            // Encontra o índice da Meal original e substitui pela nova
-//            int mealIndex = meals.indexOf(meal);
-////            if (mealIndex != -1) {
-////                meals.set(mealIndex, newMeal);
-////            }
-//            for(Meal meal1: meals){
-//                if(meal1.getMealIndex() == mealIndex){
-//                    meal1.setRecipe(dinnerRecipe);
-//                }
-//            }
-//
-//            mealPlan.putMeals(meals);
-//
-//            // Opcional: Atualiza a visualização da Meal substituída, se necessário
-//            sceneSwitcher.switchScene("fxml/MealPlan.fxml", event, user);
-//        }
-//    }
+    private void handleNewRecipeBtn(Meal meal, ActionEvent event) {
+        Optional<Recipe> newRecipe = generateNewMealPrompt();
+        if (mealPlan != null) {
+            //List<Meal> meals = mealPlan.getMeals();
+
+            if (newRecipe.isPresent()) {
+                if (bdManager.updateMealRecipe(meal, newRecipe)) {
+                    meal.setRecipe(newRecipe.get()); // Atualiza a receita da meal com a nova
+                    List<Meal> meals = user.getMealPlan().getMeals(); // Obtém a lista de refeições
+                    for (int i = 0; i < meals.size(); i++) {
+                        Meal mealExistente = meals.get(i); // Obtém cada meal existente na lista
+                        if (mealExistente.getMealID().equals(meal.getMealID())) {
+                            // Substitui diretamente a meal na lista
+                            meals.set(i, meal);
+                            break; // Encerra o loop assim que encontrar a meal
+                        }
+                    }
+                }
+            }
+            // Opcional: Atualiza a visualização da Meal substituída, se necessário
+            sceneSwitcher.switchScene("fxml/MealPlan.fxml", event, user);
+        }
+    }
 
 
-//    private Meal generateNewMealPrompt() {
-//        // Lógica para gerar uma nova Meal (substitua com a implementação necessária)
-//        //return new Meal();
-//
-//
-//        //temporary solution
-//        Recipe dinnerRecipe = new Recipe(
-//                "Frango com Legumes",
-//                "1. Tempere o frango com sal e pimenta.\n2. Grelhe o frango até dourar.\n3. Cozinhe os brócolis no vapor.\n4. Sirva o frango acompanhado dos brócolis.",
-//                1,
-//                400,
-//                Duration.ofMinutes(20),
-//                List.of(new Reminder("Grelhe o frango."), new Reminder("Cozinhe os legumes no vapor.")),
-//                List.of(
-//                        new Ingredient("Frango", "Peito de frango grelhado", 150, "g", 200, new Macros(30, 0, 5), List.of()),
-//                        new Ingredient("Brócolis", "Brócolis no vapor", 100, "g", 40, new Macros(4, 7, 0), List.of())
-//                )
-//        );
-//        Meal dinner = new Meal(dinnerRecipe);
-//        dinner.setType(MealType.Dinner);
-//
-//
-//        return dinner;
-//    }
+    private Optional<Recipe> generateNewMealPrompt() {
+        // Simulando o conteúdo da receita em formato JSON (com os novos campos já ajustados)
+        String json = "{\"name\":\"Nova receita\",\"description\":\"Bell peppers filled with quinoa, beans, and cheese.\",\"servings\":2,\"prep\":40,\"reminders\":[{\"data\":\"Bake at 375°F for 30 minutes.\"}],\"ingredients\":[{\"name\":\"Bell Peppers\",\"description\":\"Edible containers for stuffing.\",\"quantity\":2,\"units\":\"units\",\"calories\":50,\"macros\":{\"proteins\":1.0,\"carbs\":10.0,\"fats\":0.5},\"allergens\":[]},{\"name\":\"Quinoa\",\"description\":\"Protein-rich stuffing.\",\"quantity\":100,\"units\":\"grams\",\"calories\":120,\"macros\":{\"proteins\":4.0,\"carbs\":21.0,\"fats\":1.9},\"allergens\":[]}]}";
+        // Usando InstanceBuilder para deserializar
+        InstanceBuilder instanceBuilder = new InstanceBuilder();
+        Optional<Recipe> optionalRecipe = instanceBuilder.fromJson(json, Recipe.class);
+
+        // Verificar se o resultado é válido
+        if (optionalRecipe.isPresent()) {
+            return optionalRecipe;
+        } else {
+            System.out.println("Erro na deserialização do JSON para Recipe");
+            return Optional.empty();
+        }
+    }
+
 
 }

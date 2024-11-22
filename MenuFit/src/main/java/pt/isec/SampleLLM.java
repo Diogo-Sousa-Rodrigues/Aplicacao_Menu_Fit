@@ -32,7 +32,7 @@ public class SampleLLM {
                 Recipe recipe = recipeOptional.get();
 
 
-                System.out.println("Recipe: " + recipe.name() + "\n");
+                System.out.println("Recipe: " + recipe.getName() + "\n");
             }
             else {
                 System.out.println("Unable to instantiate recipe.\n");
