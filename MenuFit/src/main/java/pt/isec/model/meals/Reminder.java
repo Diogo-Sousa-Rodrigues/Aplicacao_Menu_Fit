@@ -2,6 +2,7 @@ package pt.isec.model.meals;
 
 import com.google.gson.annotations.Expose;
 
+
 public class Reminder {
     public Reminder(String data) {
         this.data = data;

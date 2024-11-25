@@ -54,7 +54,13 @@ public class HealthAndDietaryRestrictions_1Controller implements UserInitializab
                 objective,
                 levelOfFitness,
                 desiredWeight,
-                dailyCalorieCount
+                dailyCalorieCount,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
         );
 
         this.user.setHealthData(healthData);
