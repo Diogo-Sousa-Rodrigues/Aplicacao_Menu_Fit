@@ -8,12 +8,17 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import pt.isec.model.meals.*;
 import pt.isec.model.users.BasicUser;
+import pt.isec.model.users.Gender;
 import pt.isec.model.users.User;
 import pt.isec.persistence.BDManager;
 import pt.isec.persistence.EphemeralStore;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +36,9 @@ public class LogInController {
     @FXML
     public Label invalidLogin;
     BDManager bdManager;
+
+    private static final String REMEMBER_ME_FILE = System.getProperty("user.home") + "/remember_me.txt";
+
 
     public LogInController(){
         this.sceneSwitcher = new SceneSwitcher();
@@ -53,12 +61,31 @@ public class LogInController {
         passwordTextField.setVisible(false);
     }
 
+    // Método temporário para salvar os dados do "Remember Me" em um ficheiro de texto
+    private void saveRememberMeData(String email, String password, String firstName, String lastName, Date birthdate, Gender gender) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(REMEMBER_ME_FILE))) {
+            writer.write("email:" + email + "\n");
+            writer.write("password:" + password + "\n");
+            writer.write("firstName:" + firstName + "\n");
+            writer.write("lastName:" + lastName + "\n");
+            writer.write("gender: " + gender + "\n");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            String birthDateFormatted = formatter.format(birthdate);
+            writer.write("birthdate:" + birthDateFormatted + "\n");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar dados no arquivo.");
+        }
+    }
+
     @FXML
     void logInHandler(ActionEvent event) throws IOException {
         String email = emailTextField.getText();
         String password = getPassword();
 
         BasicUser userLoggedIn = bdManager.checkLogin(email, password);
+        //EphemeralStore store = EphemeralStore.getInstance();
+
+        //Optional<User> getResult = store.getUser(email, password);
 
         //sceneSwitcher.switchScene("fxml/MealPlanReview.fxml", event); //TEMPORARY FOR TESTING
         if(userLoggedIn == null){
@@ -68,6 +95,10 @@ public class LogInController {
             //createTemporaryMealPlanForTesting(store, getResult.get());
             //getResult.get().setCurrentMealIndex(0);
             sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, userLoggedIn, bdManager);
+
+            // Chamada do método para guardar os dados do "Remember Me" em um ficheiro de texto caso o Login seja bem sucedido
+            saveRememberMeData(userLoggedIn.getEmail(), password, userLoggedIn.getFirstName(), userLoggedIn.getLastName(), userLoggedIn.getBirthdate(), userLoggedIn.getGender());
+            sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, userLoggedIn);
         }
     }
 

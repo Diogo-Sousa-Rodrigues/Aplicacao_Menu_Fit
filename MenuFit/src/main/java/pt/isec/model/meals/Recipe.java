@@ -81,4 +81,14 @@ public class Recipe {
                 "Recipe ID: " + recipeID
         );
     }
+
+    public int getCalories() {
+        int sum = 0;
+
+        for (var ingredient : ingredients) {
+            sum += ingredient.calories();
+        }
+
+        return sum;
+    }
 }

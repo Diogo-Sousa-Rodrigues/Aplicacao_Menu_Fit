@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import pt.isec.model.users.HealthData;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
@@ -115,6 +116,9 @@ public class HealthAndDietaryRestrictions_3Controller implements UserInitializab
 
     @FXML
     public void finishHandler(ActionEvent event) {
+        String dietType = foodRestrictionsTextField.getText();
+        String medications = medicationsTextField.getText();
+
         if (vitaminOrMineralYesRadioButton.isSelected()) {
             String deficiencies = vitaminOrMineralTextField.getText().trim();
             if (deficiencies.isEmpty()) {
@@ -138,7 +142,7 @@ public class HealthAndDietaryRestrictions_3Controller implements UserInitializab
         }
 
         if (medicationsYesRadioButton.isSelected()) {
-            String medications = medicationsTextField.getText().trim();
+            medications = medicationsTextField.getText().trim();
             if (medications.isEmpty()) {
                 showAlert("Attention", "Please enter the medications you are taking.");
                 return;
@@ -148,7 +152,24 @@ public class HealthAndDietaryRestrictions_3Controller implements UserInitializab
 
         System.out.println("Proceeding to the next step...");
 
+        HealthData healthData = new HealthData(
+                user.getHealthData().getWeight(),
+                user.getHealthData().getHeight(),
+                user.getHealthData().getObjective(),
+                user.getHealthData().getLevelOfFitness(),
+                user.getHealthData().getDesiredWeight(),
+                user.getHealthData().getDailyCalorieCount(),
+                user.getHealthData().getAllergiesOrIntorelances(),
+                user.getHealthData().getMedicalReasons(),
+                user.getHealthData().getChronicHealth(),
+                null,
+                dietType,
+                medications);
+
+        this.user.setHealthData(healthData);
+
         sceneSwitcher.switchScene("fxml/TimeAndBudget.fxml", event, user);
+
     }
 
     @FXML

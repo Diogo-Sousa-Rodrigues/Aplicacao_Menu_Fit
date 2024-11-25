@@ -2,9 +2,9 @@ package pt.isec.ui.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import pt.isec.model.users.BasicUser;
+import pt.isec.model.users.HealthData;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
@@ -15,21 +15,16 @@ public class ProfileRestrictionsController implements UserInitializable {
     private final SceneSwitcher sceneSwitcher;
 
     @FXML
-    private Label userAllergy1Label;
+    private Label userAllergiesLabel;
     @FXML
-    private Label userAllergy2Label;
+    private Label userHealthConditionsLabel;
     @FXML
     private Label userDietTypeLabel;
     @FXML
-    private Button editRestrictionsButton;
+    private Label userMedicalReasonsLabel;
     @FXML
-    private Button basicInformationButton;
-    @FXML
-    private Button restrictionsButton;
-    @FXML
-    private Button objectivesButton;
-    @FXML
-    private Button logOutButton;
+    private Label userMedicationsLabel;
+
 
     public ProfileRestrictionsController() {
         this.sceneSwitcher = new SceneSwitcher();
@@ -37,16 +32,26 @@ public class ProfileRestrictionsController implements UserInitializable {
 
     @FXML
     private void initialize() {
-        loadDietaryRestrictions();
-        loadDietType();
+
     }
 
     private void loadDietaryRestrictions() {
+        HealthData healthData = user.getHealthData();
 
+        if (healthData != null) {
+            userAllergiesLabel.setText(healthData.getAllergiesOrIntorelances());
+            userHealthConditionsLabel.setText(healthData.getChronicHealth());
+        }
     }
 
     private void loadDietType() {
+        HealthData healthData = user.getHealthData();
 
+        if (healthData != null) {
+            userDietTypeLabel.setText(healthData.getDietType());
+            userMedicalReasonsLabel.setText(healthData.getMedicalReasons());
+            userMedicationsLabel.setText(healthData.getMedications());
+        }
     }
 
     @FXML
