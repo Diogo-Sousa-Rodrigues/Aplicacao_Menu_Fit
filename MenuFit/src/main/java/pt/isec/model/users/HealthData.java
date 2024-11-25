@@ -56,7 +56,7 @@ public class HealthData {
         return dailyCalorieCount;
     }
 
-    public void setDailyCalorieCount(String dailyCalorieCount) {
+    public void setDailyCalorieGoal(String dailyCalorieCount) {
         this.dailyCalorieCount = dailyCalorieCount;
     }
 

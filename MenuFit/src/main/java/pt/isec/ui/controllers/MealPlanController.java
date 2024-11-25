@@ -15,6 +15,7 @@ import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
 import pt.isec.prompt.InstanceBuilder;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -118,12 +119,8 @@ public class MealPlanController implements UserInitializable {
         CheckBox selectCheckBox = new CheckBox();
         selectCheckBox.setLayoutX(170);
         selectCheckBox.setLayoutY(6);
-        if(user.getCurrentMealIndex() == meal.getMealIndex()){
-            selectCheckBox.setDisable(false);
-        }else{
-            selectCheckBox.setDisable(true);
-        }
-        selectCheckBox.setOnAction(event -> handleCheckMealDone(meal, selectCheckBox, event));
+        selectCheckBox.setDisable(!meal.getDate().toLocalDate().equals(LocalDate.now()));
+        selectCheckBox.setOnAction(event -> handleCheckMealDone(meal, selectCheckBox, event, mealPane));
 
         Recipe recipe = meal.getRecipe();
         if (recipe != null) {
@@ -149,17 +146,21 @@ public class MealPlanController implements UserInitializable {
             mealPane.getChildren().addAll(mealTypeLabel, newRecipeButton, selectCheckBox, noRecipeLabel);
         }
 
-        if(meal.getMealIndex() < user.getCurrentMealIndex()){
+        if(meal.getCheck()){
             mealPane.setDisable(true);
         }
         return mealPane;
     }
 
-    private void handleCheckMealDone(Meal meal, CheckBox selectCheckBox, ActionEvent event) {
+    private void handleCheckMealDone(Meal meal, CheckBox selectCheckBox, ActionEvent event, Pane mealPane) {
         if(selectCheckBox.isSelected()){
-            int sum = user.getHealthData().getDailyCalorieSum();
-            user.getHealthData().setDailyCalorieSum(sum + meal.getRecipe().getCalories());
-            user.setCurrentMealIndex(meal.getMealIndex() + 1);
+            //int sum = user.getHealthData().getDailyCalorieSum();
+            //user.getHealthData().setDailyCalorieSum(sum + meal.getRecipe().getCalories());
+            //user.setCurrentMealIndex(meal.getMealIndex() + 1);
+            bdManager.checkMeal(meal);
+            mealPlan = bdManager.getMealPlan(user.getIdUser());
+            user.setMealPlan(mealPlan);
+            mealPane.setDisable(true);
             sceneSwitcher.switchScene("fxml/MealPlan.fxml", event, user);
         }
     }

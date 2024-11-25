@@ -8,19 +8,16 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import pt.isec.model.meals.*;
 import pt.isec.model.users.BasicUser;
-import pt.isec.model.users.User;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
-import pt.isec.persistence.EphemeralStore;
 
-import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -60,7 +57,7 @@ public class MainMenuController implements UserInitializable {
     public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
         this.bdManager = bdManager;
-        if(user.getMealPlan() != null){
+        if(user.getMealPlan() != null && !user.getMealPlan().getEndDate().isBefore(LocalDateTime.now())){
             mealPlan = user.getMealPlan();
         }else{
             mealPlan = bdManager.getMealPlan(user.getIdUser());

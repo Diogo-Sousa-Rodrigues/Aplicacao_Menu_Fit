@@ -60,7 +60,7 @@ public class Recipe {
             sum += ingredient.calories();
         }
 
-        return sum;
+        return sum/servings;
     }
 
 
