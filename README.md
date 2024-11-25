@@ -213,7 +213,7 @@ Mitigation actions:
   - Favorite/Delete meals
   - Daily Goal Tracker
 
-- Dates: 12/Nov
+- Dates: 15/Out
 - Team capacity: 4 * 4 * 5 = 80 hours
 - Release: V1.0
 
@@ -345,15 +345,15 @@ Mitigation actions:
 - Story Points: 1S+2M + 8S(only some tasks) + 1M(only some tasks)
 
 ##### Sprint Review
-- Analysis:
+- Analysis: Overall very good. Some improvements to do in QA.
 
-- Story Points:
+- Story Points: 7S + 2M
 
-- Version:
+- Version: 0.1
 
-- Client analysis:
+- Client analysis: pleased with the application. 
 
-- Conclusions:
+- Conclusions: 
 
 
 ##### Sprint Retrospective
@@ -363,10 +363,9 @@ Mitigation actions:
 - Goal: MVP - We define our MVP as an app that will offer this possibilities and functionalities to the user:
   - Recipe management (favorite/delete)
   - Data persistence accross instances (database)
-  - Remember me
+  - Add extra meal
   - AI Prompts
-  - Nutricionist (to be discussed)
-  - (...)  
+  - Remember me
 
 - Dates: 12/Nov
 - Team capacity: 4 * 4 * 5 = 80 hours
@@ -392,12 +391,14 @@ Mitigation actions:
   - QA: Juliano Babaroca
 
 - To do:
-  - US12: 
-    - Task1: Manage Data
 
   - US10:
     - Task1: Recipe data
     - Task2: Manage recipes
+    - Task3: Edit Recipe Table
+
+  - US12: 
+    - Task1: Manage Data
 
   - US14:
     - Task1: Database CRUD
@@ -414,6 +415,62 @@ Mitigation actions:
     - Task1: Substitute recipe prompt
     - Task2: Meal plan prompt
     - Task3: API implementation
+    - Task4: Custom AI Prompt
     - Spike: AI API
+    - Spike: AI Prompt
   
+- Story Points: 1S, 3M, 1L
+
+##### Sprint Review
+- Analysis: 
+
+- Story Points: 
+
+- Version: 
+
+- Client analysis: 
+
+- Conclusions: 
+
+
+### Sprint 4
+##### Sprint Plan
+
+- Goal:
+  - Continue Data Persistency
+  - Finish AI Prompt
+  - Add extra meal
+  - Edit Profile
+
+- Dates: from 26/Nov to 10/Dez, 2 weeks
+
+- Roles:
+  - Product Owner: Juliano Babaroca
+  - Scrum Master: Bárbara Trindade
+  - QA: Júlio Pacheco
+
+- To do:
+
+  - US10:
+    - Task1: Recipe data
+    - Task2: Manage recipes
+    - Task3: Edit Recipe Table
+
+  - US16: 
+    - Spike: AI API
+    - Task: Custom AI Prompt
+
+  - US17:
+    - Task1: Extra Meal UI
+    - Task2: Extra Meal data
+    - Task3: Adjust Calorie Log
+
+  - US18:
+    - Task1: Create Database table
+    - Task2: Database CRUD
+  
+  - US19:
+    - Task1: Create Edit UI
+    - Task2: Update User's Info in Database
+    
 - Story Points: 1S, 3M, 1L
