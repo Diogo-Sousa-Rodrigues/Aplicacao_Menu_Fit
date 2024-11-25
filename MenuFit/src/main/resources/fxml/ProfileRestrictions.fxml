@@ -33,8 +33,10 @@
    </Label>
    <Pane fx:id="userDieataryRestrictionsPane" layoutX="249.0" layoutY="138.0" prefHeight="276.0" prefWidth="234.0" style="-fx-border-color: grey; -fx-border-width: 2;">
       <children>
-         <Label fx:id="userAllergy1Label" layoutX="6.0" layoutY="4.0" prefHeight="27.0" prefWidth="223.0" text="Celiac Disease" />
-         <Label fx:id="userAllergy2Label" layoutX="6.0" layoutY="31.0" prefHeight="27.0" prefWidth="223.0" text="Cinnamon Allergy" />
+         <Label fx:id="userAllergiesTitleLabel" layoutX="6.0" layoutY="4.0" prefHeight="27.0" prefWidth="223.0" text="Allergies:" />
+         <Label fx:id="userAllergiesLabel" alignment="TOP_LEFT" layoutX="6.0" layoutY="31.0" prefHeight="48.0" prefWidth="223.0" text="Cinnamon " />
+         <Label fx:id="userHealthConditionsTitleLabel" layoutX="6.0" layoutY="79.0" prefHeight="27.0" prefWidth="223.0" text="Health Conditions:" />
+         <Label fx:id="userHealthConditionsLabel" alignment="TOP_LEFT" layoutX="6.0" layoutY="106.0" prefHeight="48.0" prefWidth="223.0" text="Diabetes" />
       </children>
    </Pane>
    <Label fx:id="menuFitLabel1" layoutX="421.0" layoutY="31.0" prefHeight="35.0" prefWidth="124.0" text="User Profile">
@@ -50,6 +52,10 @@
    <Pane fx:id="dietTypePane" layoutX="545.0" layoutY="138.0" prefHeight="276.0" prefWidth="234.0" style="-fx-border-color: grey; -fx-border-width: 2;">
       <children>
          <Label fx:id="userDietTypeLabel" layoutX="6.0" layoutY="4.0" prefHeight="27.0" prefWidth="223.0" text="Vegan" />
+         <Label fx:id="userMedicalReasonsTitleLabel" layoutX="6.0" layoutY="47.0" prefHeight="27.0" prefWidth="223.0" text="Medical Reasons:" />
+         <Label fx:id="userMedicalReasonsLabel" alignment="TOP_LEFT" layoutX="6.0" layoutY="74.0" prefHeight="48.0" prefWidth="223.0" text="Low-sodium" />
+         <Label fx:id="userMedicationsTitleLabel" layoutX="6.0" layoutY="110.0" prefHeight="27.0" prefWidth="223.0" text="Medications:" />
+         <Label fx:id="userMedicationsLabel" alignment="TOP_LEFT" layoutX="6.0" layoutY="137.0" prefHeight="48.0" prefWidth="223.0" text="Low-sodium" />
       </children>
    </Pane>
    <Button fx:id="editRestrictionsButton" layoutX="706.0" layoutY="31.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="73.0" text="Edit" />

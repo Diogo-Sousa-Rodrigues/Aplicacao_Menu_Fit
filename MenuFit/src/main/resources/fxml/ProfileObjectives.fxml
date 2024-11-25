@@ -33,11 +33,7 @@
    </Label>
    <Pane fx:id="userNamePane" layoutX="249.0" layoutY="138.0" prefHeight="295.0" prefWidth="531.0" style="-fx-border-color: grey; -fx-border-width: 2;">
       <children>
-         <Label fx:id="userObjectiveWeightLabel" layoutX="14.0" layoutY="1.0" prefHeight="27.0" prefWidth="48.0" text="Weight: " />
-         <Label fx:id="userGainMuscleLabel" layoutX="14.0" layoutY="31.0" prefHeight="27.0" prefWidth="521.0" text="Gain Muscle" />
-         <Label fx:id="userEatHealthierLabel" layoutX="14.0" layoutY="58.0" prefHeight="27.0" prefWidth="521.0" text="Eat Healthier" />
-         <Label fx:id="userDailyCalorieIntakeLabel" layoutX="14.0" layoutY="85.0" prefHeight="27.0" prefWidth="521.0" text="2200 daily calorie intake" />
-         <Label fx:id="userWeightNumberLabel" layoutX="62.0" layoutY="1.0" prefHeight="27.0" prefWidth="48.0" text="number" />
+         <Label fx:id="userObjectiveLabel" alignment="TOP_LEFT" layoutX="5.0" layoutY="1.0" prefHeight="286.0" prefWidth="520.0" text="Weight: " textAlignment="JUSTIFY" wrapText="true" />
       </children>
    </Pane>
    <Label fx:id="menuFitLabel1" layoutX="421.0" layoutY="31.0" prefHeight="35.0" prefWidth="124.0" text="User Profile">
