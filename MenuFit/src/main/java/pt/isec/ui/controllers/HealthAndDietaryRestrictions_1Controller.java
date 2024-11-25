@@ -13,18 +13,14 @@ import pt.isec.persistence.BDManager;
 public class HealthAndDietaryRestrictions_1Controller implements UserInitializable {
 
     private BasicUser user;
+    private BDManager bdManager;
     public HealthAndDietaryRestrictions_1Controller(){
         sceneSwitcher = new SceneSwitcher();
     }
 
-    @Override
-    public void initializeUser(BasicUser user, BDManager bdManager) {
-        this.user = user;
-    }
-
     @FXML
     public void previousHandler(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user, bdManager);
     }
 
     @FXML
@@ -74,7 +70,7 @@ public class HealthAndDietaryRestrictions_1Controller implements UserInitializab
 
         System.out.println("Health Data collected: " + healthData);
 
-        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event, user, bdManager);
     }
 
     public void calculateBMI() {
@@ -194,4 +190,9 @@ public class HealthAndDietaryRestrictions_1Controller implements UserInitializab
     private ComboBox<String> levelOfFitnessComboBox;
 
 
+    @Override
+    public void initializeUser(BasicUser user, BDManager bdManager) {
+        this.user = user;
+        this.bdManager = bdManager;
+    }
 }

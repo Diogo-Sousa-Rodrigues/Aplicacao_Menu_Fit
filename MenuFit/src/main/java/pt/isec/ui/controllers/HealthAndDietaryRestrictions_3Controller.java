@@ -5,8 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
-import pt.isec.model.users.HealthData;
 import pt.isec.model.users.BasicUser;
+import pt.isec.model.users.HealthData;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
@@ -15,6 +15,7 @@ import pt.isec.persistence.BDManager;
 public class HealthAndDietaryRestrictions_3Controller implements UserInitializable {
     private BasicUser user;
     private SceneSwitcher sceneSwitcher;
+    private BDManager bdManager;
 
     @FXML
     private RadioButton vitaminOrMineralYesRadioButton;
@@ -168,13 +169,13 @@ public class HealthAndDietaryRestrictions_3Controller implements UserInitializab
 
         this.user.setHealthData(healthData);
 
-        sceneSwitcher.switchScene("fxml/TimeAndBudget.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/TimeAndBudget.fxml", event, user, bdManager);
 
     }
 
     @FXML
     public void previousHandler(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event, user, bdManager);
     }
 
     private void showAlert(String title, String message) {
@@ -229,5 +230,6 @@ public class HealthAndDietaryRestrictions_3Controller implements UserInitializab
     @Override
     public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
+        this.bdManager = bdManager;
     }
 }

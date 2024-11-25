@@ -15,6 +15,7 @@ public class HealthAndDietaryRestrictions_2Controller implements UserInitializab
 
     private SceneSwitcher sceneSwitcher;
     private BasicUser user;
+    private BDManager bdManager;
 
     @FXML
     private RadioButton allergiesOrIntolerancesYesRadioButton;
@@ -178,14 +179,14 @@ public class HealthAndDietaryRestrictions_2Controller implements UserInitializab
         this.user.setHealthData(healthData);
 
         System.out.println("Proceeding to the next step...");
-        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_3.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_3.fxml", event, user, bdManager);
 
     }
 
     @FXML
     public void previousHandler(ActionEvent event) {
         System.out.println("Going back to the previous step...");
-        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_1.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_1.fxml", event, user, bdManager);
     }
 
     private void showAlert(String title, String message) {
@@ -249,5 +250,6 @@ public class HealthAndDietaryRestrictions_2Controller implements UserInitializab
     @Override
     public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
+        this.bdManager = bdManager;
     }
 }

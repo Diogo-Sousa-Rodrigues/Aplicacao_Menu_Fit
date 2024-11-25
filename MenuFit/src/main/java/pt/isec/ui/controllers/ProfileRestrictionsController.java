@@ -12,6 +12,7 @@ import pt.isec.persistence.BDManager;
 public class ProfileRestrictionsController implements UserInitializable {
 
     private BasicUser user;
+    private BDManager bdManager;
     private final SceneSwitcher sceneSwitcher;
 
     @FXML
@@ -61,28 +62,29 @@ public class ProfileRestrictionsController implements UserInitializable {
 
     @FXML
     public void basicInformationHandler(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/ProfileBasicInformation.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/ProfileBasicInformation.fxml", event, user, bdManager);
     }
 
     @FXML
     public void objectivesHandler(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/ProfileObjectives.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/ProfileObjectives.fxml", event, user, bdManager);
     }
 
     @FXML
     public void logOutHandler(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/Login.fxml", event, null, null);
+        sceneSwitcher.switchScene("fxml/Login.fxml", event, null, bdManager);
     }
 
     @Override
     public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
+        this.bdManager = bdManager;
         loadDietaryRestrictions();
         loadDietType();
     }
 
     @FXML
     public void handleGoBackButton(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user, bdManager);
     }
 }

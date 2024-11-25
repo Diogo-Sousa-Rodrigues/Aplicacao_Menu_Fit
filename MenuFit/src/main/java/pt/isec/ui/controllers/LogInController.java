@@ -94,11 +94,11 @@ public class LogInController {
             //métod o temporário para poder ter um meal plan (incompleto) acessivel na base de dados
             //createTemporaryMealPlanForTesting(store, getResult.get());
             //getResult.get().setCurrentMealIndex(0);
-            sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, userLoggedIn, bdManager);
+            //sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, userLoggedIn, bdManager);
 
             // Chamada do método para guardar os dados do "Remember Me" em um ficheiro de texto caso o Login seja bem sucedido
             saveRememberMeData(userLoggedIn.getEmail(), password, userLoggedIn.getFirstName(), userLoggedIn.getLastName(), userLoggedIn.getBirthdate(), userLoggedIn.getGender());
-            sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, userLoggedIn);
+            sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, userLoggedIn, bdManager);
         }
     }
 

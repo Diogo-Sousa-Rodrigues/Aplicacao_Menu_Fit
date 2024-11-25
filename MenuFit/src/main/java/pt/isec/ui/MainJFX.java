@@ -36,7 +36,7 @@ public class MainJFX extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        try{
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/LogIn.fxml"));
             Parent root = loader.load();
 
@@ -56,7 +56,7 @@ public class MainJFX extends Application {
             stage.getIcons().add(icon);
             stage.setScene(scene);
             stage.show();
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -154,7 +154,6 @@ public class MainJFX extends Application {
 
         return false;
     }
-
 
 
     public static void main(String[] args) {

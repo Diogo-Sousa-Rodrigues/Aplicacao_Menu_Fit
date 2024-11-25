@@ -27,6 +27,7 @@ public class ProfileObjectivesController implements UserInitializable {
 
     private BasicUser user;
     private SceneSwitcher sceneSwitcher;
+    private BDManager bdManager;
 
     public ProfileObjectivesController() {
         this.sceneSwitcher = new SceneSwitcher();
@@ -40,6 +41,7 @@ public class ProfileObjectivesController implements UserInitializable {
     @Override
     public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
+        this.bdManager = bdManager;
         loadObjectives();
     }
 
@@ -58,21 +60,22 @@ public class ProfileObjectivesController implements UserInitializable {
 
     @FXML
     private void handleRestrictionsButton(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/ProfileRestrictions.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/ProfileRestrictions.fxml", event, user, bdManager);
     }
 
     @FXML
     private void handleBasicInformationButton(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/ProfileBasicInformation.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/ProfileBasicInformation.fxml", event, user, bdManager);
     }
 
     @FXML
     public void handleLogOutButton(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/Login.fxml", event, null, null);
+        sceneSwitcher.switchScene("fxml/Login.fxml", event, null, bdManager);
     }
 
     @FXML
     public void handleGoBackButton(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user, bdManager);
     }
+
 }
