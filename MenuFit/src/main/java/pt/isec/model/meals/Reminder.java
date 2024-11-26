@@ -2,9 +2,16 @@ package pt.isec.model.meals;
 
 import com.google.gson.annotations.Expose;
 
+
 public class Reminder {
     public Reminder(String data) {
         this.data = data;
+    }
+
+    public Reminder(Integer reminderID, boolean check, String text) {
+        this.reminderID = reminderID;
+        this.check = check;
+        this.data = text;
     }
 
     /**
@@ -35,7 +42,16 @@ public class Reminder {
         this.check = check;
     }
 
+    public void setReminderID(Integer reminderID) {
+        this.reminderID = reminderID;
+    }
+
+    public Integer getReminderID() {
+        return reminderID;
+    }
+
     @Expose private final String data;
 
     private boolean check;
+    private Integer reminderID;
 }

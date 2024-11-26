@@ -7,9 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.HealthData;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.BDManager;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -80,7 +82,7 @@ public class ProfileBasicInformationController implements UserInitializable {
     @FXML
     private Button editBasicInformationButton;
 
-    private User user;
+    private BasicUser user;
     private SceneSwitcher sceneSwitcher;
 
     private static final String REMEMBER_ME_FILE = System.getProperty("user.home") + "/remember_me.txt";
@@ -95,7 +97,7 @@ public class ProfileBasicInformationController implements UserInitializable {
     }
 
     @Override
-    public void initializeUser(User user) {
+    public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
         updateUserInfo();
     }
@@ -128,7 +130,7 @@ public class ProfileBasicInformationController implements UserInitializable {
     @FXML
     public void handleLogOutButton(ActionEvent event) {
         deleteRememberMeFile();
-        sceneSwitcher.switchScene("fxml/Login.fxml", event, null);
+        sceneSwitcher.switchScene("fxml/Login.fxml", event, null, null);
     }
 
     // Método para apagar o ficheiro caso o utilizador dê Logout

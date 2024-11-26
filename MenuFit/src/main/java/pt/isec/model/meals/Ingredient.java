@@ -23,6 +23,7 @@ import java.util.List;
 public record Ingredient(String name, String description, float quantity,
                          String units, int calories, Macros macros, List<String> allergens) {
 
+
     @Override
     public String toString() {
         return String.join("\n",

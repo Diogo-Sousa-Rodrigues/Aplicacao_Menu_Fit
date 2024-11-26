@@ -1,6 +1,7 @@
 package pt.isec.model.meals;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Meal {
     public Meal(Recipe recipe) {
@@ -12,6 +13,19 @@ public class Meal {
         this.type = type;
         this.date = date;
         this.recipe = recipe;
+    }
+
+    public Meal(Integer mealID, String type, String date) {
+        this.mealID = mealID;
+        this.type = MealType.valueOf(type);
+        this.date = LocalDateTime.parse(date);
+    }
+
+    public Meal(Integer mealID, String type, String date, Boolean check) {
+        this.mealID = mealID;
+        this.type = MealType.valueOf(type);
+        this.date = LocalDateTime.parse(date);
+        this.check = check;
     }
 
     /**
@@ -59,6 +73,14 @@ public class Meal {
         return date;
     }
 
+    public void setMealID(Integer mealID) {
+        this.mealID = mealID;
+    }
+
+    public Integer getMealID() {
+        return mealID;
+    }
+
     /**
      * Gets the Meal's index
      *
@@ -79,6 +101,14 @@ public class Meal {
         this.mealIndex = mealIndex;
     }
 
+    public boolean getCheck() {
+        return this.check;
+    }
+
+    public void setCheck(Boolean check) {
+        this.check = check;
+    }
+
     @Override
     public String toString() {
         return String.join("\n",
@@ -93,6 +123,11 @@ public class Meal {
 
     private Recipe recipe;
 
+    private Integer mealID;
+
+    private Boolean check;
+
     // TODO: To be removed
     private int mealIndex;
+
 }

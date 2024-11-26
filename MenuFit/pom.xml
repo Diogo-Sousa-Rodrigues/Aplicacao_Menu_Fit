@@ -27,7 +27,6 @@
             <artifactId>javafx-fxml</artifactId>
             <version>23.0.1</version>
         </dependency>
-
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -46,6 +45,11 @@
             <version>20240303</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.43.2.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -106,7 +110,6 @@
             <!--suppress UnresolvedMavenProperty -->
             <url>https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/maven</url>
         </repository>
-
     </repositories>
     <distributionManagement>
         <repository>

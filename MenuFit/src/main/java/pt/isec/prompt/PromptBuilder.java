@@ -1,5 +1,10 @@
 package pt.isec.prompt;
 
+import pt.isec.model.meals.Meal;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 public class PromptBuilder {
     private static PromptBuilder instance = null;
 
@@ -31,6 +36,24 @@ public class PromptBuilder {
         return prompt;
     }
 
+    public String getMealPrompt() {
+        String prompt = null;
+
+        prompt = "Give me a JSON that represents a meal. Follow the following template: " + mealJSONTemplate + "\n";
+        prompt += String.join("\n", replyRequirements);
+
+        return prompt;
+    }
+
+    public String getMealPlanPrompt() {
+        String prompt = null;
+
+        prompt = "Give me a JSON that represents a meal plan for the next 7 days, try to keep 3 meals minimum per day (total of 21 meals or more are expected). Follow the following template: " + mealPlanJSONTemplate + "\n";
+        prompt += String.join("\n", replyRequirements);
+
+        return prompt;
+    }
+
     private static final String ingredientJSONTemplate =
             "{" +
                 "name:string," +
@@ -55,6 +78,21 @@ public class PromptBuilder {
                 "prep:int (time in minutes)," +
                 "reminders:[{ data: string }]" +
                 "ingredients:[" + ingredientJSONTemplate + "]" +
+            "}";
+
+    private static final String mealJSONTemplate =
+            "{" +
+                "type:string (Breakfast, Lunch, Dinner, Snack)," +
+                "date:string (LocalTimeDate)," +
+                "recipe: " + recipeJSONTemplate  +
+            "}";
+
+    private static final String mealPlanJSONTemplate =
+            "{" +
+                "goal: string," +
+                "begin: string (LocalDateTime)," +
+                "end: string (LocalDateTime)," +
+                "meals: [" + mealJSONTemplate +"]" +
             "}";
 
     private static final String[] replyRequirements = {

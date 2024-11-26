@@ -6,15 +6,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import pt.isec.model.users.BasicUser;
+import pt.isec.model.users.HealthData;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.BDManager;
 
 public class ProfileObjectivesController implements UserInitializable {
 
     @FXML
     private AnchorPane objectivesPane;
     @FXML
-    private Label objectivesLabel;
+    private Label userObjectiveLabel;
     @FXML
     private ListView<String> objectivesListView;
     @FXML
@@ -22,8 +25,9 @@ public class ProfileObjectivesController implements UserInitializable {
     @FXML
     private Button basicInformationButton;
 
-    private User user;
+    private BasicUser user;
     private SceneSwitcher sceneSwitcher;
+    private BDManager bdManager;
 
     public ProfileObjectivesController() {
         this.sceneSwitcher = new SceneSwitcher();
@@ -35,19 +39,20 @@ public class ProfileObjectivesController implements UserInitializable {
     }
 
     @Override
-    public void initializeUser(User user) {
+    public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
-        //loadObjectives();
+        this.bdManager = bdManager;
+        loadObjectives();
     }
-/*
+
     private void loadObjectives() {
-        objectivesListView.getItems().clear();
-        List<String> objectives = user.getObjectives();
-        if (objectives != null) {
-            objectivesListView.getItems().addAll(objectives);
+        HealthData healthData = user.getHealthData();
+
+        if (healthData != null) {
+            userObjectiveLabel.setText(healthData.getObjective());
         }
     }
-*/
+
     @FXML
     private void handleEditObjectivesButton(ActionEvent event) {
 
@@ -55,21 +60,22 @@ public class ProfileObjectivesController implements UserInitializable {
 
     @FXML
     private void handleRestrictionsButton(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/ProfileRestrictions.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/ProfileRestrictions.fxml", event, user, bdManager);
     }
 
     @FXML
     private void handleBasicInformationButton(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/ProfileBasicInformation.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/ProfileBasicInformation.fxml", event, user, bdManager);
     }
 
     @FXML
     public void handleLogOutButton(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/Login.fxml", event, null);
+        sceneSwitcher.switchScene("fxml/Login.fxml", event, null, bdManager);
     }
 
     @FXML
     public void handleGoBackButton(ActionEvent event) {
-        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user, bdManager);
     }
+
 }

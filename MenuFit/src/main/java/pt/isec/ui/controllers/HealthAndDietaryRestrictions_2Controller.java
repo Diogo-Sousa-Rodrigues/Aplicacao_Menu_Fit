@@ -5,13 +5,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import pt.isec.model.users.BasicUser;
+import pt.isec.model.users.HealthData;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
+import pt.isec.persistence.BDManager;
 
 public class HealthAndDietaryRestrictions_2Controller implements UserInitializable {
 
     private SceneSwitcher sceneSwitcher;
-    private User user;
+    private BasicUser user;
+    private BDManager bdManager;
 
     @FXML
     private RadioButton allergiesOrIntolerancesYesRadioButton;
@@ -117,6 +121,11 @@ public class HealthAndDietaryRestrictions_2Controller implements UserInitializab
     @FXML
     public void finishHandler(ActionEvent event) {
 
+        String allergiesOrIntolerances = allergiesOrIntolerancesTextField.getText();
+        String medicalReasons = medicalReasonsTextField.getText();
+        String chronicHealth = chronicHealthTextField.getText();
+
+
         if (allergiesOrIntolerancesYesRadioButton.isSelected()) {
             String allergies = allergiesOrIntolerancesTextField.getText().trim();
             if (allergies.isEmpty()) {
@@ -153,14 +162,31 @@ public class HealthAndDietaryRestrictions_2Controller implements UserInitializab
             System.out.println("Gastrointestinal Issues: " + gastrointestinalIssues);
         }
 
+        HealthData healthData = new HealthData(
+                user.getHealthData().getWeight(),
+                user.getHealthData().getHeight(),
+                user.getHealthData().getObjective(),
+                user.getHealthData().getLevelOfFitness(),
+                user.getHealthData().getDesiredWeight(),
+                user.getHealthData().getDailyCalorieCount(),
+                allergiesOrIntolerances,
+                medicalReasons,
+                chronicHealth,
+                null,
+                null,
+                null);
+
+        this.user.setHealthData(healthData);
+
         System.out.println("Proceeding to the next step...");
-        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_3.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_3.fxml", event, user, bdManager);
+
     }
 
     @FXML
     public void previousHandler(ActionEvent event) {
         System.out.println("Going back to the previous step...");
-        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_1.fxml", event, user);
+        sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_1.fxml", event, user, bdManager);
     }
 
     private void showAlert(String title, String message) {
@@ -222,7 +248,8 @@ public class HealthAndDietaryRestrictions_2Controller implements UserInitializab
     }
 
     @Override
-    public void initializeUser(User user) {
+    public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
+        this.bdManager = bdManager;
     }
 }

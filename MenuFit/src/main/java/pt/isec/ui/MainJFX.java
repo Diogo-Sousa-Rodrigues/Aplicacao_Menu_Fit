@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import pt.isec.persistence.BDManager;
+import pt.isec.ui.controllers.LogInController;
 
 import java.io.IOException;
 
@@ -26,6 +28,7 @@ import java.util.Optional;
 public class MainJFX extends Application {
     private static final String REMEMBER_ME_FILE = System.getProperty("user.home") + "/remember_me.txt";
     private SceneSwitcher sceneSwitcher;
+    private BDManager bdManager = new BDManager();
 
     public MainJFX() {
         this.sceneSwitcher = new SceneSwitcher();
@@ -34,20 +37,25 @@ public class MainJFX extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/LogIn.fxml"));
+            Parent root = loader.load();
+
+            // Obter o controlador e inicializar com argumentos
+            LogInController controller = loader.getController();
+            controller.setBDManager(bdManager);
             // Primeiro verifica se o utilizador já fez login anteriormente com o "Remember Me" ativo
             if (checkRememberMe(stage)) {
                 return;
             }
 
             // Caso contrário, apresenta a tela de login
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/LogIn.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/LogIn.fxml"));
             Scene scene = new Scene(root);
             stage.setTitle("MenuFit");
             Image icon = new Image("images/logo.png");
             stage.getIcons().add(icon);
             stage.setScene(scene);
             stage.show();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -107,18 +115,18 @@ public class MainJFX extends Application {
             }
 
             if (email != null && password != null && firstName != null && lastName != null && gender != null && birthDate != null) {
-                EphemeralStore store = EphemeralStore.getInstance();
+                //EphemeralStore store = EphemeralStore.getInstance();
 
                 // Adiciona o utilizador à store
-                BasicUser user = new BasicUser(firstName, lastName, email, birthDate, gender);
-                store.putUser(user, password);
+                //BasicUser user = new BasicUser(firstName, lastName, email, birthDate, gender);
+                ///store.putUser(user, password);
 
                 // Recupera o utilizador com o email e senha
-                Optional<User> getResult = store.getUser(email, password);
+                //Optional<User> getResult = store.getUser(email, password);
+                BasicUser user = bdManager.checkLogin(email, password);
 
-                if (getResult.isPresent()) {
-                    User loggedUser = getResult.get();
-                    System.out.println(loggedUser.getFirstName() + " " + loggedUser.getLastName() + " logged in.");
+                if (user != null) {
+                    System.out.println(user.getFirstName() + " " + user.getLastName() + " logged in.");
                     System.out.println("Logging in automatically.");
 
                     FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/MainMenu.fxml"));
@@ -126,7 +134,7 @@ public class MainJFX extends Application {
 
                     // Envia as informações do utilizador para o controlador da próxima screen
                     MainMenuController controller = loader.getController();
-                    controller.initializeUser(loggedUser);
+                    controller.initializeUser(user, bdManager);
 
                     Scene scene = new Scene(root);
                     stage.setTitle("MenuFit");
@@ -146,7 +154,6 @@ public class MainJFX extends Application {
 
         return false;
     }
-
 
 
     public static void main(String[] args) {
