@@ -1,8 +1,11 @@
-package pt.isec.prompt;
+package pt.isec.builders;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import pt.isec.adapters.DurationAdapter;
+import pt.isec.adapters.LocalDateTimeAdapter;
 import pt.isec.ai.CommonLLM;
+import pt.isec.json.SimpleJsonDeserializer;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

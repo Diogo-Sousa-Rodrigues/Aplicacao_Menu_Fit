@@ -5,10 +5,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import pt.isec.model.meals.Ingredient;
 import pt.isec.model.meals.Meal;
-import pt.isec.model.meals.MealPlan;
 import pt.isec.model.meals.Recipe;
-import pt.isec.prompt.DurationAdapter;
-import pt.isec.prompt.LocalDateTimeAdapter;
+import pt.isec.adapters.DurationAdapter;
+import pt.isec.adapters.LocalDateTimeAdapter;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package pt.isec.prompt;
+package pt.isec.json;
 
 import java.util.Optional;
 

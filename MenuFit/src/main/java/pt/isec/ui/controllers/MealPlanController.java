@@ -13,7 +13,7 @@ import pt.isec.model.meals.*;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
-import pt.isec.prompt.InstanceBuilder;
+import pt.isec.builders.InstanceBuilder;
 
 import java.time.LocalDate;
 import java.util.List;

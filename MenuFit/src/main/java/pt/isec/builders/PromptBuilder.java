@@ -1,9 +1,4 @@
-package pt.isec.prompt;
-
-import pt.isec.model.meals.Meal;
-
-import java.time.LocalDateTime;
-import java.util.List;
+package pt.isec.builders;
 
 public class PromptBuilder {
     private static PromptBuilder instance = null;

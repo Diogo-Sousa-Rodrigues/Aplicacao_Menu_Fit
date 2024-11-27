@@ -1,19 +1,11 @@
 package pt.isec;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
 import pt.isec.ai.CommonLLM;
-import pt.isec.ai.GeminiLLM;
 import pt.isec.ai.GroqLLM;
-import pt.isec.model.meals.Meal;
 import pt.isec.model.meals.MealPlan;
-import pt.isec.model.meals.Recipe;
-import pt.isec.prompt.DurationAdapter;
-import pt.isec.prompt.InstanceBuilder;
-import pt.isec.prompt.PromptBuilder;
+import pt.isec.builders.InstanceBuilder;
+import pt.isec.builders.PromptBuilder;
 
-import java.time.Duration;
 import java.util.Optional;
 
 public class SampleLLM {
