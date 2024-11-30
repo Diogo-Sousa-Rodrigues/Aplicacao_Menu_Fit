@@ -41,6 +41,8 @@ public class MainMenuController implements UserInitializable {
     private Label caloriesConsumedLabel; // Label para calorias consumidas
     @FXML
     private Label caloriesRemainingLabel; // Label para calorias restantes
+    @FXML
+    private Button addExtraMealBtn;
 
 
     //Propriedades calorias
@@ -167,6 +169,12 @@ public class MainMenuController implements UserInitializable {
         initializeDailyReminders();
     }
 
+    @FXML
+    private void handleExtraMeal(ActionEvent event) {
+        System.out.println("Extra meal button clicked");
+        sceneSwitcher.switchScene("fxml/ExtraMealMenu.fxml", event, user);
+    }
+
     private void initializeDailyReminders() {
         if(mealPlan == null) return;
         Map<Reminder, MealType> remindersWithMealTypeMap = new HashMap<>();
@@ -260,7 +268,6 @@ public class MainMenuController implements UserInitializable {
         recipeImage.setVisible(isVisible);
     }
 
-
     private void updateNextMealPreview(Meal meal) {
         Recipe recipe = meal.getRecipe();
         nextMealTypeLabel.setText(meal.getType().name());
@@ -270,9 +277,12 @@ public class MainMenuController implements UserInitializable {
         nextMealPrepTimeLabel.setText("- " + minutes + " m");
     }
 
+
+
     private void initializeDailyMealsPreview() {
         // Limpa o contêiner antes de adicionar novos rótulos
         dailyMealsContainer.getChildren().clear();
+        dailyMealsContainer.getChildren().add(addExtraMealBtn);
 
         if (mealPlan != null) {
             List<Meal> meals = mealPlan.getMeals();

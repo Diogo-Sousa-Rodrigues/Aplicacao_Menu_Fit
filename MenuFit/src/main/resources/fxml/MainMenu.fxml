@@ -80,7 +80,7 @@
 
     <VBox fx:id="dailyMealsContainer" layoutX="830.0" layoutY="279.0" prefHeight="555.0" prefWidth="313.0" style="-fx-border-color: grey; -fx-border-width: 2; -fx-padding: 20">
       <children>
-         <Button mnemonicParsing="false" onAction="#handleExtraMeal" text="Add Extra Meal" />
+         <Button fx:id="addExtraMealBtn" mnemonicParsing="false" onAction="#handleExtraMeal" text="Add Extra Meal" />
       </children></VBox>
     <Label layoutX="830.0" layoutY="225.0" text="Daily Menu">
         <font>
