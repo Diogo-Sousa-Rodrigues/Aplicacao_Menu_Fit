@@ -3,6 +3,7 @@ package pt.isec.model.users;
 import pt.isec.model.meals.Meal;
 
 import java.util.Date;
+import java.util.List;
 
 public interface User {
     Integer getIdUser();
@@ -138,4 +139,8 @@ public interface User {
     void setCurrentMeal(Meal meal);
 
     Meal getCurrentMeal();
+
+    List<Meal> getExtraMeals();
+
+    void addExtraMeal(Meal meal);
 }

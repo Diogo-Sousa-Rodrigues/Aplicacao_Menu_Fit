@@ -3,6 +3,7 @@ package pt.isec.model.users;
 import pt.isec.model.meals.Meal;
 
 import java.util.Date;
+import java.util.List;
 
 public abstract class GenericUser implements User {
     public GenericUser(Integer idUser, String firstName, String lastName, String email,
@@ -122,6 +123,16 @@ public abstract class GenericUser implements User {
         this.currentMeal = currentMeal;
     }
 
+    @Override
+    public List<Meal> getExtraMeals() {
+        return extraMeals;
+    }
+
+    @Override
+    public void addExtraMeal(Meal meal) {
+        extraMeals.add(meal);
+    }
+
     private String firstName, lastName, email;
     private Integer idUser;
 
@@ -134,6 +145,8 @@ public abstract class GenericUser implements User {
     private String currentRecipe;
 
     private int currentMealIndex;
+
+    private List<Meal> extraMeals;
 
     private Meal currentMeal;
 }
