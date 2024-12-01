@@ -8,7 +8,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.HealthData;
-import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
 

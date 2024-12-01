@@ -140,7 +140,7 @@ public abstract class GenericUser implements User {
 
     private Gender gender;
 
-    private HealthData healthData;
+    public HealthData healthData;
 
     private String currentRecipe;
 

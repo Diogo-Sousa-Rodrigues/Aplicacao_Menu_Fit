@@ -6,7 +6,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.HealthData;
-import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
 
@@ -63,14 +62,14 @@ public class HealthAndDietaryRestrictions_1Controller implements UserInitializab
                 null,
                 null,
                 null,
+                null,
                 null
         );
 
         this.user.setHealthData(healthData);
 
-        System.out.println("Health Data collected: " + healthData);
-
         sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event, user, bdManager);
+
     }
 
     public void calculateBMI() {

@@ -9,11 +9,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.HealthData;
-import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -99,7 +97,13 @@ public class ProfileBasicInformationController implements UserInitializable {
     @Override
     public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
-        updateUserInfo();
+        HealthData healthData = bdManager.loadHealthAndDietaryRestrictions(user.getIdUser());
+
+        if (healthData != null) {
+            this.user.setHealthData(healthData);
+
+            updateUserInfo();
+        }
     }
 
     private void updateUserInfo() {

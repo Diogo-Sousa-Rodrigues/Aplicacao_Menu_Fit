@@ -3,6 +3,7 @@ package pt.isec.persistence;
 import pt.isec.model.meals.*;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.Gender;
+import pt.isec.model.users.HealthData;
 
 import java.io.Serializable;
 import java.sql.*;
@@ -249,6 +250,105 @@ public class BDManager implements Serializable {
         }
         return success;
     }
+
+
+    public boolean saveDietaryRestrictions(HealthData healthData, Integer userID) {
+        boolean success = true;
+
+        String sql = "INSERT INTO DietaryRestrictions (UserID, Weight, Height, Objetivo, Level_Fitness, DesiredWeight, DailyCalorieCount, Allergies, Specific_Diet, Chronic_Isseus, Gastrointestinal_Issues, Vitamin_Deficiencies, Food_Preference, Medication) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?)";
+
+        try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userID);
+            pstmt.setString(2, healthData.getWeight());
+            pstmt.setString(3, healthData.getHeight());
+            pstmt.setString(4, healthData.getObjective());
+            pstmt.setString(5, healthData.getLevelOfFitness());
+            pstmt.setString(6, healthData.getDesiredWeight());
+            pstmt.setString(7, healthData.getDailyCalorieCount());
+            pstmt.setString(8, healthData.getAllergiesOrIntorelances());
+            pstmt.setString(9, healthData.getMedicalReasons());
+            pstmt.setString(10, healthData.getChronicHealth());
+            pstmt.setString(11, healthData.getGastrointestinalIssues());
+            pstmt.setString(12, healthData.getVitaminDeficiencies());
+            pstmt.setString(13, healthData.getDietType());
+            pstmt.setString(14, healthData.getMedications());
+
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected <= 0) {
+                System.out.println("Failed to register dietary restrictions.");
+                success = false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while registering dietary restrictions: " + e.getMessage());
+            success = false;
+        }
+
+        return success;
+    }
+
+    public HealthData loadHealthAndDietaryRestrictions(Integer userID) {
+        String sql = "SELECT * FROM DietaryRestrictions WHERE UserID = ?";
+
+        try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
+            pstmt.setInt(1, userID);
+
+            System.out.println("Executing SQL: " + sql);
+            System.out.println("UserID: " + userID);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+
+                    System.out.println("Data found for UserID: " + userID);
+                    System.out.println("Weight: " + rs.getString("Weight"));
+                    System.out.println("Height: " + rs.getString("Height"));
+
+
+                    String weight = rs.getString("Weight");
+                    String height = rs.getString("Height");
+                    String objective = rs.getString("Objetivo");
+                    String levelOfFitness = rs.getString("Level_Fitness");
+                    String desiredWeight = rs.getString("DesiredWeight");
+                    String dailyCalorieCount = rs.getString("DailyCalorieCount");
+                    String allergiesOrIntolerances = rs.getString("Allergies");
+                    String medicalReasons = rs.getString("Specific_Diet");
+                    String chronicHealth = rs.getString("Chronic_Isseus");
+                    String gastrointestinalIssues = rs.getString("Gastrointestinal_Issues");
+                    String vitaminDeficiencies = rs.getString("Vitamin_Deficiencies");
+                    String dietType = rs.getString("Food_Preference");
+                    String medications = rs.getString("Medication");
+
+
+                    return new HealthData(
+                            weight,
+                            height,
+                            objective,
+                            levelOfFitness,
+                            desiredWeight,
+                            dailyCalorieCount,
+                            allergiesOrIntolerances,
+                            medicalReasons,
+                            chronicHealth,
+                            gastrointestinalIssues,
+                            vitaminDeficiencies,
+                            dietType,
+                            medications
+                    );
+                } else {
+
+                    System.out.println("No data found for UserID: " + userID);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error loading health and dietary restrictions: " + e.getMessage());
+        }
+
+        return null;
+    }
+
+
+
 
     public MealPlan getMealPlan(Integer userID) {
         MealPlan mealPlan = null;

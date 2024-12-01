@@ -9,6 +9,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import pt.isec.model.meals.*;
 import pt.isec.model.users.BasicUser;
+import pt.isec.model.users.GenericUser;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
 import pt.isec.builders.InstanceBuilder;
@@ -70,8 +71,8 @@ public class MealPlanReviewController implements UserInitializable {
     }
 
     public void addMeals(Optional<MealPlan> mealPlan) {
-        if (mealPlan.isPresent()) { // Verifica se o Optional contém um valor
-            MealPlan plan = mealPlan.get(); // Obtém o valor do Optional
+        if (mealPlan.isPresent()) {
+            MealPlan plan = mealPlan.get();
 
             for (Meal meal : plan.getMeals()) {
                 VBox dailyPane = dailyMealPanes.get(meal.getDate().getDayOfWeek().toString());
@@ -90,7 +91,6 @@ public class MealPlanReviewController implements UserInitializable {
                 dailyPane.getChildren().add(mealTextFlow);
             }
         } else {
-            // Tratamento caso o Optional não contenha valor (opcional)
             System.out.println("MealPlan não está presente.");
         }
     }
@@ -102,6 +102,8 @@ public class MealPlanReviewController implements UserInitializable {
     public void btnAcceptHandler(ActionEvent event) {
         mealPlan.get().setIDUser(user.getIdUser());
         bdManager.saveMealPlan(mealPlan);
+        bdManager.saveDietaryRestrictions(user.getHealthData(), user.getIdUser());
+
 
         user.setCurrentMealIndex(0);
         user.getHealthData().setDailyCalorieSum(0);
