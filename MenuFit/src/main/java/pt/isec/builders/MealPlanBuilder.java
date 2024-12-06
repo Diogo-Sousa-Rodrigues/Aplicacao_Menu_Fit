@@ -48,7 +48,7 @@ public class MealPlanBuilder {
                 // Calculate new day (begin + 1)
                 LocalDate date = begin.plusDays(day); // = ...
 
-                String prompt = promptBuilder.getMeals(user, date, timeBudget, mealsPerDay);
+                String prompt = promptBuilder.getMealsPerDayPrompt(user, date, timeBudget, mealsPerDay);
 
                 Type typeToken = new TypeToken<List<Meal>>() {}.getType();
 

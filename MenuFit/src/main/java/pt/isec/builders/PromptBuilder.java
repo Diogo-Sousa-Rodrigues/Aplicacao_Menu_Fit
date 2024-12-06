@@ -19,47 +19,7 @@ public class PromptBuilder {
 
     private PromptBuilder() {};
 
-    public String getIngredientPrompt() {
-        String prompt = null;
-
-        prompt = "Give me a JSON that represents an ingredient of a meal. Follow the following template: " + ingredientJSONTemplate + "\n";
-        prompt += String.join("\n", replyRequirements);
-
-        return prompt;
-    }
-
-    public String getRecipePrompt() {
-        String prompt = null;
-
-        prompt = "Give me a JSON that represents a recipe for a meal. Follow the following template: " + recipeJSONTemplate + "\n";
-        prompt += String.join("\n", replyRequirements);
-
-        return prompt;
-    }
-
-    public String getMealPrompt() {
-        String prompt = null;
-
-        prompt = "Give me a JSON that represents a meal. Follow the following template: " + mealJSONTemplate + "\n";
-        prompt += String.join("\n", replyRequirements);
-
-        return prompt;
-    }
-
-    public String getMealPlanPrompt() {
-        String prompt = null;
-
-        prompt = "Give me a JSON that represents a meal plan for the next 7 days, try to keep 3 meals minimum per day (total of 21 meals or more are expected). Follow the following template: " + mealPlanJSONTemplate + "\n";
-        prompt += String.join("\n", replyRequirements);
-
-        return prompt;
-    }
-
-    public String getMealsPerDayPrompt(String goal, User user, HealthData healthData) {
-        return "TODO";
-    }
-
-    public String getMeals(User user, LocalDate date, TimeBudget timeBudget, int mealsPerDay) {
+    public String getMealsPerDayPrompt(User user, LocalDate date, TimeBudget timeBudget, int mealsPerDay) {
 
         HealthData healthData = user.getHealthData();
 
