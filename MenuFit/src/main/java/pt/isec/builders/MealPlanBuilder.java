@@ -3,7 +3,6 @@ package pt.isec.builders;
 import pt.isec.ai.CommonLLM;
 import pt.isec.model.meals.Meal;
 import pt.isec.model.meals.MealPlan;
-import pt.isec.model.users.HealthData;
 import pt.isec.model.users.TimeBudget;
 import pt.isec.model.users.User;
 
@@ -26,14 +25,20 @@ public class MealPlanBuilder {
 
     private MealPlanBuilder() {};
 
-    public Optional<MealPlan> getMealPlan(String goal, User user, HealthData healthData,
-                                          TimeBudget timeBudget, LocalDate begin, LocalDate end, CommonLLM llm)
+    public Optional<MealPlan> getMealPlan(User user, TimeBudget timeBudget,
+                                          LocalDate begin, LocalDate end, CommonLLM llm)
         throws RuntimeException {
 
         PromptBuilder promptBuilder = PromptBuilder.getInstance();
         InstanceBuilder instanceBuilder = new InstanceBuilder();
 
         long days = ChronoUnit.DAYS.between(begin, end);
+
+        MealPlan mealPlan = new MealPlan(user);
+
+        mealPlan.setGoal(user.getHealthData().getObjective());
+        mealPlan.setBeginDate(begin);
+        mealPlan.setEndDate(end);
 
         try {
             // Step 1: Ask AI how many meals per day should the Meal Plan have
@@ -48,11 +53,18 @@ public class MealPlanBuilder {
                 Type typeToken = new TypeToken<List<Meal>>() {}.getType();
 
                 Optional<List<Meal>> mealsOpt = instanceBuilder.getInstance(prompt, llm, typeToken, 5);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+                if (mealsOpt.isEmpty()) {
+                    throw new RuntimeException();
+                }
 
-        return Optional.empty();
+                var meals = mealsOpt.get();
+
+                mealPlan.putMeals(List.copyOf(meals));
+            }
+
+            return Optional.of(mealPlan);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 }

@@ -7,9 +7,11 @@ import com.google.gson.reflect.TypeToken;
 import pt.isec.ai.CommonLLM;
 import pt.isec.ai.GroqLLM;
 import pt.isec.builders.InstanceBuilder;
+import pt.isec.builders.MealPlanBuilder;
 import pt.isec.builders.PromptBuilder;
 import pt.isec.model.meals.Ingredient;
 import pt.isec.model.meals.Meal;
+import pt.isec.model.meals.MealPlan;
 import pt.isec.model.meals.Recipe;
 import pt.isec.adapters.DurationAdapter;
 import pt.isec.adapters.LocalDateTimeAdapter;
@@ -32,31 +34,34 @@ public class Sample {
         llm.setApiKey("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");
 
         {
-            Type typeToken = new TypeToken<List<Meal>>() {}.getType();
 
             Date birthdate = new Date(941920980);
+
             User user = new BasicUser(1, "Júlio", "Pacheco",
                     "julio@email.com", birthdate, Gender.Male);
+
             HealthData healthData = new HealthData("68", "1.85", "Lose weight",
                     "Active", "75", "0", "None",
                     "None", "None", "None", "Vitamin C",
                     "None", "None");
+
             user.setHealthData(healthData);
+
             int mealsPerDay = 5;
+
             TimeBudget timeBudget = new TimeBudget(Duration.ofMinutes(30), 5.0f, "€");
+
             LocalDate date = LocalDateTime.now().toLocalDate();
+            LocalDate begin = date.plusDays(0);
+            LocalDate end = date.plusDays(7);
 
-            String prompt = promptBuilder.getMeals(user, date, timeBudget, mealsPerDay);
+            MealPlanBuilder mealPlanBuilder = MealPlanBuilder.getInstance();
+            Optional<MealPlan> mealPlanOpt = mealPlanBuilder.getMealPlan(user, timeBudget, begin, end, llm);
 
-            Optional<List<Meal>> mealsOpt =  instanceBuilder.getInstance(prompt, llm, typeToken, 5);
-
-            if (mealsOpt.isPresent()) {
-                var meals = mealsOpt.get();
-
-                System.out.println("Number of meals: " + meals.size());
-                for (var meal : meals) {
-                    System.out.println(meal);
-                }
+            if (mealPlanOpt.isPresent()) {
+                System.out.println("Meal Plan generated successfully.");
+            } else {
+                System.out.println("Unable to generate Meal Plan.");
             }
         }
         //{ // Ingredient (from and to JSON)

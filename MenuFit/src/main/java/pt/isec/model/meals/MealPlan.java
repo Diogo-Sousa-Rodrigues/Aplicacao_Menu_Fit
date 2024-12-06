@@ -3,6 +3,7 @@ package pt.isec.model.meals;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.User;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +26,14 @@ public class MealPlan {
 
     public MealPlan(User user) {
         this.meals = new ArrayList<>();
+        this.userID = user.getIdUser();
     }
 
     public MealPlan(Integer mealPlanID, Integer userID, String beginDate, String endDate, String goal) {
         this.mealPlanID = mealPlanID;
         this.userID = userID;
-        this.begin = LocalDateTime.parse(beginDate);
-        this.end = LocalDateTime.parse(endDate);
+        this.begin = LocalDate.parse(beginDate);
+        this.end = LocalDate.parse(endDate);
         this.goal = goal;
     }
 
@@ -68,19 +70,19 @@ public class MealPlan {
         this.goal = goal;
     }
 
-    public LocalDateTime getBeginDate() {
+    public LocalDate getBeginDate() {
         return this.begin;
     }
 
-    public void setBeginDate(LocalDateTime begin) {
+    public void setBeginDate(LocalDate begin) {
         this.begin = begin;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return this.end;
     }
 
-    public void setEndDate(LocalDateTime end) {
+    public void setEndDate(LocalDate end) {
         this.end = end;
     }
 
@@ -100,9 +102,9 @@ public class MealPlan {
 
     private String goal;
 
-    private LocalDateTime begin;
+    private LocalDate begin;
 
-    private LocalDateTime end;
+    private LocalDate end;
     Integer userID;
     Integer mealPlanID;
 
