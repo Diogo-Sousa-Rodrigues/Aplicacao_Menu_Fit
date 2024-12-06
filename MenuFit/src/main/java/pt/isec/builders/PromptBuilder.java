@@ -1,5 +1,11 @@
 package pt.isec.builders;
 
+import pt.isec.model.users.HealthData;
+import pt.isec.model.users.TimeBudget;
+import pt.isec.model.users.User;
+
+import java.time.LocalDate;
+
 public class PromptBuilder {
     private static PromptBuilder instance = null;
 
@@ -47,6 +53,45 @@ public class PromptBuilder {
         prompt += String.join("\n", replyRequirements);
 
         return prompt;
+    }
+
+    public String getMealsPerDayPrompt(String goal, User user, HealthData healthData) {
+        return "TODO";
+    }
+
+    public String getMeals(User user, LocalDate date, TimeBudget timeBudget, int mealsPerDay) {
+
+        HealthData healthData = user.getHealthData();
+
+        StringBuilder prompt = new StringBuilder();
+
+        prompt.append("You are tasked with generating a JSON Array with meals data.\n");
+        prompt.append("The JSON Array will contain the meals for a given day.\n");
+        prompt.append("The number of expected meals in the JSON Array is: ").append(mealsPerDay).append(".\n");
+        prompt.append("The meals are part of a strict meal plan that you must respect, that has the following goal: ")
+                .append(healthData.getObjective()).append('\n');
+        prompt.append("The person you will generate the meals for identifies as a ")
+                .append(user.getGender().toString()).append(", is ")
+                .append(healthData.getHeight()).append(" meters tall, has")
+                .append(healthData.getWeight()).append(" kilograms of weight, and is ")
+                .append(user.getAge()).append(" years old.\n");
+        prompt.append("The person has a fitness level of: ").append(healthData.getLevelOfFitness());
+        prompt.append("Please respect the following health restrictions when generating the meals: ")
+                .append("Allergies or intolerances: ").append(healthData.getAllergiesOrIntolerances())
+                .append("Chronic health issues: ").append(healthData.getChronicHealth())
+                .append("Gastrointestinal issues: ").append(healthData.getGastrointestinalIssues())
+                .append("Vitamin deficiencies: ").append(healthData.getVitaminDeficiencies())
+                .append("Medications: ").append(healthData.getMedications())
+                .append("Other medical reasons: ").append(healthData.getMedicalReasons());
+        prompt.append("The meals you generate are for the day: ").append(date);
+        prompt.append("The meals you generate must not exceed: ").append(timeBudget.getBudget());
+        prompt.append("The preparation time for a meal must try to meet the persons timing restrictions (minutes): ")
+                .append(timeBudget.getAvailableTime().toMinutes());
+        prompt.append("You must use the following JSON template for each of the meals you generate: ")
+                .append(mealJSONTemplate);
+        prompt.append("Here are your reply requirements: ").append(String.join("\n", replyRequirements));
+
+        return prompt.toString();
     }
 
     private static final String ingredientJSONTemplate =

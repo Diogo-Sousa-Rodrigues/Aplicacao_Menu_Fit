@@ -1,10 +1,6 @@
 package pt.isec.model.users;
 
 public class HealthData {
-
-
-
-
     public String getMedications() {
         return medications;
     }
@@ -25,7 +21,7 @@ public class HealthData {
         this.levelOfFitness = levelOfFitness;
         this.desiredWeight = desiredWeight;
         this.dailyCalorieCount = dailyCalorieCount;
-        this.allergiesOrIntorelances = allergiesOrIntolerances;
+        this.allergiesOrIntolerances = allergiesOrIntolerances;
         this.medicalReasons = medicalReasons;
         this.chronicHealth = chronicHealth;
         this.gastrointestinalIssues = gastrointestinalIssues;
@@ -90,9 +86,9 @@ public class HealthData {
         this.dailyCalorieSum = dailyCalorieSum;
     }
 
-    public String getAllergiesOrIntorelances() { return allergiesOrIntorelances; }
+    public String getAllergiesOrIntolerances() { return allergiesOrIntolerances; }
 
-    public void setAllergiesOrIntorelances(String allergiesOrIntorelances) { this.allergiesOrIntorelances = allergiesOrIntorelances; }
+    public void setAllergiesOrIntolerances(String allergiesOrIntolerances) { this.allergiesOrIntolerances = allergiesOrIntolerances; }
 
     public String getMedicalReasons() { return medicalReasons; }
 
@@ -134,7 +130,7 @@ public class HealthData {
     private String desiredWeight;
     private String dailyCalorieCount;
     private Integer dailyCalorieSum;
-    private String allergiesOrIntorelances;
+    private String allergiesOrIntolerances;
     private String medicalReasons;
     private String chronicHealth;
     private String gastrointestinalIssues;

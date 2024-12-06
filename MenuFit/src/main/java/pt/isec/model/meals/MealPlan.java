@@ -60,6 +60,10 @@ public class MealPlan {
         return this.goal;
     }
 
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
+    }
+
     public void setGoal(String goal) {
         this.goal = goal;
     }

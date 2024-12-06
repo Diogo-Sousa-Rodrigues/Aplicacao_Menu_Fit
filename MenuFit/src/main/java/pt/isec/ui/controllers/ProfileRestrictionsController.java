@@ -39,7 +39,7 @@ public class ProfileRestrictionsController implements UserInitializable {
         HealthData healthData = user.getHealthData();
 
         if (healthData != null) {
-            userAllergiesLabel.setText(healthData.getAllergiesOrIntorelances());
+            userAllergiesLabel.setText(healthData.getAllergiesOrIntolerances());
             userHealthConditionsLabel.setText(healthData.getChronicHealth());
         }
     }

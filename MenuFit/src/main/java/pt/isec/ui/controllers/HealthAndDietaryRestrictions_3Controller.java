@@ -160,7 +160,7 @@ public class HealthAndDietaryRestrictions_3Controller implements UserInitializab
                 user.getHealthData().getLevelOfFitness(),
                 user.getHealthData().getDesiredWeight(),
                 user.getHealthData().getDailyCalorieCount(),
-                user.getHealthData().getAllergiesOrIntorelances(),
+                user.getHealthData().getAllergiesOrIntolerances(),
                 user.getHealthData().getMedicalReasons(),
                 user.getHealthData().getChronicHealth(),
                 user.getHealthData().getGastrointestinalIssues(),

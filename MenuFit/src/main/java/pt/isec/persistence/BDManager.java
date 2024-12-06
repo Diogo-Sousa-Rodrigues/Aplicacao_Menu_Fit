@@ -267,7 +267,7 @@ public class BDManager implements Serializable {
             pstmt.setString(5, healthData.getLevelOfFitness());
             pstmt.setString(6, healthData.getDesiredWeight());
             pstmt.setString(7, healthData.getDailyCalorieCount());
-            pstmt.setString(8, healthData.getAllergiesOrIntorelances());
+            pstmt.setString(8, healthData.getAllergiesOrIntolerances());
             pstmt.setString(9, healthData.getMedicalReasons());
             pstmt.setString(10, healthData.getChronicHealth());
             pstmt.setString(11, healthData.getGastrointestinalIssues());

@@ -3,16 +3,20 @@ package pt.isec.builders;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import pt.isec.adapters.DurationAdapter;
+import pt.isec.adapters.LocalDateAdapter;
 import pt.isec.adapters.LocalDateTimeAdapter;
 import pt.isec.ai.CommonLLM;
 import pt.isec.json.SimpleJsonDeserializer;
 
+import java.lang.reflect.Type;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class InstanceBuilder implements SimpleJsonDeserializer {
-    public <T> Optional<T> getInstance(String prompt, CommonLLM llm, Class<T> type, int attempts) throws RuntimeException {
+    public <T> Optional<T> getInstance(String prompt, CommonLLM llm, Type type, int attempts)
+            throws RuntimeException {
         while (attempts > 0) {
             String response = llm.request(prompt);
 
@@ -28,9 +32,10 @@ public class InstanceBuilder implements SimpleJsonDeserializer {
     }
 
     @Override
-    public <T> Optional<T> fromJson(String json, Class<T> type) {
+    public <T> Optional<T> fromJson(String json, Type type) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Duration.class, new DurationAdapter())
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
                 .create();
 
@@ -77,6 +82,5 @@ public class InstanceBuilder implements SimpleJsonDeserializer {
                 "{\"type\":\"Lunch\",\"date\":\"2024-12-01T12:30\",\"recipe\":{\"name\":\"Pasta Salad\",\"description\":\"Cold pasta with cherry tomatoes and feta cheese.\",\"servings\":2,\"prep\":20,\"reminders\":[{\"data\":\"Chill the salad before serving.\"}],\"ingredients\":[{\"name\":\"Pasta\",\"description\":\"Base ingredient for the salad.\",\"quantity\":100,\"units\":\"grams\",\"calories\":350,\"macros\":{\"proteins\":10.0,\"carbs\":70.0,\"fats\":1.5},\"allergens\":[\"Gluten\"]},{\"name\":\"Feta Cheese\",\"description\":\"Tangy and salty topping.\",\"quantity\":50,\"units\":\"grams\",\"calories\":75,\"macros\":{\"proteins\":4.0,\"carbs\":1.0,\"fats\":6.0},\"allergens\":[\"Dairy\"]}]}}, " +
                 "{\"type\":\"Dinner\",\"date\":\"2024-12-01T19:00\",\"recipe\":{\"name\":\"Stuffed Bell Peppers\",\"description\":\"Bell peppers filled with quinoa, beans, and cheese.\",\"servings\":2,\"prep\":40,\"reminders\":[{\"data\":\"Bake at 375°F for 30 minutes.\"}],\"ingredients\":[{\"name\":\"Bell Peppers\",\"description\":\"Edible containers for stuffing.\",\"quantity\":2,\"units\":\"units\",\"calories\":50,\"macros\":{\"proteins\":1.0,\"carbs\":10.0,\"fats\":0.5},\"allergens\":[]},{\"name\":\"Quinoa\",\"description\":\"Protein-rich stuffing.\",\"quantity\":100,\"units\":\"grams\",\"calories\":120,\"macros\":{\"proteins\":4.0,\"carbs\":21.0,\"fats\":1.9},\"allergens\":[]}]}}]}";
     }
-
 }
 

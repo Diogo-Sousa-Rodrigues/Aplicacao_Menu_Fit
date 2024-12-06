@@ -143,4 +143,6 @@ public interface User {
     List<Meal> getExtraMeals();
 
     void addExtraMeal(Meal meal);
+
+    int getAge();
 }
