@@ -147,6 +147,25 @@ public abstract class GenericUser implements User {
         return Period.between(birthLocalDate, currentDate).getYears();
     }
 
+    @Override
+    public void setPreferedWeightUnit(String preferedWeightUnit) {
+        this.preferedWeightUnit = preferedWeightUnit;
+    }
+
+    @Override
+    public String getPreferedWeightUnit() {
+        return preferedWeightUnit;
+    }
+
+    @Override
+    public void setTimeBudget(TimeBudget timeBudget){
+        this.timeBudget = timeBudget;
+    }
+    @Override
+    public TimeBudget getTimeBudget() {
+        return timeBudget;
+    }
+
     private String firstName, lastName, email;
     private Integer idUser;
 
@@ -163,4 +182,7 @@ public abstract class GenericUser implements User {
     private List<Meal> extraMeals;
 
     private Meal currentMeal;
+
+    private String preferedWeightUnit;
+    private TimeBudget timeBudget;
 }

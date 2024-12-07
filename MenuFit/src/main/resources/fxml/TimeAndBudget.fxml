@@ -9,45 +9,45 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.TimeAndBudgetController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.TimeAndBudgetController">
    <children>
-      <Label layoutX="309.0" layoutY="161.0" text="Time and Budget">
+      <Label layoutX="410.0" layoutY="165.0" text="Time and Budget">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <ImageView fx:id="logo" fitHeight="48.0" fitWidth="53.0" layoutX="44.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="logo" fitHeight="48.0" fitWidth="53.0" layoutX="145.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/logo.png" />
          </image></ImageView>
-      <Label layoutX="97.0" layoutY="46.0" text="MenuFit">
+      <Label layoutX="198.0" layoutY="50.0" text="MenuFit">
          <font>
             <Font size="33.0" />
          </font>
       </Label>
-      <Label layoutX="54.0" layoutY="282.0" prefHeight="35.0" prefWidth="300.0" text="How much time do you have available to prepare meals each day?" wrapText="true" />
-      <Label layoutX="54.0" layoutY="317.0" text="(Helps in planning quick vs more elaborate meals)" wrapText="true">
+      <Label layoutX="155.0" layoutY="286.0" prefHeight="35.0" prefWidth="300.0" text="How much time do you have available to prepare meals each day?" wrapText="true" />
+      <Label layoutX="155.0" layoutY="321.0" text="(Helps in planning quick vs more elaborate meals)" wrapText="true">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <Slider fx:id="timeSlider" layoutX="54.0" layoutY="344.0" majorTickUnit="30.0" max="60.0" min="5.0" minorTickCount="5" prefHeight="14.0" prefWidth="300.0" showTickLabels="true" value="15.0" />
-      <Label layoutX="444.0" layoutY="282.0" prefHeight="18.0" prefWidth="300.0" text="Do you want to set a budget per meal?" wrapText="true" />
-      <Label layoutX="444.0" layoutY="300.0" text="(Helps in selecting cost-effective ingredients and meal options)">
+      <Slider fx:id="timeSlider" layoutX="155.0" layoutY="348.0" majorTickUnit="30.0" max="60.0" min="5.0" minorTickCount="5" prefHeight="14.0" prefWidth="300.0" showTickLabels="true" value="15.0" />
+      <Label layoutX="545.0" layoutY="286.0" prefHeight="18.0" prefWidth="300.0" text="Do you want to set a budget per meal?" wrapText="true" />
+      <Label layoutX="545.0" layoutY="304.0" text="(Helps in selecting cost-effective ingredients and meal options)">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
-      <CheckBox fx:id="budgetOptionCheckBox" layoutX="660.0" layoutY="381.0" mnemonicParsing="false" text="Don't set budget">
+      <CheckBox fx:id="budgetOptionCheckBox" layoutX="761.0" layoutY="385.0" mnemonicParsing="false" text="Don't set budget">
          <font>
             <Font size="10.0" />
          </font>
       </CheckBox>
-      <Slider fx:id="budgetSlider" layoutX="444.0" layoutY="344.0" majorTickUnit="49.0" min="1.0" minorTickCount="1" prefHeight="14.0" prefWidth="300.0" showTickLabels="true" value="10.0" />
-      <Label layoutX="354.0" layoutY="357.0" text="+" />
-      <Label layoutX="746.0" layoutY="357.0" text="+" />
-      <Button fx:id="previous" layoutX="80.0" layoutY="520.0" mnemonicParsing="false" onAction="#previousHandler" text="&lt; Previous" />
-      <Button fx:id="finish" layoutX="636.0" layoutY="519.0" mnemonicParsing="false" onAction="#finishHandler" prefHeight="26.0" prefWidth="80.0" text="See Preview" />
-      <Label fx:id="timeLabel" layoutX="169.0" layoutY="389.0" text="10" />
-      <Label fx:id="budgetLabel" layoutX="565.0" layoutY="389.0" text="5" />
+      <Slider fx:id="budgetSlider" layoutX="545.0" layoutY="348.0" majorTickUnit="49.0" min="1.0" minorTickCount="1" prefHeight="14.0" prefWidth="300.0" showTickLabels="true" value="10.0" />
+      <Label layoutX="455.0" layoutY="361.0" text="+" />
+      <Label layoutX="847.0" layoutY="361.0" text="+" />
+      <Button fx:id="previous" layoutX="181.0" layoutY="524.0" mnemonicParsing="false" onAction="#previousHandler" text="&lt; Previous" />
+      <Button fx:id="finish" layoutX="737.0" layoutY="523.0" mnemonicParsing="false" onAction="#finishHandler" prefHeight="26.0" prefWidth="80.0" text="See Preview" />
+      <Label fx:id="timeLabel" layoutX="270.0" layoutY="393.0" text="10" />
+      <Label fx:id="budgetLabel" layoutX="666.0" layoutY="393.0" text="5" />
    </children>
 </AnchorPane>

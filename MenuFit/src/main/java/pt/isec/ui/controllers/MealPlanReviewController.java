@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import pt.isec.ai.CommonLLM;
+import pt.isec.ai.GroqLLM;
+import pt.isec.builders.MealPlanBuilder;
 import pt.isec.model.meals.*;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.GenericUser;
@@ -14,14 +17,16 @@ import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
 import pt.isec.builders.InstanceBuilder;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class MealPlanReviewController implements UserInitializable {
     private BasicUser user;
     private BDManager bdManager;
     private SceneSwitcher sceneSwitcher;
-    private Optional<MealPlan> mealPlan;
-
+    //private Optional<MealPlan> mealPlan;
+    private Optional<MealPlan> mealPlanOpt;
     @FXML
     private GridPane weekGridPane;
 
@@ -32,15 +37,34 @@ public class MealPlanReviewController implements UserInitializable {
     }
 
     /**
+     * Gera a ordem dos dias da semana começando por um dia específico.
+     *
+     * @param startDay O dia de início, como "MONDAY".
+     * @return Uma lista dos dias na ordem reorganizada.
+     */
+    private List<String> getOrderedDays(String startDay) {
+        List<String> daysOfWeek = Arrays.asList("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY");
+        int startIndex = daysOfWeek.indexOf(startDay);
+        if (startIndex == -1) return daysOfWeek; // Caso inválido, retorna a ordem padrão.
+
+        List<String> orderedDays = new ArrayList<>();
+        orderedDays.addAll(daysOfWeek.subList(startIndex, daysOfWeek.size())); // Parte após o início.
+        orderedDays.addAll(daysOfWeek.subList(0, startIndex)); // Parte antes do início.
+        return orderedDays;
+    }
+
+    /**
      * Initializes the layout for each day of the week in a GridPane, arranging them in a 3x3 grid.
      * Each day gets a VBox with a label displaying the day name in bold, and the VBoxes are styled with a black border.
      * Sunday is placed in the center column.
      */
     @FXML
     public void initialize() {
-        String[] daysOfWeek = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"};
-        for (int i = 0; i < daysOfWeek.length; i++) {
-            String day = daysOfWeek[i];
+        String startDay = LocalDate.now().getDayOfWeek().toString(); // Dia atual como início.
+        List<String> orderedDays = getOrderedDays(startDay);
+
+        for (int i = 0; i < orderedDays.size(); i++) {
+            String day = orderedDays.get(i);
 
             VBox dailyPane = new VBox();
             dailyPane.setSpacing(5);
@@ -63,11 +87,25 @@ public class MealPlanReviewController implements UserInitializable {
     public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
         this.bdManager = bdManager;
-        InstanceBuilder instanceBuilder = new InstanceBuilder();
-        String json = instanceBuilder.getSampleMealPlanJSON();
-        mealPlan = instanceBuilder.fromJson(json, MealPlan.class);
-        addMeals(mealPlan);
+//        InstanceBuilder instanceBuilder = new InstanceBuilder();
+//        String json = instanceBuilder.getSampleMealPlanJSON();
+//        mealPlan = instanceBuilder.fromJson(json, MealPlan.class);
+//        addMeals(mealPlan);
 
+        CommonLLM llm = GroqLLM.getInstance();
+        llm.setApiKey("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");
+        LocalDate date = LocalDateTime.now().toLocalDate();
+        LocalDate begin = date.plusDays(0);
+        LocalDate end = date.plusDays(7);
+        MealPlanBuilder mealPlanBuilder = MealPlanBuilder.getInstance();
+        mealPlanOpt = mealPlanBuilder.getMealPlan(user, user.getTimeBudget(), begin, end, llm);
+
+        if (mealPlanOpt.isPresent()) {
+            System.out.println("Meal Plan generated successfully.");
+        } else {
+            System.out.println("Unable to generate Meal Plan.");
+        }
+        addMeals(mealPlanOpt);
     }
 
     public void addMeals(Optional<MealPlan> mealPlan) {
@@ -100,12 +138,10 @@ public class MealPlanReviewController implements UserInitializable {
     }
 
     public void btnAcceptHandler(ActionEvent event) {
-        mealPlan.get().setIDUser(user.getIdUser());
-        bdManager.saveMealPlan(mealPlan);
+        mealPlanOpt.get().setIDUser(user.getIdUser());
+        bdManager.saveMealPlan(mealPlanOpt);
         bdManager.saveDietaryRestrictions(user.getHealthData(), user.getIdUser());
 
-
-        user.setCurrentMealIndex(0);
         user.getHealthData().setDailyCalorieSum(0);
         sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user);
     }

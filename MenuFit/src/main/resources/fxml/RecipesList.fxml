@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.RecipesListController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.RecipesListController">
     <ImageView fx:id="logoImageView" fitHeight="50.0" fitWidth="50.0" layoutX="20.0" layoutY="20.0" preserveRatio="true">
         <Image url="@../images/logo.png" />
     </ImageView>
     <Label fx:id="appTitleLabel" layoutX="80.0" layoutY="30.0" style="-fx-font-size: 24; -fx-font-weight: bold;" text="MenuFit - Recipes" />
     <Button fx:id="viewRecipeBtn" layoutX="80.0" layoutY="397.0" mnemonicParsing="false" onAction="#handleViewRecipeBtn" text="See recipe temporary" />
 
-    <Button fx:id="goBackBtn" layoutX="700.0" layoutY="20.0" onAction="#onGoBackClicked" text="Go back" />
+    <Button fx:id="goBackBtn" layoutX="853.0" layoutY="27.0" onAction="#onGoBackClicked" text="Go back" />
 
     <VBox fx:id="favoritesVBox" layoutX="80.0" layoutY="100.0" spacing="10.0">
         <Label style="-fx-font-size: 18;" text="Favorites" />

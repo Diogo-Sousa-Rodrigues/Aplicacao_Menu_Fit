@@ -144,5 +144,12 @@ public interface User {
 
     void addExtraMeal(Meal meal);
 
+    void setPreferedWeightUnit(String unit);
+
+    String getPreferedWeightUnit();
+
     int getAge();
+
+    void setTimeBudget(TimeBudget timeBudget);
+    TimeBudget getTimeBudget();
 }

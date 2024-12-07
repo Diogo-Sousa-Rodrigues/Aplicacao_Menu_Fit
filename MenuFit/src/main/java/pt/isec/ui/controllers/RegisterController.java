@@ -86,10 +86,12 @@ public class RegisterController {
 //        }
 
         String fullName = firstName + " " + lastName;
-        bdManager.registerUser(fullName, email, password, gender, birthDateString);
-
-        showAlert("Registration Successful", "User Registered Successfully!");
-        sceneSwitcher.switchScene("fxml/LogIn.fxml", event, bdManager);
+        if(bdManager.registerUser(fullName, email, password, gender, birthDateString)){
+            showAlert("Registration Successful", "User Registered Successfully!");
+            sceneSwitcher.switchScene("fxml/LogIn.fxml", event, bdManager);
+        }else{
+            showAlert("Registration Failed", "Email or PhoneNumber Already Taken");
+        }
     }
 
 
