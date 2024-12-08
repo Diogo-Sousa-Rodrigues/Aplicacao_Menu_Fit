@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -70,8 +71,8 @@ public class LogInController {
             writer.write("firstName:" + firstName + "\n");
             writer.write("lastName:" + lastName + "\n");
             writer.write("gender: " + gender + "\n");
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-            String birthDateFormatted = formatter.format(birthdate);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            String birthDateFormatted = birthdate.format(formatter);
             writer.write("birthdate:" + birthDateFormatted + "\n");
         } catch (IOException e) {
             System.out.println("Erro ao salvar dados no arquivo.");
