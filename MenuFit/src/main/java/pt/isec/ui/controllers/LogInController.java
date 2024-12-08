@@ -18,6 +18,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -62,7 +63,7 @@ public class LogInController {
     }
 
     // Método temporário para salvar os dados do "Remember Me" em um ficheiro de texto
-    private void saveRememberMeData(String email, String password, String firstName, String lastName, Date birthdate, Gender gender) {
+    private void saveRememberMeData(String email, String password, String firstName, String lastName, LocalDate birthdate, Gender gender) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(REMEMBER_ME_FILE))) {
             writer.write("email:" + email + "\n");
             writer.write("password:" + password + "\n");

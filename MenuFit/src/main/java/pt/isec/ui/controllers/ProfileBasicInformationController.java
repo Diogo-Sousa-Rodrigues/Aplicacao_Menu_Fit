@@ -166,7 +166,7 @@ public class ProfileBasicInformationController implements UserInitializable {
         changeEditVisibilities(true);
         //por os valores nos edits
         nameEdit.setText(user.getFirstName()+" "+user.getLastName());
-        birthdateEdit.setValue(Instant.ofEpochMilli(user.getBirthdate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+        birthdateEdit.setValue(user.getBirthdate());
         genderEdit.setValue(user.getGender().toString());
         emailEdit.setText(user.getEmail());
         heightEdit.setText(userHeightLabel.getText());
@@ -265,7 +265,7 @@ public class ProfileBasicInformationController implements UserInitializable {
 
                 user.setGender(Gender.valueOf((String) genderEdit.getValue()));
                 userGenderLabel.setText(genderEdit.getValue().toString());
-                user.setBirthdate(Date.from(birthdateEdit.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                user.setBirthdate(birthdateEdit.getValue());
                 userBirthdateLabel.setText(birthdateEdit.getValue().toString());
             }else{
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.sql.*;
 import java.sql.Date;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.*;
 
 public class BDManager implements Serializable {
@@ -88,7 +89,7 @@ public class BDManager implements Serializable {
                 String firstName = rs.getString("Name").split(" ")[0]; // Assume o primeiro nome
                 String lastName = rs.getString("Name").replaceFirst(firstName, "").trim(); // Assume o restante como sobrenome
                 String userEmail = rs.getString("Email");
-                Date birthdate = Date.valueOf(rs.getString("Date_of_Birth")); // Converte para java.sql.Date
+                LocalDate birthdate = LocalDate.parse(rs.getString("Date_of_Birth")); // Converte para java.sql.Date
                 Gender gender = Gender.valueOf(rs.getString("Gender")); // Converte para enum Gender
 
                 // Cria um BasicUser com os dados extraídos

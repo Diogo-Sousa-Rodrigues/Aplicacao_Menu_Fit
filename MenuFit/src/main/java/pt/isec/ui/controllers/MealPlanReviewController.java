@@ -87,49 +87,44 @@ public class MealPlanReviewController implements UserInitializable {
     public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
         this.bdManager = bdManager;
-//        InstanceBuilder instanceBuilder = new InstanceBuilder();
-//        String json = instanceBuilder.getSampleMealPlanJSON();
-//        mealPlan = instanceBuilder.fromJson(json, MealPlan.class);
-//        addMeals(mealPlan);
 
         CommonLLM llm = GroqLLM.getInstance();
         llm.setApiKey("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");
+
         LocalDate date = LocalDateTime.now().toLocalDate();
+
         LocalDate begin = date.plusDays(0);
         LocalDate end = date.plusDays(7);
+
         MealPlanBuilder mealPlanBuilder = MealPlanBuilder.getInstance();
-        mealPlanOpt = mealPlanBuilder.getMealPlan(user, user.getTimeBudget(), begin, end, llm);
+        mealPlanOpt = mealPlanBuilder.getMealPlan(user, begin, end, llm);
 
         if (mealPlanOpt.isPresent()) {
             System.out.println("Meal Plan generated successfully.");
+
+            var mealPlan = mealPlanOpt.get();
+            addMeals(mealPlan);
         } else {
             System.out.println("Unable to generate Meal Plan.");
         }
-        addMeals(mealPlanOpt);
     }
 
-    public void addMeals(Optional<MealPlan> mealPlan) {
-        if (mealPlan.isPresent()) {
-            MealPlan plan = mealPlan.get();
+    public void addMeals(MealPlan mealPlan) {
+        for (Meal meal : mealPlan.getMeals()) {
+            VBox dailyPane = dailyMealPanes.get(meal.getDate().getDayOfWeek().toString());
 
-            for (Meal meal : plan.getMeals()) {
-                VBox dailyPane = dailyMealPanes.get(meal.getDate().getDayOfWeek().toString());
+            Text typeText = new Text(meal.getType().toString() + ": ");
+            typeText.setStyle("-fx-font-size: 13; -fx-font-weight: bold;");
 
-                Text typeText = new Text(meal.getType().toString() + ": ");
-                typeText.setStyle("-fx-font-size: 13; -fx-font-weight: bold;");
+            Text recipeText = new Text(
+                    meal.getRecipe().getName() + "\n" +
+                            meal.getRecipe().getPrep().toMinutes() + " min, " +
+                            meal.getRecipe().getCalories() + " kcal"
+            );
+            recipeText.setStyle("-fx-font-size: 13; -fx-padding: 2 0 2 0;");
 
-                Text recipeText = new Text(
-                        meal.getRecipe().getName() + "\n" +
-                                meal.getRecipe().getPrep().toMinutes() + " min, " +
-                                meal.getRecipe().getCalories() + " kcal"
-                );
-                recipeText.setStyle("-fx-font-size: 13; -fx-padding: 2 0 2 0;");
-
-                TextFlow mealTextFlow = new TextFlow(typeText, recipeText);
-                dailyPane.getChildren().add(mealTextFlow);
-            }
-        } else {
-            System.out.println("MealPlan não está presente.");
+            TextFlow mealTextFlow = new TextFlow(typeText, recipeText);
+            dailyPane.getChildren().add(mealTextFlow);
         }
     }
 

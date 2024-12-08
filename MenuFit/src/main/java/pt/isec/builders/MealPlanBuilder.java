@@ -25,7 +25,7 @@ public class MealPlanBuilder {
 
     private MealPlanBuilder() {};
 
-    public Optional<MealPlan> getMealPlan(User user, TimeBudget timeBudget,
+    public Optional<MealPlan> getMealPlan(User user,
                                           LocalDate begin, LocalDate end, CommonLLM llm)
         throws RuntimeException {
 
@@ -35,6 +35,7 @@ public class MealPlanBuilder {
         long days = ChronoUnit.DAYS.between(begin, end);
 
         MealPlan mealPlan = new MealPlan(user);
+        TimeBudget timeBudget = user.getTimeBudget();
 
         mealPlan.setGoal(user.getHealthData().getObjective());
         mealPlan.setBeginDate(begin);

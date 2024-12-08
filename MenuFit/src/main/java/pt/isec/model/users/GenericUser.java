@@ -2,6 +2,7 @@ package pt.isec.model.users;
 
 import pt.isec.model.meals.Meal;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public abstract class GenericUser implements User {
     public GenericUser(Integer idUser, String firstName, String lastName, String email,
-                       Date birthdate, Gender gender) {
+                       LocalDate birthdate, Gender gender) {
         this.idUser = idUser;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -71,12 +72,12 @@ public abstract class GenericUser implements User {
     }
 
     @Override
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return this.birthdate;
     }
 
     @Override
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -138,13 +139,9 @@ public abstract class GenericUser implements User {
 
     @Override
     public int getAge() {
-        LocalDate birthLocalDate = this.birthdate.toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
-
         LocalDate currentDate = LocalDate.now();
 
-        return Period.between(birthLocalDate, currentDate).getYears();
+        return Period.between(birthdate, currentDate).getYears();
     }
 
     @Override
@@ -169,7 +166,7 @@ public abstract class GenericUser implements User {
     private String firstName, lastName, email;
     private Integer idUser;
 
-    private Date birthdate;
+    private LocalDate birthdate;
 
     private Gender gender;
 

@@ -35,7 +35,7 @@ public class Sample {
 
         {
 
-            Date birthdate = new Date(941920980);
+            LocalDate birthdate = LocalDate.now();
 
             User user = new BasicUser(1, "Júlio", "Pacheco",
                     "julio@email.com", birthdate, Gender.Male);
@@ -47,16 +47,15 @@ public class Sample {
 
             user.setHealthData(healthData);
 
-            int mealsPerDay = 5;
-
             TimeBudget timeBudget = new TimeBudget(Duration.ofMinutes(30), 5.0f, "€");
+            user.setTimeBudget(timeBudget);
 
             LocalDate date = LocalDateTime.now().toLocalDate();
             LocalDate begin = date.plusDays(0);
             LocalDate end = date.plusDays(7);
 
             MealPlanBuilder mealPlanBuilder = MealPlanBuilder.getInstance();
-            Optional<MealPlan> mealPlanOpt = mealPlanBuilder.getMealPlan(user, timeBudget, begin, end, llm);
+            Optional<MealPlan> mealPlanOpt = mealPlanBuilder.getMealPlan(user, begin, end, llm);
 
             if (mealPlanOpt.isPresent()) {
                 System.out.println("Meal Plan generated successfully.");
