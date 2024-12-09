@@ -10,11 +10,11 @@ public class AddExtraMealTest {
 
     @Test
     void testExtraMealName() {
-        ExtraMeal extraMeal = new ExtraMeal("Extra Meal", 100);
+        ExtraMeal extraMeal = new ExtraMeal("Extra Meal UT", 100);
         BDManager bdManager = new BDManager();
         bdManager.addExtraMeal(999, extraMeal);
         ExtraMeal extraMealFromDB = bdManager.getExtraMeal(999);
-        assertEquals("Extra Meal", extraMealFromDB.getName(), "Extra Meal name should be 'Extra Meal'.");
+        assertEquals("Extra Meal UT", extraMealFromDB.getName(), "Extra Meal name should be 'Extra Meal UT'.");
     }
 
 }

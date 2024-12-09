@@ -290,6 +290,7 @@ public class MainMenuController implements UserInitializable {
 
         if (mealPlan != null) {
             List<Meal> meals = mealPlan.getMeals();
+            List<ExtraMeal> extraMeals = mealPlan.getExtraMeals();
 
             // Configura espaçamento global no VBox
             dailyMealsContainer.setSpacing(20);
@@ -305,6 +306,21 @@ public class MainMenuController implements UserInitializable {
 
                     // Cria um Label para o nome da receita
                     Label recipeLabel = new Label(recipe.getName());
+                    recipeLabel.setStyle("-fx-font-size: 18px;");
+
+                    // Adiciona ambos os Labels ao contêiner
+                    dailyMealsContainer.getChildren().addAll(mealTypeLabel, recipeLabel);
+                }
+            }
+
+            for (ExtraMeal extraMeal : extraMeals) {
+                if (extraMeal.getDate().toLocalDate().equals(LocalDate.now())) {
+                    // Cria um Label para o tipo da refeição
+                    Label mealTypeLabel = new Label("Extra Meal");
+                    mealTypeLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+
+                    // Cria um Label para o nome da receita
+                    Label recipeLabel = new Label(extraMeal.getName());
                     recipeLabel.setStyle("-fx-font-size: 18px;");
 
                     // Adiciona ambos os Labels ao contêiner
