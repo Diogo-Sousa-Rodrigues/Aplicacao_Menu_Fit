@@ -353,7 +353,7 @@ Mitigation actions:
 
 - Client analysis: pleased with the application. 
 
-- Conclusions: 
+- Conclusions: Need better team meetings
 
 
 ##### Sprint Retrospective
@@ -419,18 +419,19 @@ Mitigation actions:
     - Spike: AI API
     - Spike: AI Prompt
   
-- Story Points: 1S, 3M, 1L
+- Story Points: 1S + 3M + 1L
 
 ##### Sprint Review
-- Analysis: 
+- Analysis: Overall very good.
 
-- Story Points: 
+- Story Points: 1S + 2M
 
-- Version: 
+- Version: 0.2
 
-- Client analysis: 
+- Client analysis: pleased with the application. 
 
-- Conclusions: 
+- Conclusions: Need better independency of User Stories
+
 
 
 ### Sprint 4
@@ -474,3 +475,80 @@ Mitigation actions:
     - Task2: Update User's Info in Database
     
 - Story Points: 1S, 3M, 1L
+
+##### Sprint Review
+- Analysis: Overall very good.
+
+- Story Points: 1S + 3M + 1L
+
+- Version: 0.2
+
+- Client analysis: pleased with the application. 
+
+- Conclusions: Group member impacted the team efficiency.
+
+
+### Release 3
+
+- Goal: MVP - We define our MVP as an app that will offer this possibilities and functionalities to the user:
+  - Simple Nutrotionist
+  - Basic Subscription Plan
+  - Improve UI
+
+- Dates: 09/Dec
+- Team capacity: 4 * 4 * 5 = 80 hours
+- Release: V2.0
+
+***
+
+## Increments
+
+### Sprint 5
+##### Sprint Plan
+
+- Goal: <!-- Create the base architecture of the app and basic interface. -->
+  - AI Prompts
+  - DataBase creation and connection
+  - Remember me
+
+- Dates: from 11/Nov to 26/Nov, 2 weeks
+
+- Roles:
+  - Product Owner: Tiago Fernandes
+  - Scrum Master: Júlio Pacheco
+  - QA: Diogo Rodrigues
+
+- To do:
+
+  - US20:
+    - Spike: Nutritionist logic
+    - Task1: Integrate user in DB
+    - Task2: Add new register option
+
+  - US21: 
+    - Task1: Client Profile Page
+    - Task2: Dashboard
+
+  - US22:
+    - Task1: Manage Data
+    - Task2: Notification UI
+    - Task3: Create Notification Logic and Data
+    - Task4: Update MealPlanReview UI
+    - Task5: Update Profile UI
+
+  - US23:
+    - Spike: Detailed UI/UX analyse
+    - Task1: UI Changes
+  
+- Story Points: 4M
+
+##### Sprint Review
+- Analysis: 
+
+- Story Points: 
+
+- Version: 
+
+- Client analysis: 
+
+- Conclusions: 
