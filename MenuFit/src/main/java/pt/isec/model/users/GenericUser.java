@@ -2,11 +2,16 @@ package pt.isec.model.users;
 
 import pt.isec.model.meals.Meal;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 public abstract class GenericUser implements User {
     public GenericUser(Integer idUser, String firstName, String lastName, String email,
-                       Date birthdate, Gender gender) {
+                       LocalDate birthdate, Gender gender) {
         this.idUser = idUser;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -67,12 +72,12 @@ public abstract class GenericUser implements User {
     }
 
     @Override
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return this.birthdate;
     }
 
     @Override
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -122,18 +127,59 @@ public abstract class GenericUser implements User {
         this.currentMeal = currentMeal;
     }
 
+    @Override
+    public List<Meal> getExtraMeals() {
+        return extraMeals;
+    }
+
+    @Override
+    public void addExtraMeal(Meal meal) {
+        extraMeals.add(meal);
+    }
+
+    @Override
+    public int getAge() {
+        LocalDate currentDate = LocalDate.now();
+
+        return Period.between(birthdate, currentDate).getYears();
+    }
+
+    @Override
+    public void setPreferedWeightUnit(String preferedWeightUnit) {
+        this.preferedWeightUnit = preferedWeightUnit;
+    }
+
+    @Override
+    public String getPreferedWeightUnit() {
+        return preferedWeightUnit;
+    }
+
+    @Override
+    public void setTimeBudget(TimeBudget timeBudget){
+        this.timeBudget = timeBudget;
+    }
+    @Override
+    public TimeBudget getTimeBudget() {
+        return timeBudget;
+    }
+
     private String firstName, lastName, email;
     private Integer idUser;
 
-    private Date birthdate;
+    private LocalDate birthdate;
 
     private Gender gender;
 
-    private HealthData healthData;
+    public HealthData healthData;
 
     private String currentRecipe;
 
     private int currentMealIndex;
 
+    private List<Meal> extraMeals;
+
     private Meal currentMeal;
+
+    private String preferedWeightUnit;
+    private TimeBudget timeBudget;
 }

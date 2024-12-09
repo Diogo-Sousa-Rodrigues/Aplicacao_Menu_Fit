@@ -7,7 +7,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.HealthData;
-import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
 
@@ -121,46 +120,22 @@ public class HealthAndDietaryRestrictions_2Controller implements UserInitializab
     @FXML
     public void finishHandler(ActionEvent event) {
 
-        String allergiesOrIntolerances = allergiesOrIntolerancesTextField.getText();
-        String medicalReasons = medicalReasonsTextField.getText();
-        String chronicHealth = chronicHealthTextField.getText();
+        String allergiesOrIntolerances = allergiesOrIntolerancesYesRadioButton.isSelected()
+                ? allergiesOrIntolerancesTextField.getText().trim()
+                : null;
 
+        String chronicHealth = chronicHealthYesRadioButton.isSelected()
+                ? chronicHealthTextField.getText().trim()
+                : null;
 
-        if (allergiesOrIntolerancesYesRadioButton.isSelected()) {
-            String allergies = allergiesOrIntolerancesTextField.getText().trim();
-            if (allergies.isEmpty()) {
-                showAlert("Attention", "Please enter your allergies or intolerances.");
-                return;
-            }
-            System.out.println("Allergies/Intolerances: " + allergies);
-        }
+        String medicalReasons = medicalYesRadioButton.isSelected()
+                ? medicalReasonsTextField.getText().trim()
+                : null;
 
-        if (chronicHealthYesRadioButton.isSelected()) {
-            String chronicCondition = chronicHealthTextField.getText().trim();
-            if (chronicCondition.isEmpty()) {
-                showAlert("Attention", "Please enter your chronic health conditions.");
-                return;
-            }
-            System.out.println("Chronic Health Conditions: " + chronicCondition);
-        }
+        String gastrointestinalIssues = gastrointestinalIssuesYesRadioButton.isSelected()
+                ? gastrointestinalIssuesTextField.getText().trim()
+                : null;
 
-        if (medicalYesRadioButton.isSelected()) {
-            String medicalDiet = medicalReasonsTextField.getText().trim();
-            if (medicalDiet.isEmpty()) {
-                showAlert("Attention", "Please enter the type of medical diet you are following.");
-                return;
-            }
-            System.out.println("Medical Diet: " + medicalDiet);
-        }
-
-        if (gastrointestinalIssuesYesRadioButton.isSelected()) {
-            String gastrointestinalIssues = gastrointestinalIssuesTextField.getText().trim();
-            if (gastrointestinalIssues.isEmpty()) {
-                showAlert("Attention", "Please enter your gastrointestinal issues.");
-                return;
-            }
-            System.out.println("Gastrointestinal Issues: " + gastrointestinalIssues);
-        }
 
         HealthData healthData = new HealthData(
                 user.getHealthData().getWeight(),
@@ -172,15 +147,16 @@ public class HealthAndDietaryRestrictions_2Controller implements UserInitializab
                 allergiesOrIntolerances,
                 medicalReasons,
                 chronicHealth,
+                gastrointestinalIssues,
                 null,
                 null,
-                null);
+                null
+        );
+
 
         this.user.setHealthData(healthData);
 
-        System.out.println("Proceeding to the next step...");
         sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_3.fxml", event, user, bdManager);
-
     }
 
     @FXML

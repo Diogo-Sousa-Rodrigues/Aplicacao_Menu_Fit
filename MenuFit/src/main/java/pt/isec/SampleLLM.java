@@ -1,46 +1,72 @@
 package pt.isec;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
-import pt.isec.ai.CommonLLM;
-import pt.isec.ai.GeminiLLM;
-import pt.isec.ai.GroqLLM;
-import pt.isec.model.meals.Meal;
-import pt.isec.model.meals.MealPlan;
-import pt.isec.model.meals.Recipe;
-import pt.isec.prompt.DurationAdapter;
-import pt.isec.prompt.InstanceBuilder;
-import pt.isec.prompt.PromptBuilder;
-
-import java.time.Duration;
-import java.util.Optional;
+import java.util.Random;
 
 public class SampleLLM {
     public static void main(String[] args) {
-        CommonLLM llm = GroqLLM.getInstance();
-        llm.setApiKey("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");
+        Random random = new Random();
 
-        try {
-            String prompt = PromptBuilder.getInstance().getMealPlanPrompt();
+        int three = 0;
+        int four = 0;
+        int five = 0;
+        int six = 0;
 
-            InstanceBuilder instanceBuilder = new InstanceBuilder();
+        for (int i = 0; i < 100; ++i) {
+            double value = random.nextGaussian(3, 2.2);
 
-            Optional<MealPlan> mealOptional = instanceBuilder.getInstance(prompt,
-                    llm, MealPlan.class, 5);
-
-            if (mealOptional.isPresent()) {
-                MealPlan meal = mealOptional.get();
-
-
-                System.out.println("MealPlan: " + meal.getBeginDate() + "\n");
+            if (value < 3) {
+                var distance = 3 - value;
+                value += distance;
             }
-            else {
-                System.out.println("Unable to instantiate meal.\n");
+
+            int v = (int) value;
+            if (v == 3) {
+                three++;
+            } else if (v == 4) {
+                four++;
+            } else if (v == 5) {
+                five++;
+            } else if (v == 6) {
+                six++;
             }
-        } catch (Exception e) {
-            System.out.println("Request failure: " + e);
+
+            if (value <= 6.0) {
+                System.out.println(value);
+            } else {
+                System.out.println("\t" + value);
+            }
         }
+
+        System.out.println("Three: " + three);
+        System.out.println("Four: " + four);
+        System.out.println("Five: " + five);
+        System.out.println("Six: " + six);
+
+        return;
+
+        //CommonLLM llm = GroqLLM.getInstance();
+        //llm.setApiKey("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");
+
+        //try {
+        //    String prompt = PromptBuilder.getInstance().getMealPlanPrompt();
+
+        //    InstanceBuilder instanceBuilder = new InstanceBuilder();
+
+        //    Optional<MealPlan> mealOptional = instanceBuilder.getInstance(prompt,
+        //            llm, MealPlan.class, 5);
+
+        //    if (mealOptional.isPresent()) {
+        //        MealPlan meal = mealOptional.get();
+
+
+        //        System.out.println("MealPlan: " + meal.getBeginDate() + "\n");
+        //    }
+        //    else {
+        //        System.out.println("Unable to instantiate meal.\n");
+        //    }
+        //} catch (Exception e) {
+        //    System.out.println("Request failure: " + e);
+        //}
 
     }
 }
