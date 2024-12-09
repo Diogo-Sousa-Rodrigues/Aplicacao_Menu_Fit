@@ -1,5 +1,7 @@
 package pt.isec.builders;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pt.isec.ai.CommonLLM;
 import pt.isec.model.meals.Meal;
 import pt.isec.model.meals.MealPlan;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class MealPlanBuilder {
+    private static final Logger log = LoggerFactory.getLogger(MealPlanBuilder.class);
     private static MealPlanBuilder instance = null;
     public static MealPlanBuilder getInstance() {
         if (instance == null) {
@@ -65,6 +68,7 @@ public class MealPlanBuilder {
 
             return Optional.of(mealPlan);
         } catch (Exception e) {
+            log.info(e.getMessage());
             return Optional.empty();
         }
     }
