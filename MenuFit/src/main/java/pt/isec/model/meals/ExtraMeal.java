@@ -10,6 +10,12 @@ public class ExtraMeal {
         this.date = date;
     }
 
+    public ExtraMeal(String name, int calories) {
+        this.name = name;
+        this.calories = calories;
+        this.date = LocalDateTime.now();
+    }
+
     public String getName() { return name; }
 
     public void setName(String name) { this.name = name; }
