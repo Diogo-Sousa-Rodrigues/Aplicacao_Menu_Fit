@@ -30,9 +30,9 @@
    <Button fx:id="btnAccept" layoutX="917.0" layoutY="557.0" mnemonicParsing="false" onAction="#btnAcceptHandler" text="Accept" />
    <ScrollPane layoutX="78.0" layoutY="78.0" prefHeight="470.0" prefWidth="857.0">
       <content>
-       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="566.0" prefWidth="841.0">
+       <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="841.0">
             <children>
-               <GridPane fx:id="weekGridPane" hgap="10" layoutX="1.0" layoutY="8.0" prefHeight="528.0" prefWidth="840.0" vgap="10">
+               <GridPane fx:id="weekGridPane" hgap="10" layoutX="1.0" layoutY="8.0" prefWidth="840.0" vgap="10">
                   <columnConstraints>
                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="33.33" />
                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="33.33" />

@@ -147,18 +147,29 @@ public class MealPlanController implements UserInitializable {
             Label recipeNameLabel = new Label(recipe.getName());
             recipeNameLabel.setLayoutX(8);
             recipeNameLabel.setLayoutY(41);
+            recipeNameLabel.setWrapText(true);
+            recipeNameLabel.setMaxWidth(mealPane.getPrefWidth()-15);
+
+// Adiciona a label ao layout para garantir que o tamanho seja calculado
+            mealPane.getChildren().add(recipeNameLabel);
 
             Label caloriesLabel = new Label("- " + recipe.getCalories() + " cal");
             caloriesLabel.setLayoutX(8);
-            caloriesLabel.setLayoutY(58);
             caloriesLabel.setFont(new Font(9));
 
             Label timeLabel = new Label("- " + recipe.getPrep().toMinutes() + " min");
             timeLabel.setLayoutX(8);
-            timeLabel.setLayoutY(75);
             timeLabel.setFont(new Font(9));
+// Usa um listener para ajustar as posições dinamicamente
+            recipeNameLabel.heightProperty().addListener((obs, oldHeight, newHeight) -> {
+                double baseY = recipeNameLabel.getLayoutY() + newHeight.doubleValue() + 5;
 
-            mealPane.getChildren().addAll(mealTypeLabel, newRecipeButton, selectCheckBox, recipeNameLabel, caloriesLabel, timeLabel);
+                caloriesLabel.setLayoutY(baseY);
+                timeLabel.setLayoutY(baseY + 17);
+            });
+
+
+            mealPane.getChildren().addAll(mealTypeLabel, newRecipeButton, selectCheckBox, caloriesLabel, timeLabel);
         } else {
             Label noRecipeLabel = new Label("No recipe available");
             noRecipeLabel.setLayoutX(8);
