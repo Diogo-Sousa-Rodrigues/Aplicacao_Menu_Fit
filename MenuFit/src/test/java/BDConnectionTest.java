@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BDManagerTest {
+class BDConnectionTest {
     private BDManager bdManager;
 
     @BeforeEach
