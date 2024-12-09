@@ -462,18 +462,29 @@ Mitigation actions:
     - Task: Custom AI Prompt
 
   - US17:
+    - UnitTest: Extra Meal in DB
     - Task1: Extra Meal UI
     - Task2: Extra Meal data
     - Task3: Adjust Calorie Log
 
   - US18:
+    - UnitTest: Create DB Table
     - Task1: Create Database table
     - Task2: Database CRUD
   
   - US19:
     - Task1: Create Edit UI
     - Task2: Update User's Info in Database
-    
+
+- Extra done:
+
+  - US14:
+      - UnitTest: Database Connection
+  
+  - Unit Test: Serialize JSON to Model Class
+
+  - Unit Test: Email and Password Validation
+      
 - Story Points: 1S, 3M, 1L
 
 ##### Sprint Review
@@ -506,12 +517,12 @@ Mitigation actions:
 ### Sprint 5
 ##### Sprint Plan
 
-- Goal: <!-- Create the base architecture of the app and basic interface. -->
-  - AI Prompts
-  - DataBase creation and connection
-  - Remember me
+- Goal: <!-- Create the Nutritionist and a better UI. -->
+  - Simple Nutrotionist
+  - Basic Subscription Plan
+  - Improve UI
 
-- Dates: from 11/Nov to 26/Nov, 2 weeks
+- Dates: from 10/Dec to 24/Dec, 2 weeks
 
 - Roles:
   - Product Owner: Tiago Fernandes
@@ -519,6 +530,8 @@ Mitigation actions:
   - QA: Diogo Rodrigues
 
 - To do:
+
+  - Defect: Favorite/Delete Meals
 
   - US20:
     - Spike: Nutritionist logic
@@ -539,8 +552,13 @@ Mitigation actions:
   - US23:
     - Spike: Detailed UI/UX analyse
     - Task1: UI Changes
+
+- Spill Over:
+
+  - US10:
+    - Task1: Recipe Data
   
-- Story Points: 4M
+- Story Points: 4M + 1M (only 1 task)
 
 ##### Sprint Review
 - Analysis: 
