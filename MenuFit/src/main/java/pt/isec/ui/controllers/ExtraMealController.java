@@ -30,7 +30,7 @@ public class ExtraMealController implements UserInitializable {
 
     @FXML
     void handlePrevious(ActionEvent event) throws IOException {
-        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, null, null);
+        sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user, null);
     }
 
     @FXML

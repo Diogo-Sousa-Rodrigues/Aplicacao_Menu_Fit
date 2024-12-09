@@ -25,6 +25,7 @@ public class ProfileObjectivesController implements UserInitializable {
     public Label weightGoal;
     public Label warningLabel;
     public Button generateMealPlanBtn;
+    public Label units;
     @FXML
     private Label userObjectiveLabel;
 
@@ -54,10 +55,9 @@ public class ProfileObjectivesController implements UserInitializable {
 
         if (healthData != null) {
             userObjectiveLabel.setText(healthData.getObjective());
-            if(user.getPreferedWeightUnit() != null){
-                weightGoal.setText(healthData.getDesiredWeight() + " " + user.getPreferedWeightUnit());
-            }
+            weightGoal.setText(healthData.getDesiredWeight());
             calorieGoal.setText(healthData.getDailyCalorieCount());
+            units.setText(user.getPreferedWeightUnit());
         }
         disableFields(user.getHealthData()==null);
     }
@@ -93,6 +93,7 @@ public class ProfileObjectivesController implements UserInitializable {
         editObjectivesButton.setDisable(user.getHealthData()==null);
         weightGoal.setVisible(!isVisible);
         calorieGoal.setVisible(!isVisible);
+        units.setVisible(!isVisible);
     }
 
     @FXML
@@ -137,11 +138,14 @@ public class ProfileObjectivesController implements UserInitializable {
         if(bdManager.updateObjective(user.getIdUser(), objectivesEdit.getText(), weightGoalEdit.getText(), calorieGoalEdit.getText())){
             if(kgRadioButton.isSelected()){
                 user.setPreferedWeightUnit("kg");
-            }else
+                units.setText("kg");
+            }else{
                 user.setPreferedWeightUnit("lbs");
+                units.setText("lbs");
+            }
             userObjectiveLabel.setText(objectivesEdit.getText());
             user.getHealthData().setObjective(userObjectiveLabel.getText());
-            weightGoal.setText(weightGoalEdit.getText() + " " + user.getPreferedWeightUnit());
+            weightGoal.setText(weightGoalEdit.getText());
             user.getHealthData().setDesiredWeight(weightGoalEdit.getText());
             calorieGoal.setText(calorieGoalEdit.getText());
             user.getHealthData().setDailyCalorieCount(calorieGoalEdit.getText());
