@@ -7,12 +7,14 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import pt.isec.model.users.BasicUser;
+import pt.isec.model.users.TimeBudget;
 import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ResourceBundle;
 
 public class TimeAndBudgetController implements Initializable, UserInitializable {
@@ -61,6 +63,8 @@ public class TimeAndBudgetController implements Initializable, UserInitializable
             budget = null;
         }
         //TODO guardar os dados
+        TimeBudget timeBudget = new TimeBudget(Duration.ofMinutes(time), budget, "€");
+        user.setTimeBudget(timeBudget);
         sceneSwitcher.switchScene("fxml/MealPlanReview.fxml", event, user);
     }
 

@@ -1,7 +1,6 @@
 package pt.isec.model.users;
 
 public class HealthData {
-
     public String getMedications() {
         return medications;
     }
@@ -14,7 +13,7 @@ public class HealthData {
                       String objective, String levelOfFitness,
                       String desiredWeight, String dailyCalorieCount,
                       String allergiesOrIntolerances, String medicalReasons,
-                      String chronicHealth, String gastrointestinalIssues,
+                      String chronicHealth, String gastrointestinalIssues,String vitaminDeficiencies,
                       String dietType, String medications) {
         this.weight = weight;
         this.height = height;
@@ -22,10 +21,11 @@ public class HealthData {
         this.levelOfFitness = levelOfFitness;
         this.desiredWeight = desiredWeight;
         this.dailyCalorieCount = dailyCalorieCount;
-        this.allergiesOrIntorelances = allergiesOrIntolerances;
+        this.allergiesOrIntolerances = allergiesOrIntolerances;
         this.medicalReasons = medicalReasons;
         this.chronicHealth = chronicHealth;
         this.gastrointestinalIssues = gastrointestinalIssues;
+        this.vitaminDeficiencies = vitaminDeficiencies;
         this.dietType = dietType;
         this.medications = medications;
     }
@@ -86,9 +86,9 @@ public class HealthData {
         this.dailyCalorieSum = dailyCalorieSum;
     }
 
-    public String getAllergiesOrIntorelances() { return allergiesOrIntorelances; }
+    public String getAllergiesOrIntolerances() { return allergiesOrIntolerances; }
 
-    public void setAllergiesOrIntorelances(String allergiesOrIntorelances) { this.allergiesOrIntorelances = allergiesOrIntorelances; }
+    public void setAllergiesOrIntolerances(String allergiesOrIntolerances) { this.allergiesOrIntolerances = allergiesOrIntolerances; }
 
     public String getMedicalReasons() { return medicalReasons; }
 
@@ -97,6 +97,11 @@ public class HealthData {
     public String getGastrointestinalIssues() { return gastrointestinalIssues; }
 
     public void setGastrointestinalIssues(String gastrointestinalIssues) { this.gastrointestinalIssues = gastrointestinalIssues; }
+
+    public String getVitaminDeficiencies() { return vitaminDeficiencies; }
+
+    public void setVitaminDeficiencies(String vitaminDeficiencies) {this.vitaminDeficiencies = vitaminDeficiencies; }
+
 
     public String getChronicHealth() { return chronicHealth; }
 
@@ -125,10 +130,11 @@ public class HealthData {
     private String desiredWeight;
     private String dailyCalorieCount;
     private Integer dailyCalorieSum;
-    private String allergiesOrIntorelances;
+    private String allergiesOrIntolerances;
     private String medicalReasons;
     private String chronicHealth;
     private String gastrointestinalIssues;
+    private String vitaminDeficiencies;
     private String dietType;
     private String medications;
 }

@@ -1,4 +1,4 @@
-package pt.isec.prompt;
+package pt.isec.adapters;
 
 import com.google.gson.*;
 

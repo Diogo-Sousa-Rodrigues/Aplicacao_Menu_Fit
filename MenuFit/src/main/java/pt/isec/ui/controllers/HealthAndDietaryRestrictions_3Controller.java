@@ -7,7 +7,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.HealthData;
-import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
 
@@ -119,6 +118,7 @@ public class HealthAndDietaryRestrictions_3Controller implements UserInitializab
     public void finishHandler(ActionEvent event) {
         String dietType = foodRestrictionsTextField.getText();
         String medications = medicationsTextField.getText();
+        String vitaminDeficiencies = vitaminOrMineralTextField.getText();
 
         if (vitaminOrMineralYesRadioButton.isSelected()) {
             String deficiencies = vitaminOrMineralTextField.getText().trim();
@@ -160,17 +160,17 @@ public class HealthAndDietaryRestrictions_3Controller implements UserInitializab
                 user.getHealthData().getLevelOfFitness(),
                 user.getHealthData().getDesiredWeight(),
                 user.getHealthData().getDailyCalorieCount(),
-                user.getHealthData().getAllergiesOrIntorelances(),
+                user.getHealthData().getAllergiesOrIntolerances(),
                 user.getHealthData().getMedicalReasons(),
                 user.getHealthData().getChronicHealth(),
-                null,
+                user.getHealthData().getGastrointestinalIssues(),
+                vitaminDeficiencies,
                 dietType,
                 medications);
 
         this.user.setHealthData(healthData);
 
         sceneSwitcher.switchScene("fxml/TimeAndBudget.fxml", event, user, bdManager);
-
     }
 
     @FXML

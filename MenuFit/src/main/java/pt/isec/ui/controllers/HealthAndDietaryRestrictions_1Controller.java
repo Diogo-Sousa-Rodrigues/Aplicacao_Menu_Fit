@@ -6,7 +6,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.HealthData;
-import pt.isec.model.users.User;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
 
@@ -35,7 +34,7 @@ public class HealthAndDietaryRestrictions_1Controller implements UserInitializab
         if (weight.isEmpty() || height.isEmpty() || objective.isEmpty() || levelOfFitness == null ||
                 (!desiredWeightYesRadioButton.isSelected() && !desiredWeightNoRadioButton.isSelected()) ||
                 (!dailyCalorieYesCountRadioButton.isSelected() && !dailyCalorieNoCountRadioButton.isSelected()) ||
-                (!kgRadioButton.isSelected() && !lbsRadioButton.isSelected())) {
+                (desiredWeightYesRadioButton.isSelected() && (!kgRadioButton.isSelected() && !lbsRadioButton.isSelected()))) {
 
             showAlert("Attention", "Please fill in all required fields and make selections for the radio buttons.");
             return;
@@ -63,14 +62,19 @@ public class HealthAndDietaryRestrictions_1Controller implements UserInitializab
                 null,
                 null,
                 null,
+                null,
                 null
         );
 
         this.user.setHealthData(healthData);
-
-        System.out.println("Health Data collected: " + healthData);
+        if(kgRadioButton.isSelected()){
+            this.user.setPreferedWeightUnit("kg");
+        }else if(lbsRadioButton.isSelected()){
+            this.user.setPreferedWeightUnit("lbs");
+        }
 
         sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event, user, bdManager);
+
     }
 
     public void calculateBMI() {
@@ -132,7 +136,7 @@ public class HealthAndDietaryRestrictions_1Controller implements UserInitializab
         boolean levelOfFitnessSelected = levelOfFitnessComboBox.getValue() != null;
         boolean desiredWeightSelected = desiredWeightYesRadioButton.isSelected() || desiredWeightNoRadioButton.isSelected();
         boolean dailyCalorieSelected = dailyCalorieYesCountRadioButton.isSelected() || dailyCalorieNoCountRadioButton.isSelected();
-        boolean weightUnitSelected = kgRadioButton.isSelected() || lbsRadioButton.isSelected();
+        boolean weightUnitSelected = !desiredWeightYesRadioButton.isSelected() || (kgRadioButton.isSelected() || lbsRadioButton.isSelected());
 
         next.setDisable(!(weightNotEmpty && heightNotEmpty && objectiveNotEmpty && levelOfFitnessSelected
                 && desiredWeightSelected && dailyCalorieSelected && weightUnitSelected));
