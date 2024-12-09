@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import pt.isec.model.meals.ExtraMeal;
 import pt.isec.model.meals.Meal;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.User;
@@ -37,8 +38,8 @@ public class ExtraMealController implements UserInitializable {
         String mealName = inputMealName.getText();
         int calories = Integer.parseInt(inputCalories.getText());
 
-        //Meal extraMeal = new Meal(mealName, calories);
-        //this.user.addExtraMeal(mealName, calories);
+        ExtraMeal extraMeal = new ExtraMeal(mealName, calories);
+        this.user.getMealPlan().putExtraMeal(extraMeal);
 
         sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user);
     }

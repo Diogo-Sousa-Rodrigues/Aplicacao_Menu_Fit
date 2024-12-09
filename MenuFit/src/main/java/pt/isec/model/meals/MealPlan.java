@@ -44,6 +44,13 @@ public class MealPlan {
         return false;
     }
 
+    public boolean putExtraMeal(ExtraMeal meal) {
+        if (!this.extraMeals.contains(meal)) {
+            return this.extraMeals.add(meal);
+        }
+        return false;
+    }
+
     public void putMeals(List<Meal> meals) {
         for (var meal : meals) {
             this.putMeal(meal);
@@ -57,6 +64,8 @@ public class MealPlan {
     public List<Meal> getMeals() {
         return this.meals;
     }
+
+    public List<ExtraMeal> getExtraMeals() { return this.extraMeals; }
 
     public String getGoal() {
         return this.goal;
@@ -99,6 +108,7 @@ public class MealPlan {
     }
 
     private List<Meal> meals = new ArrayList<>();
+    private final List<ExtraMeal> extraMeals = new ArrayList<>();
 
     private String goal;
 

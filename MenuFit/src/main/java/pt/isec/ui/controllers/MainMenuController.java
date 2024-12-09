@@ -54,7 +54,7 @@ public class MainMenuController implements UserInitializable {
     SceneSwitcher sceneSwitcher;
     BDManager bdManager;
 
-    public MainMenuController(){
+    public MainMenuController() {
         this.sceneSwitcher = new SceneSwitcher();
     }
 
@@ -62,9 +62,9 @@ public class MainMenuController implements UserInitializable {
     public void initializeUser(BasicUser user, BDManager bdManager) {
         this.user = user;
         this.bdManager = bdManager;
-        if(user.getMealPlan() != null){
+        if (user.getMealPlan() != null) {
             mealPlan = user.getMealPlan();
-        }else{
+        } else {
             mealPlan = bdManager.getMealPlan(user.getIdUser());
             user.setMealPlan(mealPlan);
         }
@@ -76,26 +76,31 @@ public class MainMenuController implements UserInitializable {
     }
 
     private void initializeCalorieCounter() {
-        if(mealPlan != null){
+        if (mealPlan != null) {
             int counterDayTotal = 0;
             int counterConsumed = 0;
             for (Meal meal : mealPlan.getMeals()) {
                 if (meal.getDate().toLocalDate().equals(LocalDate.now())) {
                     counterDayTotal += meal.getRecipe().getCalories();
-                    if(meal.getCheck()){
+                    if (meal.getCheck()) {
                         counterConsumed += meal.getRecipe().getCalories();
                     }
+                }
+            }
+            for (ExtraMeal extraMeal : mealPlan.getExtraMeals()) {
+                if (extraMeal.getDate().toLocalDate().equals(LocalDate.now())) {
+                    counterDayTotal += extraMeal.getCalories();
+                    counterConsumed += extraMeal.getCalories();
                 }
             }
             caloriesConsumed.set(counterConsumed);
             caloriesRemaining.set(counterDayTotal - counterConsumed);
             caloriesConsumedLabel.textProperty().bind(caloriesConsumed.asString().concat("/" + counterDayTotal));
             caloriesRemainingLabel.textProperty().bind(caloriesRemaining.asString().concat("/" + counterDayTotal));
-        }else {
+        } else {
             caloriesConsumedLabel.setText("----/----");
             caloriesRemainingLabel.setText("----/----");
         }
-
     }
 
     @FXML
@@ -176,7 +181,7 @@ public class MainMenuController implements UserInitializable {
     }
 
     private void initializeDailyReminders() {
-        if(mealPlan == null) return;
+        if (mealPlan == null) return;
         Map<Reminder, MealType> remindersWithMealTypeMap = new HashMap<>();
 
         boolean mealFound = false;
@@ -189,7 +194,7 @@ public class MainMenuController implements UserInitializable {
                 }
             }
         }
-        if(!mealFound){
+        if (!mealFound) {
             vboxReminders.getChildren().clear();
             return;
         }
@@ -226,9 +231,9 @@ public class MainMenuController implements UserInitializable {
 
             checkBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
 
-                        if(bdManager.checkReminder(reminder))
-                            reminder.setCheck(newValue);
-                    });
+                if (bdManager.checkReminder(reminder))
+                    reminder.setCheck(newValue);
+            });
 
             vboxReminders.getChildren().add(hBox);
         }
@@ -276,7 +281,6 @@ public class MainMenuController implements UserInitializable {
         long minutes = recipe.getPrep().toMinutes();
         nextMealPrepTimeLabel.setText("- " + minutes + " m");
     }
-
 
 
     private void initializeDailyMealsPreview() {
