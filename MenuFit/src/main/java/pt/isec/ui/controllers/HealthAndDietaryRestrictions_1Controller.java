@@ -34,7 +34,7 @@ public class HealthAndDietaryRestrictions_1Controller implements UserInitializab
         if (weight.isEmpty() || height.isEmpty() || objective.isEmpty() || levelOfFitness == null ||
                 (!desiredWeightYesRadioButton.isSelected() && !desiredWeightNoRadioButton.isSelected()) ||
                 (!dailyCalorieYesCountRadioButton.isSelected() && !dailyCalorieNoCountRadioButton.isSelected()) ||
-                (!kgRadioButton.isSelected() && !lbsRadioButton.isSelected())) {
+                (desiredWeightYesRadioButton.isSelected() && (!kgRadioButton.isSelected() && !lbsRadioButton.isSelected()))) {
 
             showAlert("Attention", "Please fill in all required fields and make selections for the radio buttons.");
             return;
@@ -67,6 +67,11 @@ public class HealthAndDietaryRestrictions_1Controller implements UserInitializab
         );
 
         this.user.setHealthData(healthData);
+        if(kgRadioButton.isSelected()){
+            this.user.setPreferedWeightUnit("kg");
+        }else if(lbsRadioButton.isSelected()){
+            this.user.setPreferedWeightUnit("lbs");
+        }
 
         sceneSwitcher.switchScene("fxml/HealthAndDietaryRestrictions_2.fxml", event, user, bdManager);
 
@@ -131,7 +136,7 @@ public class HealthAndDietaryRestrictions_1Controller implements UserInitializab
         boolean levelOfFitnessSelected = levelOfFitnessComboBox.getValue() != null;
         boolean desiredWeightSelected = desiredWeightYesRadioButton.isSelected() || desiredWeightNoRadioButton.isSelected();
         boolean dailyCalorieSelected = dailyCalorieYesCountRadioButton.isSelected() || dailyCalorieNoCountRadioButton.isSelected();
-        boolean weightUnitSelected = kgRadioButton.isSelected() || lbsRadioButton.isSelected();
+        boolean weightUnitSelected = !desiredWeightYesRadioButton.isSelected() || (kgRadioButton.isSelected() || lbsRadioButton.isSelected());
 
         next.setDisable(!(weightNotEmpty && heightNotEmpty && objectiveNotEmpty && levelOfFitnessSelected
                 && desiredWeightSelected && dailyCalorieSelected && weightUnitSelected));

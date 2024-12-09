@@ -10,29 +10,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.LogInController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.LogInController">
     <children>
-        <Label layoutX="262.0" layoutY="154.0" text="Log In">
+        <Label layoutX="360.0" layoutY="151.0" text="Log In">
             <font>
                 <Font size="25.0" />
             </font>
         </Label>
-        <TextField fx:id="emailTextField" layoutX="262.0" layoutY="218.0" prefHeight="26.0" prefWidth="276.0" promptText="email" />
-        <PasswordField fx:id="hiddenPasswordField" layoutX="262.0" layoutY="260.0" prefHeight="26.0" prefWidth="276.0" promptText="password" />
-        <TextField fx:id="passwordTextField" layoutX="262.0" layoutY="260.0" prefHeight="26.0" prefWidth="276.0" visible="false" />
-        <CheckBox fx:id="showPassword" layoutX="545.0" layoutY="265.0" mnemonicParsing="false" onAction="#changeVisibility" text="Show Password" />
-      <CheckBox fx:id="rememberMe" layoutX="262.0" layoutY="300.0" mnemonicParsing="false" onAction="#rememberMeHandler" text="Remember Me" />
-      <Button fx:id="login" layoutX="344.0" layoutY="383.0" mnemonicParsing="false" onAction="#logInHandler" prefHeight="36.0" prefWidth="111.0" text="Log In" textAlignment="CENTER">
+        <TextField fx:id="emailTextField" layoutX="360.0" layoutY="215.0" prefHeight="26.0" prefWidth="276.0" promptText="email" />
+        <PasswordField fx:id="hiddenPasswordField" layoutX="360.0" layoutY="257.0" prefHeight="26.0" prefWidth="276.0" promptText="password" />
+        <TextField fx:id="passwordTextField" layoutX="360.0" layoutY="257.0" prefHeight="26.0" prefWidth="276.0" visible="false" />
+        <CheckBox fx:id="showPassword" layoutX="643.0" layoutY="262.0" mnemonicParsing="false" onAction="#changeVisibility" text="Show Password" />
+      <CheckBox fx:id="rememberMe" layoutX="360.0" layoutY="297.0" mnemonicParsing="false" onAction="#rememberMeHandler" text="Remember Me" />
+      <Button fx:id="login" layoutX="442.0" layoutY="380.0" mnemonicParsing="false" onAction="#logInHandler" prefHeight="36.0" prefWidth="111.0" text="Log In" textAlignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Label layoutX="305.0" layoutY="508.0" text="New to our App?">
+      <Label layoutX="403.0" layoutY="505.0" text="New to our App?">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
-      <Button fx:id="registerNow" layoutX="393.0" layoutY="505.0" mnemonicParsing="false" onAction="#registerNowHandler" text="Register Now">
+      <Button fx:id="registerNow" layoutX="491.0" layoutY="502.0" mnemonicParsing="false" onAction="#registerNowHandler" text="Register Now">
          <font>
             <Font size="10.0" />
          </font>

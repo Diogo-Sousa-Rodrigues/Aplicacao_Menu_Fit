@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.sql.*;
 import java.sql.Date;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.*;
 
 public class BDManager implements Serializable {
@@ -46,7 +47,7 @@ public class BDManager implements Serializable {
         }
     }
 
-    public void registerUser(String fullName, String email, String password, String gender, String birthDateString) {
+    public boolean registerUser(String fullName, String email, String password, String gender, String birthDateString) {
         String sql = "INSERT INTO USER (Email, Password, Date_of_Birth, Gender, Name) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
@@ -61,12 +62,14 @@ public class BDManager implements Serializable {
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("User registered successfully!");
+                return true;
             } else {
                 System.out.println("Failed to register user.");
             }
         } catch (SQLException e) {
             System.out.println("Error while registering user: " + e.getMessage());
         }
+        return false;
     }
 
     public BasicUser checkLogin(String email, String password) {
@@ -86,7 +89,7 @@ public class BDManager implements Serializable {
                 String firstName = rs.getString("Name").split(" ")[0]; // Assume o primeiro nome
                 String lastName = rs.getString("Name").replaceFirst(firstName, "").trim(); // Assume o restante como sobrenome
                 String userEmail = rs.getString("Email");
-                Date birthdate = Date.valueOf(rs.getString("Date_of_Birth")); // Converte para java.sql.Date
+                LocalDate birthdate = LocalDate.parse(rs.getString("Date_of_Birth")); // Converte para java.sql.Date
                 Gender gender = Gender.valueOf(rs.getString("Gender")); // Converte para enum Gender
 
                 // Cria um BasicUser com os dados extraídos
@@ -554,12 +557,54 @@ public class BDManager implements Serializable {
 
                 int affectedRows = pstmt.executeUpdate();
                 if(affectedRows > 0){
-                    return(updateIngredients(newRecipe.get(), meal.getRecipe()) && updateReminders(newRecipe.get(), meal.getRecipe()));
+                    return(deleteOldIngredients(recipeID) && deleteOldReminders(recipeID) && updateIngredients(newRecipe.get(), meal.getRecipe()) && updateReminders(newRecipe.get(), meal.getRecipe()));
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
                 return false;
             }
+        }
+        return false;
+    }
+
+    private boolean deleteOldReminders(Integer recipeID) {
+        String sql = "DELETE FROM REMINDERS WHERE RecipeID = ?";
+
+        try (PreparedStatement pstmt = dbConn.prepareStatement(sql)) {
+            // Configurar o parâmetro do IDExpense
+            pstmt.setInt(1, recipeID);
+
+            // Executar a query
+            int rowsAffected = pstmt.executeUpdate();
+
+            // Verificar se a operação foi bem-sucedida
+            if (rowsAffected > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return false;
+    }
+
+    private boolean deleteOldIngredients(Integer recipeID) {
+        String sql = "DELETE FROM INGREDIENTS WHERE RecipeID = ?";
+
+        try (PreparedStatement pstmt = dbConn.prepareStatement(sql)) {
+            // Configurar o parâmetro do IDExpense
+            pstmt.setInt(1, recipeID);
+
+            // Executar a query
+            int rowsAffected = pstmt.executeUpdate();
+
+            // Verificar se a operação foi bem-sucedida
+            if (rowsAffected > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
         }
         return false;
     }
@@ -568,7 +613,7 @@ public class BDManager implements Serializable {
         String sql = "INSERT INTO REMINDERS (RecipeID, 'Check', Text) VALUES (?, ?, ?)";
 
         //se for necessário chamar aqui uma função apra apagar os reminders da receita antiga
-
+        boolean success = true;
         for(Reminder reminder : newRecipe.getReminders()){
             try (PreparedStatement pstmt = dbConn.prepareStatement(sql)) {
                 pstmt.setInt(1, mealRecipe.getRecipeID());
@@ -576,22 +621,22 @@ public class BDManager implements Serializable {
                 pstmt.setString(3, reminder.getData());
 
                 int affectedRows = pstmt.executeUpdate();
-                if(affectedRows > 0){
-                    return true;
+                if(affectedRows <= 0){
+                    success = false;
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
-                return false;
+                success = false;
             }
         }
-        return false;
+        return success;
     }
 
     private boolean updateIngredients(Recipe newRecipe, Recipe mealRecipe) {
         String sql = "INSERT INTO INGREDIENTS (RecipeID, Name, Description, Quantity, Units, Calories, Allergens, Proteins, Carbs, Fats) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         //se for necessário chamar aqui uma função apra apagar os ingredients da receita antiga
-
+        boolean success = true;
         for(Ingredient ingredient : newRecipe.getIngredients()){
             try (PreparedStatement pstmt = dbConn.prepareStatement(sql)) {
                 pstmt.setInt(1, mealRecipe.getRecipeID());
@@ -606,14 +651,155 @@ public class BDManager implements Serializable {
                 pstmt.setFloat(10, ingredient.macros().fats());
 
                 int affectedRows = pstmt.executeUpdate();
-                if(affectedRows > 0){
-                    return true;
+                if(affectedRows <= 0){
+                    success = false;
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
-                return false;
+                success = false;
             }
+        }
+        return success;
+    }
+
+    public String getUserPassword(Integer idUser) {
+        String sql = "SELECT Password FROM USER WHERE UserID = ?";
+        try (PreparedStatement pstmt = dbConn.prepareStatement(sql)) {
+            pstmt.setInt(1, idUser);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString(1);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return null;
+    }
+
+    public boolean setNewPassword(Integer idUser, String text) {
+        String sql = "UPDATE USER SET Password = ? WHERE UserID = ?";
+        try (PreparedStatement pstmt = dbConn.prepareStatement(sql)){
+            pstmt.setString(1, text);
+            pstmt.setInt(2, idUser);
+            int affectedRows = pstmt.executeUpdate();
+            if(affectedRows > 0){
+                return true;
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
         }
         return false;
     }
+
+    public boolean updateUserInfo(Integer idUser, String email, String birthdate, String gender, String name) {
+        String sql =  "UPDATE USER SET Email = ?, Date_of_Birth = ?, Gender = ?, Name = ? WHERE UserID = ?";
+
+        try(PreparedStatement pstmt = dbConn.prepareStatement(sql)){
+            pstmt.setString(1, email);
+            pstmt.setString(2, birthdate);
+            pstmt.setString(3, gender);
+            pstmt.setString(4, name);
+            pstmt.setInt(5, idUser);
+            int affectedRows = pstmt.executeUpdate();
+            if(affectedRows > 0){
+                return true;
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return false;
+    }
+
+    public boolean updateUserHeightAndWeight(Integer idUser, String height, String weight) {
+        String sql = "UPDATE DietaryRestrictions SET Weight = ?, Height = ? WHERE UserID = ?";
+        try(PreparedStatement pstmt = dbConn.prepareStatement(sql)){
+            pstmt.setString(1, height);
+            pstmt.setString(2, weight);
+            pstmt.setInt(3, idUser);
+            int affectedRows = pstmt.executeUpdate();
+            if(affectedRows > 0){
+                return true;
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return false;
+    }
+
+    public boolean updateObjective(Integer idUser, String objetivo, String desiredWeight, String cailyCalorieCount) {
+        String sql = "UPDATE DietaryRestrictions SET Objetivo = ?, DesiredWeight = ?, DailyCalorieCount = ? WHERE UserID = ?";
+        try(PreparedStatement pstmt = dbConn.prepareStatement(sql)){
+            pstmt.setString(1, objetivo);
+            pstmt.setString(2, desiredWeight);
+            pstmt.setString(3, cailyCalorieCount);
+            pstmt.setInt(4, idUser);
+            int affectedRows = pstmt.executeUpdate();
+            if(affectedRows > 0){
+                return true;
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return false;
+    }
+
+    public boolean updateDietaryRestrictions(Integer idUser, String diet, String allergies, String vitamins, String foodPrefRestric, String chronicIssues, String gastroIssues, String medication) {
+        String sql = "UPDATE DietaryRestrictions SET Allergies = ?, Specific_Diet = ?, Chronic_Isseus = ?, Gastrointestinal_Issues = ?, Vitamin_Deficiencies = ?, Food_Preference = ?, Medication = ? WHERE UserID = ?";
+        try(PreparedStatement pstmt = dbConn.prepareStatement(sql)){
+            pstmt.setString(1, allergies);
+            pstmt.setString(2, diet);
+            pstmt.setString(3, chronicIssues);
+            pstmt.setString(4, gastroIssues);
+            pstmt.setString(5, vitamins);
+            pstmt.setString(6, foodPrefRestric);
+            pstmt.setString(7, medication);
+            pstmt.setInt(8, idUser);
+            int affectedRows = pstmt.executeUpdate();
+            if(affectedRows > 0){
+                return true;
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return false;
+    }
+
+//    public boolean insertUserHeightAndWeight(Integer idUser, String height, String weight) {
+//        String sql = "INSERT INTO DietaryRestrictions (UserID, Weight, Height, Objetivo, Level_Fitness, DesiredWeight, DailyCalorieCount, Allergies, Specific_Diet, Chronic_Isseus, Gastrointestinal_Issues, Vitamin_Deficiencies, Food_Preference, Medication) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+//        try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
+//
+//            pstmt.setInt(1, idUser);
+//            pstmt.setString(2, weight);
+//            pstmt.setString(3, height);
+//            pstmt.setString(4, null);
+//            pstmt.setString(5, null);
+//            pstmt.setString(6, null);
+//            pstmt.setString(7, null);
+//            pstmt.setString(8, null);
+//            pstmt.setString(9, null);
+//            pstmt.setString(10, null);
+//            pstmt.setString(11, null);
+//            pstmt.setString(12, null);
+//            pstmt.setString(13, null);
+//            pstmt.setString(14, null);
+//
+//            int rowsAffected = pstmt.executeUpdate();
+//            if (rowsAffected > 0) {
+//                return true;
+//            }
+//        } catch (SQLException e) {
+//            System.out.println("Error while registering dietary restrictions: " + e.getMessage());
+//            return false;
+//        }
+//
+//        return false;
+//
+//    }
 }

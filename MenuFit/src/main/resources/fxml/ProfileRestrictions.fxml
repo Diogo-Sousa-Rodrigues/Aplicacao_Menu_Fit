@@ -2,13 +2,14 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="editButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="859.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.ProfileRestrictionsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.ProfileRestrictionsController">
    <Pane fx:id="optionsPane" prefHeight="600.0" prefWidth="206.0" style="-fx-border-color: grey; -fx-border-width: 2;">
       <children>
           <ImageView fx:id="logoImageView" fitHeight="58.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
@@ -23,40 +24,76 @@
          <Button fx:id="restrictionsButton" layoutX="4.0" layoutY="184.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="199.0" text="Restrictions" />
          <Button fx:id="objectivesButton" layoutX="4.0" layoutY="271.0" mnemonicParsing="false" onAction="#objectivesHandler" prefHeight="58.0" prefWidth="199.0" text="Objectives" />
          <Button fx:id="logOutButton" layoutX="58.0" layoutY="516.0" mnemonicParsing="false" onAction="#logOutHandler" prefHeight="48.0" prefWidth="91.0" text="Log Out" />
-         <Button fx:id="goBackButton" layoutX="58.0" layoutY="450.0" mnemonicParsing="false" onAction="#handleGoBackButton" prefHeight="48.0" prefWidth="91.0" text="Go Back" />
+         <Button fx:id="goBackButton" layoutX="58.0" layoutY="443.0" mnemonicParsing="false" onAction="#handleGoBackButton" prefHeight="48.0" prefWidth="91.0" text="Go Back" />
       </children>
    </Pane>
-   <Label fx:id="dieataryRestrictionsLabel" layoutX="249.0" layoutY="102.0" text="Dietary Restrictions">
+   <Label fx:id="dieataryRestrictionsLabel" layoutX="275.0" layoutY="88.0" text="Dietary Restrictions">
       <font>
          <Font size="18.0" />
       </font>
    </Label>
-   <Pane fx:id="userDieataryRestrictionsPane" layoutX="249.0" layoutY="138.0" prefHeight="276.0" prefWidth="234.0" style="-fx-border-color: grey; -fx-border-width: 2;">
+   <Pane fx:id="userDieataryRestrictionsPane" layoutX="267.0" layoutY="140.0" prefHeight="419.0" prefWidth="327.0" style="-fx-border-color: grey; -fx-border-width: 2;">
       <children>
-         <Label fx:id="userAllergiesTitleLabel" layoutX="6.0" layoutY="4.0" prefHeight="27.0" prefWidth="223.0" text="Allergies:" />
-         <Label fx:id="userAllergiesLabel" alignment="TOP_LEFT" layoutX="6.0" layoutY="31.0" prefHeight="48.0" prefWidth="223.0" text="Cinnamon " />
-         <Label fx:id="userHealthConditionsTitleLabel" layoutX="6.0" layoutY="79.0" prefHeight="27.0" prefWidth="223.0" text="Health Conditions:" />
-         <Label fx:id="userHealthConditionsLabel" alignment="TOP_LEFT" layoutX="6.0" layoutY="106.0" prefHeight="48.0" prefWidth="223.0" text="Diabetes" />
+         <Label fx:id="userAllergiesTitleLabel" layoutX="7.0" layoutY="78.0" prefHeight="27.0" prefWidth="223.0" text="Allergies/Intolerances:">
+            <font>
+               <Font size="14.0" />
+            </font></Label>
+         <Label fx:id="userAllergiesLabel" alignment="TOP_LEFT" layoutX="6.0" layoutY="105.0" prefHeight="73.0" prefWidth="315.0" text="----" />
+         <Label layoutX="6.0" layoutY="187.0" text="Vitamins/Mineral Deficiencies:">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+         <Label fx:id="userVitaminsDeficienciesLabel" alignment="TOP_LEFT" layoutX="6.0" layoutY="207.0" prefHeight="65.0" prefWidth="315.0" text="----" />
+         <Label layoutX="7.0" layoutY="272.0" prefHeight="27.0" prefWidth="223.0" text="Food Preferences/Restrictions:">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+         <Label fx:id="userFoodPrefRestricLabel" alignment="TOP_LEFT" layoutX="7.0" layoutY="299.0" prefHeight="112.0" prefWidth="315.0" text="----" />
+         <Label fx:id="userDietTypeLabel" layoutX="7.0" layoutY="1.0" prefHeight="27.0" prefWidth="223.0" text="Diet type:">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+         <Label fx:id="userDietLabel" alignment="TOP_LEFT" layoutX="7.0" layoutY="27.0" prefHeight="48.0" prefWidth="315.0" text="----" />
+         <TextArea fx:id="dietTypeEdit" layoutX="6.0" layoutY="22.0" prefHeight="58.0" prefWidth="315.0" visible="false" />
+         <TextArea fx:id="allergiesEdit" layoutX="6.0" layoutY="102.0" prefHeight="86.0" prefWidth="315.0" visible="false" />
+         <TextArea fx:id="vitaminsEdit" layoutX="6.0" layoutY="211.0" prefHeight="65.0" prefWidth="315.0" visible="false" />
+         <TextArea fx:id="foodPrefRestricEdit" layoutX="7.0" layoutY="299.0" prefHeight="112.0" prefWidth="315.0" visible="false" />
       </children>
    </Pane>
-   <Label fx:id="menuFitLabel1" layoutX="421.0" layoutY="31.0" prefHeight="35.0" prefWidth="124.0" text="User Profile">
+   <Label fx:id="menuFitLabel1" layoutX="519.0" layoutY="31.0" prefHeight="35.0" prefWidth="124.0" text="User Profile">
       <font>
          <Font size="24.0" />
       </font>
    </Label>
-   <Label fx:id="dietTypeLabel" layoutX="545.0" layoutY="102.0" prefHeight="27.0" prefWidth="82.0" text="Diet Type">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-   <Pane fx:id="dietTypePane" layoutX="545.0" layoutY="138.0" prefHeight="276.0" prefWidth="234.0" style="-fx-border-color: grey; -fx-border-width: 2;">
+   <Pane fx:id="dietTypePane" layoutX="616.0" layoutY="140.0" prefHeight="419.0" prefWidth="327.0" style="-fx-border-color: grey; -fx-border-width: 2;">
       <children>
-         <Label fx:id="userDietTypeLabel" layoutX="6.0" layoutY="4.0" prefHeight="27.0" prefWidth="223.0" text="Vegan" />
-         <Label fx:id="userMedicalReasonsTitleLabel" layoutX="6.0" layoutY="47.0" prefHeight="27.0" prefWidth="223.0" text="Medical Reasons:" />
-         <Label fx:id="userMedicalReasonsLabel" alignment="TOP_LEFT" layoutX="6.0" layoutY="74.0" prefHeight="48.0" prefWidth="223.0" text="Low-sodium" />
-         <Label fx:id="userMedicationsTitleLabel" layoutX="6.0" layoutY="110.0" prefHeight="27.0" prefWidth="223.0" text="Medications:" />
-         <Label fx:id="userMedicationsLabel" alignment="TOP_LEFT" layoutX="6.0" layoutY="137.0" prefHeight="48.0" prefWidth="223.0" text="Low-sodium" />
+         <Label fx:id="userMedicationsTitleLabel" layoutX="6.0" layoutY="274.0" prefHeight="27.0" prefWidth="223.0" text="Medications:">
+            <font>
+               <Font size="14.0" />
+            </font></Label>
+         <Label fx:id="userMedicationsLabel" alignment="TOP_LEFT" layoutX="6.0" layoutY="301.0" prefHeight="112.0" prefWidth="315.0" text="----" />
+         <Label layoutX="6.0" layoutY="130.0" text="Gastrointestinal Issues:">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+         <Label fx:id="userHealthConditionsTitleLabel" layoutX="6.0" prefHeight="27.0" prefWidth="223.0" text="Chronic Health Conditions:">
+            <font>
+               <Font size="14.0" />
+            </font></Label>
+         <Label fx:id="userChronicHealthConditionsLabel" alignment="TOP_LEFT" layoutX="6.0" layoutY="27.0" prefHeight="80.0" prefWidth="315.0" text="----" />
+         <Label fx:id="userGastroIssuesLabel" alignment="TOP_LEFT" layoutX="6.0" layoutY="150.0" prefHeight="127.0" prefWidth="315.0" text="----" />
+         <TextArea fx:id="chronicHealthEdit" layoutX="6.0" layoutY="27.0" prefHeight="102.0" prefWidth="315.0" visible="false" />
+         <TextArea fx:id="gastroIssuesEdit" layoutX="6.0" layoutY="150.0" prefHeight="127.0" prefWidth="315.0" visible="false" />
+         <TextArea fx:id="medicationEdit" layoutX="6.0" layoutY="300.0" prefHeight="112.0" prefWidth="315.0" visible="false" />
       </children>
    </Pane>
-   <Button fx:id="editRestrictionsButton" layoutX="706.0" layoutY="31.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="73.0" text="Edit" />
+   <Button fx:id="editRestrictionsButton" layoutX="857.0" layoutY="31.0" mnemonicParsing="false" onAction="#editRestrictionsHandler" prefHeight="35.0" prefWidth="73.0" text="Edit" />
+   <Button fx:id="saveBtn" layoutX="773.0" layoutY="31.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="35.0" prefWidth="74.0" text="Save" visible="false" />
+   <Button fx:id="cancelBtn" layoutX="856.0" layoutY="31.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="35.0" prefWidth="74.0" text="Cancel" visible="false" />
+   <Label fx:id="warningLabel" layoutX="206.0" layoutY="1.0" prefHeight="58.0" prefWidth="334.0" text="Please answer our MealPlan generation questionnaire first! Then you may check and edit your information here!" textAlignment="CENTER" visible="false" wrapText="true" />
+   <Button fx:id="generateMealPlanBtn" layoutX="285.0" layoutY="48.0" mnemonicParsing="false" onAction="#goGenerateMealPlan" prefHeight="35.0" prefWidth="133.0" text="Answer Questionnaire" textAlignment="CENTER" visible="false" />
 </AnchorPane>

@@ -2,6 +2,7 @@ package pt.isec.model.users;
 
 import pt.isec.model.meals.Meal;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -72,14 +73,14 @@ public interface User {
      *
      * @return The User's birthdate as a Date.
      */
-    Date getBirthdate();
+    LocalDate getBirthdate();
 
     /**
      * Sets the User's birthdate.
      *
      * @param birthdate The User's new birthdate.
      */
-    void setBirthdate(Date birthdate);
+    void setBirthdate(LocalDate birthdate);
 
     /**
      * Gets the User's gender.
@@ -144,5 +145,12 @@ public interface User {
 
     void addExtraMeal(Meal meal);
 
+    void setPreferedWeightUnit(String unit);
+
+    String getPreferedWeightUnit();
+
     int getAge();
+
+    void setTimeBudget(TimeBudget timeBudget);
+    TimeBudget getTimeBudget();
 }

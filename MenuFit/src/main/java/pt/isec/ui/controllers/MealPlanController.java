@@ -16,6 +16,8 @@ import pt.isec.persistence.BDManager;
 import pt.isec.builders.InstanceBuilder;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,15 +57,17 @@ public class MealPlanController implements UserInitializable {
     }
 
     private void initializeDailyMealsPreview() {
-        //EphemeralStore store = EphemeralStore.getInstance();
-        //MealPlan mealPlan = store.getMealPlan(user).orElse(null);
-
         if (mealPlan != null) {
             List<Meal> meals = mealPlan.getMeals();
 
-            // Agrupando refeições por dia
-            String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-            for (String day : daysOfWeek) {
+            // Determina o dia inicial para ordenar os dias da semana
+            String startDay = mealPlan.getBeginDate() != null
+                    ? mealPlan.getBeginDate().getDayOfWeek().toString()
+                    : LocalDate.now().getDayOfWeek().toString();
+
+            List<String> orderedDays = getOrderedDays(startDay);
+
+            for (String day : orderedDays) {
                 // Adiciona um título para o dia da semana
                 Label dayLabel = new Label(day);
                 dayLabel.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
@@ -75,30 +79,46 @@ public class MealPlanController implements UserInitializable {
 
                 // Filtra as refeições para o dia específico
                 List<Meal> dayMeals = meals.stream()
-                        .filter(meal -> meal.getDate().getDayOfWeek().toString().equalsIgnoreCase(day)) // Ajuste conforme o atributo do dia em Meal
+                        .filter(meal -> meal.getDate().getDayOfWeek().toString().equalsIgnoreCase(day))
                         .toList();
 
                 // Se houver refeições, adiciona os painéis das refeições, senão mostra mensagem
                 if (!dayMeals.isEmpty()) {
                     for (Meal meal : dayMeals) {
                         Pane mealPane = createMealPane(meal);
-                        dayMealsHBox.getChildren().add(mealPane);  // Adiciona a refeição ao HBox
+                        dayMealsHBox.getChildren().add(mealPane);
                     }
                 } else {
                     Label noMealsLabel = new Label("No meals planned for " + day);
                     noMealsLabel.setStyle("-fx-font-size: 12; -fx-text-fill: grey;");
-                    dayMealsHBox.getChildren().add(noMealsLabel);  // Exibe a mensagem se não houver refeições
+                    dayMealsHBox.getChildren().add(noMealsLabel);
                 }
 
                 // Adiciona o HBox ao VBox
                 dayVBox.getChildren().add(dayMealsHBox);
-                mealsContainer.getChildren().add(dayVBox);  // Adiciona o VBox ao container de refeições
+                mealsContainer.getChildren().add(dayVBox);
             }
         } else {
             Label noMealPlanLabel = new Label("No meal plan available for the selected user.");
             mealsContainer.getChildren().add(noMealPlanLabel);
         }
+    }
 
+    /**
+     * Gera a ordem dos dias da semana começando por um dia específico.
+     *
+     * @param startDay O dia de início, como "MONDAY".
+     * @return Uma lista dos dias na ordem reorganizada.
+     */
+    private List<String> getOrderedDays(String startDay) {
+        List<String> daysOfWeek = Arrays.asList("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY");
+        int startIndex = daysOfWeek.indexOf(startDay.toUpperCase());
+        if (startIndex == -1) return daysOfWeek; // Caso inválido, retorna a ordem padrão.
+
+        List<String> orderedDays = new ArrayList<>();
+        orderedDays.addAll(daysOfWeek.subList(startIndex, daysOfWeek.size())); // Parte após o início.
+        orderedDays.addAll(daysOfWeek.subList(0, startIndex)); // Parte antes do início.
+        return orderedDays;
     }
 
     private Pane createMealPane(Meal meal) {
@@ -205,6 +225,4 @@ public class MealPlanController implements UserInitializable {
             return Optional.empty();
         }
     }
-
-
 }

@@ -2,13 +2,17 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="editButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="859.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.ProfileObjectivesController">
+<AnchorPane fx:id="editButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.ui.controllers.ProfileObjectivesController">
    <Pane fx:id="optionsPane" prefHeight="600.0" prefWidth="206.0" style="-fx-border-color: grey; -fx-border-width: 2;">
       <children>
           <ImageView fx:id="logoImageView" fitHeight="58.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
@@ -26,20 +30,53 @@
          <Button fx:id="goBackButton" layoutX="58.0" layoutY="443.0" mnemonicParsing="false" onAction="#handleGoBackButton" prefHeight="48.0" prefWidth="91.0" text="Go Back" />
       </children>
    </Pane>
-   <Label fx:id="nameLabel" layoutX="249.0" layoutY="102.0" text="Objectives">
+   <Label fx:id="nameLabel" layoutX="531.0" layoutY="155.0" text="Objectives:">
       <font>
          <Font size="18.0" />
       </font>
    </Label>
-   <Pane fx:id="userNamePane" layoutX="249.0" layoutY="138.0" prefHeight="295.0" prefWidth="531.0" style="-fx-border-color: grey; -fx-border-width: 2;">
+   <Pane fx:id="userNamePane" layoutX="531.0" layoutY="190.0" prefHeight="295.0" prefWidth="400.0" style="-fx-border-color: grey; -fx-border-width: 2;">
       <children>
-         <Label fx:id="userObjectiveLabel" alignment="TOP_LEFT" layoutX="5.0" layoutY="1.0" prefHeight="286.0" prefWidth="520.0" text="Weight: " textAlignment="JUSTIFY" wrapText="true" />
+         <Label fx:id="userObjectiveLabel" alignment="TOP_LEFT" layoutX="4.0" layoutY="1.0" prefHeight="289.0" prefWidth="392.0" textAlignment="JUSTIFY" wrapText="true" />
+         <TextArea fx:id="objectivesEdit" layoutX="2.0" prefHeight="295.0" prefWidth="400.0" promptText="Write your objectives for the mealplan" visible="false" />
       </children>
    </Pane>
-   <Label fx:id="menuFitLabel1" layoutX="421.0" layoutY="31.0" prefHeight="35.0" prefWidth="124.0" text="User Profile">
+   <Label fx:id="menuFitLabel1" layoutX="541.0" layoutY="31.0" prefHeight="35.0" prefWidth="124.0" text="User Profile">
       <font>
          <Font size="24.0" />
       </font>
    </Label>
-   <Button fx:id="editObjectivesButton" layoutX="706.0" layoutY="31.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="73.0" text="Edit" />
+   <Button fx:id="editObjectivesButton" layoutX="857.0" layoutY="31.0" mnemonicParsing="false" onAction="#handleEditObjectivesButton" prefHeight="35.0" prefWidth="73.0" text="Edit" />
+   <Button fx:id="saveBtn" layoutX="762.0" layoutY="31.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="35.0" prefWidth="74.0" text="Save" visible="false" />
+   <Button fx:id="cancelBtn" layoutX="856.0" layoutY="31.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="35.0" prefWidth="74.0" text="Cancel" visible="false" />
+   <Label layoutX="237.0" layoutY="155.0" text="Desired Weight:">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+   <Label fx:id="weightGoal" layoutX="237.0" layoutY="190.0" prefHeight="35.0" prefWidth="134.0">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Label>
+   <Label layoutX="237.0" layoutY="262.0" text="Desired Daily Calorie Intake:">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+   <Label fx:id="calorieGoal" layoutX="237.0" layoutY="298.0" prefHeight="35.0" prefWidth="134.0">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Label>
+   <TextField fx:id="weightGoalEdit" layoutX="237.0" layoutY="195.0" prefHeight="35.0" prefWidth="134.0" visible="false" />
+   <RadioButton fx:id="kgRadioButton" layoutX="392.0" layoutY="191.0" mnemonicParsing="false" text="kg" visible="false">
+      <toggleGroup>
+         <ToggleGroup fx:id="A" />
+      </toggleGroup>
+   </RadioButton>
+   <RadioButton fx:id="lbsRadioButtion" layoutX="392.0" layoutY="217.0" mnemonicParsing="false" text="lbs" toggleGroup="$A" visible="false" />
+   <TextField fx:id="calorieGoalEdit" layoutX="237.0" layoutY="298.0" prefHeight="35.0" prefWidth="150.0" visible="false" />
+   <Label fx:id="warningLabel" layoutX="438.0" layoutY="497.0" prefHeight="58.0" prefWidth="334.0" text="Please answer our MealPlan generation questionnaire first! Then you may check and edit your information here!" textAlignment="CENTER" visible="false" wrapText="true" />
+   <Button fx:id="generateMealPlanBtn" layoutX="538.0" layoutY="544.0" mnemonicParsing="false" onAction="#goGenerateMealPlan" prefHeight="35.0" prefWidth="133.0" text="Answer Questionnaire" textAlignment="CENTER" visible="false" />
 </AnchorPane>
