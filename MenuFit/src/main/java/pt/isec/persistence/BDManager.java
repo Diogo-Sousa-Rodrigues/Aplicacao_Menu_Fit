@@ -771,6 +771,30 @@ public class BDManager implements Serializable {
         return false;
     }
 
+    public boolean addExtraMeal(Integer idUser, ExtraMeal extraMeal) {
+        String sql = "INSERT INTO ExtraMeal (UserID, Name, Calories, Date) VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
+            // Configurar os parâmetros do PreparedStatement
+            pstmt.setInt(1, idUser);
+            pstmt.setString(2, extraMeal.getName());
+            pstmt.setInt(3, extraMeal.getCalories());
+            pstmt.setString(4, extraMeal.getDate().toString());
+
+            // Executar a inserção
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                return true;
+            } else {
+                System.out.println("Failed to register extra meal.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while registering extra meal: " + e.getMessage());
+        }
+        return false;
+
+    }
+
 //    public boolean insertUserHeightAndWeight(Integer idUser, String height, String weight) {
 //        String sql = "INSERT INTO DietaryRestrictions (UserID, Weight, Height, Objetivo, Level_Fitness, DesiredWeight, DailyCalorieCount, Allergies, Specific_Diet, Chronic_Isseus, Gastrointestinal_Issues, Vitamin_Deficiencies, Food_Preference, Medication) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 //        try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {

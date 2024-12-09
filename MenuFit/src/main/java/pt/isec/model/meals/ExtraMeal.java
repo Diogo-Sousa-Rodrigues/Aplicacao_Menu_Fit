@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 
 public class ExtraMeal {
 
-    public ExtraMeal(String name, int calories) {
+    public ExtraMeal(String name, int calories, LocalDateTime date) {
         this.name = name;
         this.calories = calories;
-        this.date = LocalDateTime.now();
+        this.date = date;
     }
 
     public String getName() { return name; }

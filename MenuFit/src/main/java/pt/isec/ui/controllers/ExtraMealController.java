@@ -13,11 +13,13 @@ import pt.isec.persistence.BDManager;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class ExtraMealController implements UserInitializable {
     private BasicUser user;
     SceneSwitcher sceneSwitcher;
+    BDManager bdManager = new BDManager();
 
     @FXML
     TextField inputMealName;
@@ -37,9 +39,11 @@ public class ExtraMealController implements UserInitializable {
     void handleAdd(ActionEvent event) throws IOException {
         String mealName = inputMealName.getText();
         int calories = Integer.parseInt(inputCalories.getText());
-
-        ExtraMeal extraMeal = new ExtraMeal(mealName, calories);
-        this.user.getMealPlan().putExtraMeal(extraMeal);
+        LocalDateTime date = LocalDateTime.now();
+        ExtraMeal extraMeal = new ExtraMeal(mealName, calories, date);
+        if(bdManager.addExtraMeal(user.getIdUser(), extraMeal)){
+            this.user.getMealPlan().putExtraMeal(extraMeal);
+        }
 
         sceneSwitcher.switchScene("fxml/MainMenu.fxml", event, user);
     }
