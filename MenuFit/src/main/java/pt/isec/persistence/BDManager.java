@@ -10,6 +10,7 @@ import java.sql.*;
 import java.sql.Date;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class BDManager implements Serializable {
@@ -74,7 +75,7 @@ public class BDManager implements Serializable {
 
     public BasicUser checkLogin(String email, String password) {
         String query = "SELECT * FROM USER WHERE Email = ? AND Password = ?";
-        try(PreparedStatement stmt = this.dbConn.prepareStatement(query)) {
+        try (PreparedStatement stmt = this.dbConn.prepareStatement(query)) {
 
             // Define os parâmetros da consulta
             stmt.setString(1, email);
@@ -104,7 +105,7 @@ public class BDManager implements Serializable {
         }
     }
 
-    public boolean saveMealPlan(Optional<MealPlan> mealPlan){
+    public boolean saveMealPlan(Optional<MealPlan> mealPlan) {
         String sql = "INSERT INTO MEALPLAN (UserID, Begin_Date, End_Date, Goal) VALUES (?, ?, ?, ?)";
         Integer mealPlanID;
         try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
@@ -120,8 +121,8 @@ public class BDManager implements Serializable {
                 try (Statement stmt = dbConn.createStatement();
                      ResultSet rs = stmt.executeQuery("SELECT LAST_INSERT_ROWID()")) {
                     if (rs.next()) {
-                         mealPlanID = rs.getInt(1);
-                         return saveMeals(mealPlan, mealPlanID);
+                        mealPlanID = rs.getInt(1);
+                        return saveMeals(mealPlan, mealPlanID);
                     }
                 }
             } else {
@@ -135,8 +136,8 @@ public class BDManager implements Serializable {
 
     private boolean saveMeals(Optional<MealPlan> mealPlan, Integer mealPlanID) {
         boolean success = true;
-        for(Meal meal : mealPlan.get().getMeals()){
-           String sql = "INSERT INTO MEAL (MealPlanID, Type, Date, 'Check') VALUES (?, ?, ?, ?)";
+        for (Meal meal : mealPlan.get().getMeals()) {
+            String sql = "INSERT INTO MEAL (MealPlanID, Type, Date, 'Check') VALUES (?, ?, ?, ?)";
 
             try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
                 // Configurar os parâmetros do PreparedStatement
@@ -152,7 +153,7 @@ public class BDManager implements Serializable {
                          ResultSet rs = stmt.executeQuery("SELECT LAST_INSERT_ROWID()")) {
                         if (rs.next()) {
                             Integer mealID = rs.getInt(1);
-                            if(!saveRecipe(meal, mealID)) success = false;
+                            if (!saveRecipe(meal, mealID)) success = false;
                         }
                     }
                 } else {
@@ -201,7 +202,7 @@ public class BDManager implements Serializable {
 
     private boolean saveReminders(Recipe recipe, Integer recipeID) {
         boolean success = true;
-        for(Reminder reminder : recipe.getReminders()){
+        for (Reminder reminder : recipe.getReminders()) {
             String sql = "INSERT INTO REMINDERS (RecipeID, 'Check', Text) VALUES (?, ?, ?)";
 
             try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
@@ -225,7 +226,7 @@ public class BDManager implements Serializable {
 
     private boolean saveIngredients(Recipe recipe, Integer recipeID) {
         boolean success = true;
-        for(Ingredient ingredient : recipe.getIngredients()){
+        for (Ingredient ingredient : recipe.getIngredients()) {
             String sql = "INSERT INTO INGREDIENTS (RecipeID, Name, Description, Quantity, Units, Calories, Allergens, Proteins, Carbs, Fats) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
@@ -350,6 +351,30 @@ public class BDManager implements Serializable {
         return null;
     }
 
+    public ExtraMeal getExtraMeal(Integer userID) {
+        ExtraMeal extraMeal = null;
+        String sql = "SELECT * FROM ExtraMeal WHERE UserID = ? ORDER BY Date DESC LIMIT 1";
+
+        try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
+            pstmt.setInt(1, userID);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    String name = rs.getString("Name");
+                    int calories = rs.getInt("Calories");
+
+                    // Use getObject para obter a data e hora corretamente
+                    LocalDateTime dateTime = rs.getObject("Date", LocalDateTime.class);
+
+                    extraMeal = new ExtraMeal(name, calories, dateTime);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while fetching extra meal: " + e.getMessage());
+        }
+
+        return extraMeal;
+    }
 
 
 
@@ -428,7 +453,7 @@ public class BDManager implements Serializable {
                     Duration durationPrep = Duration.parse(prepTime);
 
                     // Carregar os ingredientes da receita
-                    List<Ingredient> ingredients =  loadIngredientsForRecipe(recipeID);
+                    List<Ingredient> ingredients = loadIngredientsForRecipe(recipeID);
 
                     // Carregar os lembretes da receita
                     List<Reminder> reminders = loadRemindersForRecipe(recipeID);
@@ -515,7 +540,7 @@ public class BDManager implements Serializable {
             pstmt.setInt(2, mealID);
 
             int affectedRows = pstmt.executeUpdate();
-            if(affectedRows > 0)
+            if (affectedRows > 0)
                 return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -533,7 +558,7 @@ public class BDManager implements Serializable {
             pstmt.setInt(2, remniderID);
 
             int affectedRows = pstmt.executeUpdate();
-            if(affectedRows > 0)
+            if (affectedRows > 0)
                 return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -546,7 +571,7 @@ public class BDManager implements Serializable {
         Integer recipeID = meal.getRecipe().getRecipeID();
         String query = "UPDATE RECIPE SET (Name, Description, Servings, Calories, Prep_Time) = (?, ?, ?, ?, ?) WHERE RecipeID = ?";
 
-        if(newRecipe.isPresent()) {
+        if (newRecipe.isPresent()) {
             try (PreparedStatement pstmt = dbConn.prepareStatement(query)) {
                 pstmt.setString(1, newRecipe.get().getName());
                 pstmt.setString(2, newRecipe.get().getDescription());
@@ -556,8 +581,8 @@ public class BDManager implements Serializable {
                 pstmt.setInt(6, recipeID);
 
                 int affectedRows = pstmt.executeUpdate();
-                if(affectedRows > 0){
-                    return(deleteOldIngredients(recipeID) && deleteOldReminders(recipeID) && updateIngredients(newRecipe.get(), meal.getRecipe()) && updateReminders(newRecipe.get(), meal.getRecipe()));
+                if (affectedRows > 0) {
+                    return (deleteOldIngredients(recipeID) && deleteOldReminders(recipeID) && updateIngredients(newRecipe.get(), meal.getRecipe()) && updateReminders(newRecipe.get(), meal.getRecipe()));
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -614,14 +639,14 @@ public class BDManager implements Serializable {
 
         //se for necessário chamar aqui uma função apra apagar os reminders da receita antiga
         boolean success = true;
-        for(Reminder reminder : newRecipe.getReminders()){
+        for (Reminder reminder : newRecipe.getReminders()) {
             try (PreparedStatement pstmt = dbConn.prepareStatement(sql)) {
                 pstmt.setInt(1, mealRecipe.getRecipeID());
                 pstmt.setInt(2, 0);
                 pstmt.setString(3, reminder.getData());
 
                 int affectedRows = pstmt.executeUpdate();
-                if(affectedRows <= 0){
+                if (affectedRows <= 0) {
                     success = false;
                 }
             } catch (SQLException e) {
@@ -637,7 +662,7 @@ public class BDManager implements Serializable {
 
         //se for necessário chamar aqui uma função apra apagar os ingredients da receita antiga
         boolean success = true;
-        for(Ingredient ingredient : newRecipe.getIngredients()){
+        for (Ingredient ingredient : newRecipe.getIngredients()) {
             try (PreparedStatement pstmt = dbConn.prepareStatement(sql)) {
                 pstmt.setInt(1, mealRecipe.getRecipeID());
                 pstmt.setString(2, ingredient.name());
@@ -651,7 +676,7 @@ public class BDManager implements Serializable {
                 pstmt.setFloat(10, ingredient.macros().fats());
 
                 int affectedRows = pstmt.executeUpdate();
-                if(affectedRows <= 0){
+                if (affectedRows <= 0) {
                     success = false;
                 }
             } catch (SQLException e) {
@@ -680,14 +705,14 @@ public class BDManager implements Serializable {
 
     public boolean setNewPassword(Integer idUser, String text) {
         String sql = "UPDATE USER SET Password = ? WHERE UserID = ?";
-        try (PreparedStatement pstmt = dbConn.prepareStatement(sql)){
+        try (PreparedStatement pstmt = dbConn.prepareStatement(sql)) {
             pstmt.setString(1, text);
             pstmt.setInt(2, idUser);
             int affectedRows = pstmt.executeUpdate();
-            if(affectedRows > 0){
+            if (affectedRows > 0) {
                 return true;
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -695,19 +720,19 @@ public class BDManager implements Serializable {
     }
 
     public boolean updateUserInfo(Integer idUser, String email, String birthdate, String gender, String name) {
-        String sql =  "UPDATE USER SET Email = ?, Date_of_Birth = ?, Gender = ?, Name = ? WHERE UserID = ?";
+        String sql = "UPDATE USER SET Email = ?, Date_of_Birth = ?, Gender = ?, Name = ? WHERE UserID = ?";
 
-        try(PreparedStatement pstmt = dbConn.prepareStatement(sql)){
+        try (PreparedStatement pstmt = dbConn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             pstmt.setString(2, birthdate);
             pstmt.setString(3, gender);
             pstmt.setString(4, name);
             pstmt.setInt(5, idUser);
             int affectedRows = pstmt.executeUpdate();
-            if(affectedRows > 0){
+            if (affectedRows > 0) {
                 return true;
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -716,15 +741,15 @@ public class BDManager implements Serializable {
 
     public boolean updateUserHeightAndWeight(Integer idUser, String height, String weight) {
         String sql = "UPDATE DietaryRestrictions SET Weight = ?, Height = ? WHERE UserID = ?";
-        try(PreparedStatement pstmt = dbConn.prepareStatement(sql)){
+        try (PreparedStatement pstmt = dbConn.prepareStatement(sql)) {
             pstmt.setString(1, height);
             pstmt.setString(2, weight);
             pstmt.setInt(3, idUser);
             int affectedRows = pstmt.executeUpdate();
-            if(affectedRows > 0){
+            if (affectedRows > 0) {
                 return true;
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -733,16 +758,16 @@ public class BDManager implements Serializable {
 
     public boolean updateObjective(Integer idUser, String objetivo, String desiredWeight, String cailyCalorieCount) {
         String sql = "UPDATE DietaryRestrictions SET Objetivo = ?, DesiredWeight = ?, DailyCalorieCount = ? WHERE UserID = ?";
-        try(PreparedStatement pstmt = dbConn.prepareStatement(sql)){
+        try (PreparedStatement pstmt = dbConn.prepareStatement(sql)) {
             pstmt.setString(1, objetivo);
             pstmt.setString(2, desiredWeight);
             pstmt.setString(3, cailyCalorieCount);
             pstmt.setInt(4, idUser);
             int affectedRows = pstmt.executeUpdate();
-            if(affectedRows > 0){
+            if (affectedRows > 0) {
                 return true;
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -751,7 +776,7 @@ public class BDManager implements Serializable {
 
     public boolean updateDietaryRestrictions(Integer idUser, String diet, String allergies, String vitamins, String foodPrefRestric, String chronicIssues, String gastroIssues, String medication) {
         String sql = "UPDATE DietaryRestrictions SET Allergies = ?, Specific_Diet = ?, Chronic_Isseus = ?, Gastrointestinal_Issues = ?, Vitamin_Deficiencies = ?, Food_Preference = ?, Medication = ? WHERE UserID = ?";
-        try(PreparedStatement pstmt = dbConn.prepareStatement(sql)){
+        try (PreparedStatement pstmt = dbConn.prepareStatement(sql)) {
             pstmt.setString(1, allergies);
             pstmt.setString(2, diet);
             pstmt.setString(3, chronicIssues);
@@ -761,14 +786,38 @@ public class BDManager implements Serializable {
             pstmt.setString(7, medication);
             pstmt.setInt(8, idUser);
             int affectedRows = pstmt.executeUpdate();
-            if(affectedRows > 0){
+            if (affectedRows > 0) {
                 return true;
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }
         return false;
+    }
+
+    public boolean addExtraMeal(Integer idUser, ExtraMeal extraMeal) {
+        String sql = "INSERT INTO ExtraMeal (UserID, Name, Calories, Date) VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement pstmt = this.dbConn.prepareStatement(sql)) {
+            // Configurar os parâmetros do PreparedStatement
+            pstmt.setInt(1, idUser);
+            pstmt.setString(2, extraMeal.getName());
+            pstmt.setInt(3, extraMeal.getCalories());
+            pstmt.setString(4, extraMeal.getDate().toString());
+
+            // Executar a inserção
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                return true;
+            } else {
+                System.out.println("Failed to register extra meal.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while registering extra meal: " + e.getMessage());
+        }
+        return false;
+
     }
 
 //    public boolean insertUserHeightAndWeight(Integer idUser, String height, String weight) {
