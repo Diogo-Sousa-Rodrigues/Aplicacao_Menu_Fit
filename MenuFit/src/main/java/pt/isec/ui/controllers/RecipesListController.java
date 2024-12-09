@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.ScrollPane;
+import pt.isec.model.meals.MealPlan;
 import pt.isec.model.users.BasicUser;
 import pt.isec.model.users.UserInitializable;
 import pt.isec.persistence.BDManager;
@@ -30,6 +31,7 @@ public class RecipesListController implements UserInitializable {
     @FXML private ScrollPane favoritesScrollPane; // Add ScrollPane for Favorites
     @FXML private ScrollPane recentsScrollPane;   // Add ScrollPane for Recents
 
+    private MealPlan mealPlan;
     private final List<HBox> favoriteRecipes = new ArrayList<>();
     private final List<HBox> recentRecipes = new ArrayList<>();
 
@@ -38,7 +40,7 @@ public class RecipesListController implements UserInitializable {
     private final Image starFilledImage = new Image(getClass().getResourceAsStream("/images/star-filled.png"));
 
     // Array de receitas - para o exemplo, passamos os nomes de receitas como Strings
-    private final String[] recipes = {"Recipe 1", "Recipe 2", "Recipe 3", "Recipe 4","a","b"};
+    private final String[] recipes = {"Caesar Salad", "Spaghetti Bolognese", "Grilled Salmon", "Greek Yogurt Bowl","Stuffed Bell Peppers","Scrambled Eggs with Avocado"};
 
     public RecipesListController() {
         this.sceneSwitcher = new SceneSwitcher();
@@ -46,7 +48,7 @@ public class RecipesListController implements UserInitializable {
 
     @FXML
     public void initialize() {
-        // Inicialização básica da interface, se necessário
+
     }
 
     @Override
@@ -54,6 +56,8 @@ public class RecipesListController implements UserInitializable {
         this.user = user;
         loadRecentRecipes(recipes); // Passa o array de receitas para carregar dinamicamente
         loadFavoriteRecipes();
+
+        mealPlan = user.getMealPlan();
     }
 
     private void loadFavoriteRecipes() {
