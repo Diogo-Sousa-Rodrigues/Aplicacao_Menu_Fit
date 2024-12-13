@@ -94,7 +94,7 @@ public class MealPlanReviewController implements UserInitializable {
         LocalDate date = LocalDateTime.now().toLocalDate();
 
         LocalDate begin = date.plusDays(0);
-        LocalDate end = date.plusDays(7);
+        LocalDate end = date.plusDays(6);
 
         MealPlanBuilder mealPlanBuilder = MealPlanBuilder.getInstance();
         mealPlanOpt = mealPlanBuilder.getMealPlan(user, begin, end, llm);
